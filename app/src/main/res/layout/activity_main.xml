@@ -47,5 +47,12 @@ android:id="@+id/press"
         android:layout_height="90dp"
         android:src="@drawable/witch_cat_girl_v2"/>
 
+    <ImageView
+        android:id="@+id/arrow_enemy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+        android:rotation="45"/>
+
 
 </RelativeLayout>
