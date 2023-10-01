@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/press"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/bg_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_top"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        />
+
+    <ImageView
+        android:id="@+id/bg_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_bottom"
+        android:scaleType="fitXY"
+        android:layout_below="@id/bg_top"
+        android:layout_marginTop="0dp"/> <!-- Ajusta la altura del margen según tus necesidades -->
+    />
+
+    <ImageView
+        android:id="@+id/bg_bottom_continuation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_bottom"
+        android:scaleType="fitXY"
+        android:layout_below="@id/bg_bottom"
+        android:layout_marginTop="-255dp"/> <!-- Ajusta el margen superior según tus necesidades -->
+    />
+
+    <ImageView
+        android:id="@+id/bird"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/witch_cat_girl_v2"/>
+
+
+</RelativeLayout>
