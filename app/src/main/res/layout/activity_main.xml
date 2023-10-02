@@ -53,7 +53,90 @@ android:id="@+id/press"
         android:layout_height="100dp"
         android:src="@drawable/arrow_v2"
 
+
         android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"
+
+        />
+    <ImageView
+        android:id="@+id/arrow_enemy4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy7"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy8"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy9"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
+    <ImageView
+        android:id="@+id/arrow_enemy10"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/arrow_v2"
+
+        android:rotation="45"/>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"

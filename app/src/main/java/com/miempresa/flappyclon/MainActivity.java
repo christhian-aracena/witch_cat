@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.renderscript.Sampler;
-import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,13 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
+    DisplayMetrics sizeMobile;
     private ImageView character;
     private RelativeLayout gameLayout;
     private int birdY;
     private int birdSpeed;
     private boolean gameStarted = false;
-    private static final int SET_POSITION_X=300;
-    private static final int SET_POSITION_Y=100;
+    private static final int SET_POSITION_X = 300;
+    private static final int SET_POSITION_Y = 100;
     private ImageView backgroundImage;
     private ImageView backgroundImage2;
     private ImageView backgroundImage3;
@@ -39,18 +36,15 @@ public class MainActivity extends AppCompatActivity {
     private int margin = -18; //
 
     //enemigos
-    private ImageView arrowEnemy;
-    private ArrowEnemy arrow;
-    private float enemySpeed =4;
+    private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
+            arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10;
+    private ArrowEnemy arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
+    private float enemySpeed = 24;
 
-    //propiedades para recibir a la instancia de arrowenemy
-
-    private static final float ENEMY_POSITION_X=100;
-    private static final float ENEMY_POSITION_Y=100;
     private float sizeEnemy = 100;
     private TextView prueba;
 
-
+    private float point1, point2, point3, point4;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -59,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+
+        // Calcula las coordenadas Y de los 4 puntos de paso en función del tamaño de la pantalla
+        sizeMobile = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(sizeMobile);
+        float screenHeight = sizeMobile.heightPixels;
+        point1 = screenHeight * 0.1f;  // Porcentaje arbitrario (20%)
+        point2 = screenHeight * 0.3f;  // Porcentaje arbitrario (40%)
+        point3 = screenHeight * 0.5f;  // Porcentaje arbitrario (60%)
+        point4 = screenHeight * 0.7f;  // Porcentaje arbitrario (80%)
+
         backgroundImage = findViewById(R.id.bg_bottom);
         backgroundImage2 = findViewById(R.id.bg_bottom_continuation);
         backgroundImage3 = findViewById(R.id.bg_bottom_continuation);
@@ -66,37 +70,79 @@ public class MainActivity extends AppCompatActivity {
         pressLayout = findViewById(R.id.bg_top);
         character = findViewById(R.id.bird);
         gameLayout = findViewById(R.id.press);
-        //enemigos
         arrowEnemy = findViewById(R.id.arrow_enemy);
-//        instancia de la primera flecha
-        arrow = new ArrowEnemy(ENEMY_POSITION_X,ENEMY_POSITION_Y,enemySpeed,sizeEnemy);
+        arrowEnemy1 = findViewById(R.id.arrow_enemy1);
+        arrowEnemy2 = findViewById(R.id.arrow_enemy2);
+        arrowEnemy3 = findViewById(R.id.arrow_enemy3);
+        arrowEnemy4 = findViewById(R.id.arrow_enemy4);
+        arrowEnemy5 = findViewById(R.id.arrow_enemy5);
+        arrowEnemy6 = findViewById(R.id.arrow_enemy6);
+        arrowEnemy7 = findViewById(R.id.arrow_enemy7);
+        arrowEnemy8 = findViewById(R.id.arrow_enemy8);
+        arrowEnemy9 = findViewById(R.id.arrow_enemy9);
+        arrowEnemy10 = findViewById(R.id.arrow_enemy10);
+
+        arrow = new ArrowEnemy(3000, point4, enemySpeed, sizeEnemy);
+        arrow1 = new ArrowEnemy(4000, point3, enemySpeed, sizeEnemy);
+        arrow2 = new ArrowEnemy(5000, point4, enemySpeed, sizeEnemy);
+        arrow3 = new ArrowEnemy(6000, point2, enemySpeed, sizeEnemy);
+        arrow4 = new ArrowEnemy(7000, point2, enemySpeed, sizeEnemy);
+        arrow5 = new ArrowEnemy(8000, point4, enemySpeed, sizeEnemy);
+        arrow6 = new ArrowEnemy(9000, point1, enemySpeed, sizeEnemy);
+        arrow7 = new ArrowEnemy(10000, point4, enemySpeed, sizeEnemy);
+        arrow8 = new ArrowEnemy(11000, point3, enemySpeed, sizeEnemy);
+        arrow9 = new ArrowEnemy(12000, point1, enemySpeed, sizeEnemy);
+        arrow10 = new ArrowEnemy(13000, point4, enemySpeed, sizeEnemy);
 
         arrowEnemy.setX(arrow.getX());
         arrowEnemy.setY(arrow.getY());
 
+        arrowEnemy1.setX(arrow1.getX());
+        arrowEnemy1.setY(arrow1.getY());
 
+        arrowEnemy2.setX(arrow1.getX());
+        arrowEnemy2.setY(arrow1.getY());
 
-        //posicion inicial del jugador
+        arrowEnemy3.setX(arrow1.getX());
+        arrowEnemy3.setY(arrow1.getY());
+
+        arrowEnemy4.setX(arrow1.getX());
+        arrowEnemy4.setY(arrow1.getY());
+
+        arrowEnemy5.setX(arrow1.getX());
+        arrowEnemy5.setY(arrow1.getY());
+
+        arrowEnemy6.setX(arrow1.getX());
+        arrowEnemy6.setY(arrow1.getY());
+
+        arrowEnemy7.setX(arrow1.getX());
+        arrowEnemy7.setY(arrow1.getY());
+
+        arrowEnemy8.setX(arrow1.getX());
+        arrowEnemy8.setY(arrow1.getY());
+
+        arrowEnemy9.setX(arrow1.getX());
+        arrowEnemy9.setY(arrow1.getY());
+
+        arrowEnemy10.setX(arrow1.getX());
+        arrowEnemy10.setY(arrow1.getY());
+
         character.setX(SET_POSITION_X);
         character.setY(SET_POSITION_Y);
-
-
 
         Intent intent = getIntent();
         int getVariable = intent.getIntExtra("seleccion", 0);
         setCharacterImage(getVariable);
-        DisplayMetrics sizeMobile = new DisplayMetrics();
+        sizeMobile = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(sizeMobile);
         screenWidth = sizeMobile.widthPixels;
 
-        // Ajusta las posiciones iniciales según el ancho de la pantalla
-        currentPosition = 0; // Establece la posición inicial de la primera imagen
+
+
+        currentPosition = 0;
         currentPosition2 = screenWidth - 15;
         currentPosition3 = screenWidth - 15;
 
-
-
-        // Llama a esta función para ambas imágenes con las posiciones iniciales respectivas
         moveBackground();
         gameStarted = false;
         gameLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -116,8 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
-
-                return true; // Devuelve true para indicar que el evento ha sido manejado
+                return true;
             }
 
             private void startGame() {
@@ -128,17 +173,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             private void jump() {
-                birdSpeed = -30;
+                birdSpeed = -32;
             }
 
             private Runnable gameRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    // Actualizar la posición del pájaro
-                    birdSpeed += 2; // Gravedad
+                    birdSpeed += 2;
                     birdY += birdSpeed;
 
-                    // Verificar si el personaje golpea la parte superior o inferior de la pantalla
                     if (birdY < 0) {
                         birdY = 0;
                         birdSpeed = 0;
@@ -147,47 +190,73 @@ public class MainActivity extends AppCompatActivity {
                         birdSpeed = 0;
                     }
 
-                    // Actualizar la posición del pájaro en la pantalla
                     character.setY(birdY);
 
-//                    Mover flecha
                     arrow.moveEnemy();
                     arrowEnemy.setX(arrow.getX());
                     arrowEnemy.setY(arrow.getY());
 
+                    arrow1.moveEnemy();
+                    arrowEnemy1.setX(arrow1.getX());
+                    arrowEnemy1.setY(arrow1.getY());
 
+                    arrow2.moveEnemy();
+                    arrowEnemy2.setX(arrow2.getX());
+                    arrowEnemy2.setY(arrow2.getY());
 
-                    // Verificar colisión con el pájaro
-                    if (arrow.checkCollision(character)) {
+                    arrow3.moveEnemy();
+                    arrowEnemy3.setX(arrow3.getX());
+                    arrowEnemy3.setY(arrow3.getY());
+
+                    arrow4.moveEnemy();
+                    arrowEnemy4.setX(arrow4.getX());
+                    arrowEnemy4.setY(arrow4.getY());
+
+                    arrow5.moveEnemy();
+                    arrowEnemy5.setX(arrow5.getX());
+                    arrowEnemy5.setY(arrow5.getY());
+
+                    arrow6.moveEnemy();
+                    arrowEnemy6.setX(arrow6.getX());
+                    arrowEnemy6.setY(arrow6.getY());
+
+                    arrow7.moveEnemy();
+                    arrowEnemy7.setX(arrow7.getX());
+                    arrowEnemy7.setY(arrow7.getY());
+
+                    arrow8.moveEnemy();
+                    arrowEnemy8.setX(arrow8.getX());
+                    arrowEnemy8.setY(arrow8.getY());
+
+                    arrow9.moveEnemy();
+                    arrowEnemy9.setX(arrow9.getX());
+                    arrowEnemy9.setY(arrow9.getY());
+
+                    arrow10.moveEnemy();
+                    arrowEnemy10.setX(arrow10.getX());
+                    arrowEnemy10.setY(arrow10.getY());
+
+                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)) {
                         prueba.setText("colisionando");
-                    }
-                    else {
+                    } else {
                         prueba.setText("");
                     }
 
-                    // Programar la próxima actualización
                     handler.postDelayed(this, 20);
                 }
-
-
             };
         });
-
-
     }
 
     private void setCharacterImage(int seleccion) {
         switch (seleccion) {
             case 1:
-                // Elegir la imagen para la gata mujer
-                character.setImageResource(R.drawable.witch_cat_girl_v2); // Reemplaza "gata_mujer" con el nombre del reurso de imagen
+                character.setImageResource(R.drawable.witch_cat_girl_v2);
                 break;
             case 2:
-                // Elegir la imagen para el gato hombre
-                character.setImageResource(R.drawable.witch_cat_v2); // Reemplaza "gato_hombre" con el nombre de recurso de imagen
+                character.setImageResource(R.drawable.witch_cat_v2);
                 break;
             default:
-                // Esta es la imagen del personaje por defecto
                 character.setImageResource(R.drawable.witch_cat_girl_v2);
                 break;
         }
@@ -197,36 +266,29 @@ public class MainActivity extends AppCompatActivity {
         backgroundImage.postOnAnimationDelayed(new Runnable() {
             @Override
             public void run() {
-                // Actualiza la posición de la imagen 1
-                currentPosition -= 13; // Ajusta la velocidad de movimiento del bg
+                currentPosition -= 13;
                 backgroundImage.setX(currentPosition);
 
-                // Actualiza la posición de la imagen 2
-                currentPosition2 -= 13; // Ajusta la velocidad de movimiento del bg
+                currentPosition2 -= 13;
                 backgroundImage2.setX(currentPosition2);
 
-                // Actualiza la posición de la imagen 3
-                currentPosition3 -= 13; // Ajusta la velocidad de movimiento del bg
+                currentPosition3 -= 13;
                 backgroundImage3.setX(currentPosition3);
 
-                // Si la imagen 1 se movió completamente hacia la izquierda, reinicia la posición
                 if (currentPosition < -screenWidth - margin) {
-                    currentPosition = screenWidth + margin; // el margin es para quitar los espacios entremedio por el tamaño de imagen
+                    currentPosition = screenWidth + margin;
                 }
 
-                // Si la imagen 2 se movió completamente hacia la izquierda, reinicia su posición
                 if (currentPosition2 < -screenWidth - margin) {
                     currentPosition2 = screenWidth + margin;
                 }
 
-                // Si la imagen 3 se movió completamente hacia la izquierda, reinicia su posición
                 if (currentPosition3 < -screenWidth - margin) {
                     currentPosition3 = screenWidth + margin;
                 }
 
-                // Vuelve a llamar al bucle
                 moveBackground();
             }
-        }, 16); // 16ms es aproximadamente 60 FPS (milisegundos por fotograma)
+        }, 16);
     }
 }
