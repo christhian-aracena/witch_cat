@@ -1,5 +1,8 @@
 package com.miempresa.flappyclon;
 
+import android.graphics.Rect;
+import android.widget.ImageView;
+
 public abstract class Enemys {
     private float x, y;  // Posición del enemigo
     private float speed;  // Velocidad del enemigo
@@ -12,15 +15,20 @@ public abstract class Enemys {
         this.sizeEnemy = sizeEnemy;
     }
 
-    public void moveEnemy(){
+    public void moveEnemy(){}
 
-    }
+    public boolean checkCollision(ImageView bird) {
+        Rect birdRect = new Rect();
+        bird.getHitRect(birdRect);
 
-    public boolean checkCollisionWithPlayer(float playerX, float playerY, float playerSize) {
-        // Lógica de colisión con el jugador
-        // Devuelve true si hay colisión, false en caso contrario
+        Rect enemyRect = new Rect(
+                (int) getX(),
+                (int) getY(),
+                (int) (getX() + getSizeEnemy()),
+                (int) (getY() + getSizeEnemy())
+        );
 
-        return true;
+        return birdRect.intersect(enemyRect);
     }
 
 

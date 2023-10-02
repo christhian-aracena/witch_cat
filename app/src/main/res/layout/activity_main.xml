@@ -52,7 +52,16 @@ android:id="@+id/press"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/arrow_v2"
+
         android:rotation="45"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        />
 
 
 </RelativeLayout>

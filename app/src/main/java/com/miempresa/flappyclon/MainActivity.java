@@ -41,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
     //enemigos
     private ImageView arrowEnemy;
     private ArrowEnemy arrow;
+    private float enemySpeed =4;
+
+    //propiedades para recibir a la instancia de arrowenemy
+
+    private static final float ENEMY_POSITION_X=100;
+    private static final float ENEMY_POSITION_Y=100;
+    private float sizeEnemy = 100;
+    private TextView prueba;
+
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,14 +62,19 @@ public class MainActivity extends AppCompatActivity {
         backgroundImage = findViewById(R.id.bg_bottom);
         backgroundImage2 = findViewById(R.id.bg_bottom_continuation);
         backgroundImage3 = findViewById(R.id.bg_bottom_continuation);
+        prueba = findViewById(R.id.textView);
         pressLayout = findViewById(R.id.bg_top);
         character = findViewById(R.id.bird);
         gameLayout = findViewById(R.id.press);
         //enemigos
         arrowEnemy = findViewById(R.id.arrow_enemy);
-        //instancia de la primera flecha
-//        arrow = new ArrowEnemy();
-        
+//        instancia de la primera flecha
+        arrow = new ArrowEnemy(ENEMY_POSITION_X,ENEMY_POSITION_Y,enemySpeed,sizeEnemy);
+
+        arrowEnemy.setX(arrow.getX());
+        arrowEnemy.setY(arrow.getY());
+
+
 
         //posicion inicial del jugador
         character.setX(SET_POSITION_X);
@@ -136,9 +150,26 @@ public class MainActivity extends AppCompatActivity {
                     // Actualizar la posición del pájaro en la pantalla
                     character.setY(birdY);
 
+//                    Mover flecha
+                    arrow.moveEnemy();
+                    arrowEnemy.setX(arrow.getX());
+                    arrowEnemy.setY(arrow.getY());
+
+
+
+                    // Verificar colisión con el pájaro
+                    if (arrow.checkCollision(character)) {
+                        prueba.setText("colisionando");
+                    }
+                    else {
+                        prueba.setText("");
+                    }
+
                     // Programar la próxima actualización
                     handler.postDelayed(this, 20);
                 }
+
+
             };
         });
 

@@ -4,6 +4,8 @@ public class ArrowEnemy extends Enemys{
 
     ArrowEnemy(float x, float y, float speed, float sizeEnemy){
         super(x, y, speed, sizeEnemy);
+        setX(3000);
+        setY(500);
 
     }
 
@@ -14,10 +16,5 @@ public class ArrowEnemy extends Enemys{
 
     }
 
-    @Override
-    public boolean checkCollisionWithPlayer(float playerX, float playerY, float playerSize){
-
-        return true;
-    }
 }
 
