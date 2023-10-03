@@ -65,7 +65,7 @@
         android:layout_height="163dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toStartOf="@+id/start"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/witch_cat_girl_v2" />

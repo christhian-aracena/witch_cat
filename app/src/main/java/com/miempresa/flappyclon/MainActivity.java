@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private int birdY;
     private int birdSpeed;
     private boolean gameStarted = false;
-    private static final int SET_POSITION_X = 300;
-    private static final int SET_POSITION_Y = 100;
+    private static final int SET_CHARACTER_POSITION_X = 300;
+    private static final int SET_CHARACTER_POSITION_Y = 100;
     private ImageView backgroundImage;
     private ImageView backgroundImage2;
     private ImageView backgroundImage3;
@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy10.setX(arrow1.getX());
         arrowEnemy10.setY(arrow1.getY());
 
-        character.setX(SET_POSITION_X);
-        character.setY(SET_POSITION_Y);
+        character.setX(SET_CHARACTER_POSITION_X);
+        character.setY(SET_CHARACTER_POSITION_Y);
 
         Intent intent = getIntent();
         int getVariable = intent.getIntExtra("seleccion", 0);
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                     arrowEnemy10.setX(arrow10.getX());
                     arrowEnemy10.setY(arrow10.getY());
 
-                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)) {
+                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
                         prueba.setText("colisionando");
                     } else {
                         prueba.setText("");

@@ -22,8 +22,8 @@ public abstract class Enemys {
         bird.getHitRect(birdRect);
 
         Rect enemyRect = new Rect(
-                (int) getX(),
-                (int) getY(),
+                (int) getX()+110,
+                (int) getY()+110,
                 (int) (getX() + getSizeEnemy()),
                 (int) (getY() + getSizeEnemy())
         );
