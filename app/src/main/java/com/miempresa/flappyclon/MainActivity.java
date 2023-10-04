@@ -1,5 +1,7 @@
 package com.miempresa.flappyclon;
 
+import static java.security.AccessController.getContext;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
             arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10;
     private ArrowEnemy arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
+
+    private ImageView coin1, coin2;
     private float enemySpeed = 24;
 
     private float sizeEnemy = 100;
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         pressLayout = findViewById(R.id.bg_top);
         character = findViewById(R.id.bird);
         gameLayout = findViewById(R.id.press);
+        coin1 = findViewById(R.id.coinUno);
         arrowEnemy = findViewById(R.id.arrow_enemy);
         arrowEnemy1 = findViewById(R.id.arrow_enemy1);
         arrowEnemy2 = findViewById(R.id.arrow_enemy2);
@@ -93,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
         arrow8 = new ArrowEnemy(11000, point3, enemySpeed, sizeEnemy);
         arrow9 = new ArrowEnemy(12000, point1, enemySpeed, sizeEnemy);
         arrow10 = new ArrowEnemy(13000, point4, enemySpeed, sizeEnemy);
+
+
+        Coins coin_1 = new Coins(1000, point1, enemySpeed, 200, MainActivity.this);
+
+
+
+        coin1.setX(coin_1.getX());
+        coin1.setY(coin_1.getY());
 
         arrowEnemy.setX(arrow.getX());
         arrowEnemy.setY(arrow.getY());
@@ -192,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
 
                     character.setY(birdY);
 
+                    coin_1.moveEnemy();
+                    coin1.setX(coin_1.getX());
+                    coin1.setX(coin_1.getX());
+
                     arrow.moveEnemy();
                     arrowEnemy.setX(arrow.getX());
                     arrowEnemy.setY(arrow.getY());
@@ -236,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                     arrowEnemy10.setX(arrow10.getX());
                     arrowEnemy10.setY(arrow10.getY());
 
-                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
+                    if (coin_1.checkCollision(character) || arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
                         prueba.setText("colisionando");
                     } else {
                         prueba.setText("");

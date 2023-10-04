@@ -113,6 +113,12 @@ android:id="@+id/press"
         android:layout_height="100dp"
         android:src="@drawable/arrow_v3"/>
 
+    <ImageView
+        android:id="@+id/coinUno"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/coin1"/>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -121,6 +127,9 @@ android:id="@+id/press"
         android:textColor="@color/black"
         android:textSize="35dp"
         />
+
+
+
 
 
 </RelativeLayout>
