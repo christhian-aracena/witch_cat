@@ -13,6 +13,7 @@ android:id="@+id/press"
 
     </FrameLayout>
 
+
     <ImageView
         android:id="@+id/bg_top"
         android:layout_width="match_parent"
@@ -22,25 +23,30 @@ android:id="@+id/press"
         android:layout_alignParentTop="true"
         />
 
-    <ImageView
-        android:id="@+id/bg_bottom"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_bottom"
-        android:scaleType="fitXY"
         android:layout_below="@id/bg_top"
-        android:layout_marginTop="0dp"/> <!-- Ajusta la altura del margen según tus necesidades -->
-    />
 
-    <ImageView
-        android:id="@+id/bg_bottom_continuation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg_bottom"
-        android:scaleType="fitXY"
-        android:layout_below="@id/bg_bottom"
-        android:layout_marginTop="-255dp"/> <!-- Ajusta el margen superior según tus necesidades -->
-    />
+        android:scaleType="fitXY">
+
+        <ImageView
+            android:id="@+id/bg_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_bottom"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:id="@+id/bg_bottom_continuation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_bottom"
+            android:scaleType="fitXY"
+            android:layout_toEndOf="@id/bg_bottom"
+            />
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/bird"
@@ -115,8 +121,74 @@ android:id="@+id/press"
 
     <ImageView
         android:id="@+id/coinUno"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinDos"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinTres"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinCuatro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinCinco"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinSeis"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinSiete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinOcho"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinNueve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinDiez"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinOnce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/coin1"/>
+
+    <ImageView
+        android:id="@+id/coinDoce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/coin1"/>
 
     <TextView

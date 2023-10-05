@@ -10,7 +10,7 @@ public class Coins extends Enemys{
         setX(x);
         setY(y);
 
-        // Configurar el tamaño de la vista (ajústalo según tus necesidades)
+
         ImageView coinImageView = new ImageView(context);
         coinImageView.setLayoutParams(new ViewGroup.LayoutParams((int) sizeEnemy, (int) sizeEnemy));
     }

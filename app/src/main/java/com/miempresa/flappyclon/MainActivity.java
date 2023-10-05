@@ -42,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
             arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10;
     private ArrowEnemy arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
 
-    private ImageView coin1, coin2;
+    private ImageView coin1, coin2, coin3,coin4,coin5,coin6,coin7,coin8,coin9,coin10,coin11,coin12;
     private float enemySpeed = 24;
 
     private float sizeEnemy = 100;
     private TextView prueba;
 
     private float point1, point2, point3, point4;
+    private float coinPoint1, coinPoint2, coinPoint3, coinPoint4;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         point3 = screenHeight * 0.5f;  // Porcentaje arbitrario (60%)
         point4 = screenHeight * 0.7f;  // Porcentaje arbitrario (80%)
 
+
+        coinPoint1 = screenHeight * 0.2f ;  // Porcentaje arbitrario (20%)
+        coinPoint2 = screenHeight * 0.4f  ;  // Porcentaje arbitrario (40%)
+        coinPoint3 = screenHeight * 0.5f ;  // Porcentaje arbitrario (60%)
+        coinPoint4 = screenHeight * 0.8f;  // Porcentaje arbitrario (80%)
+
         backgroundImage = findViewById(R.id.bg_bottom);
         backgroundImage2 = findViewById(R.id.bg_bottom_continuation);
         backgroundImage3 = findViewById(R.id.bg_bottom_continuation);
@@ -75,6 +82,18 @@ public class MainActivity extends AppCompatActivity {
         character = findViewById(R.id.bird);
         gameLayout = findViewById(R.id.press);
         coin1 = findViewById(R.id.coinUno);
+        coin2 = findViewById(R.id.coinDos);
+        coin3 = findViewById(R.id.coinTres);
+        coin4 = findViewById(R.id.coinCuatro);
+        coin5 = findViewById(R.id.coinCinco);
+        coin6 = findViewById(R.id.coinSeis);
+        coin7 = findViewById(R.id.coinSiete);
+        coin8 = findViewById(R.id.coinOcho);
+        coin9 = findViewById(R.id.coinNueve);
+        coin10 = findViewById(R.id.coinDiez);
+        coin11 = findViewById(R.id.coinOnce);
+        coin12 = findViewById(R.id.coinDoce);
+
         arrowEnemy = findViewById(R.id.arrow_enemy);
         arrowEnemy1 = findViewById(R.id.arrow_enemy1);
         arrowEnemy2 = findViewById(R.id.arrow_enemy2);
@@ -100,12 +119,58 @@ public class MainActivity extends AppCompatActivity {
         arrow10 = new ArrowEnemy(13000, point4, enemySpeed, sizeEnemy);
 
 
-        Coins coin_1 = new Coins(1000, point1, enemySpeed, 200, MainActivity.this);
+        Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_2 = new Coins(6300, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_3 = new Coins(6500, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_4 = new Coins(7500, coinPoint3, enemySpeed, 200, MainActivity.this);
+        Coins coin_5 = new Coins(7700, coinPoint3, enemySpeed, 200, MainActivity.this);
+        Coins coin_6 = new Coins(7900, coinPoint2, enemySpeed, 200, MainActivity.this);
+        Coins coin_7 = new Coins(8100, coinPoint2, enemySpeed, 200, MainActivity.this);
+        Coins coin_8 = new Coins(8300, coinPoint2, enemySpeed, 200, MainActivity.this);
+        Coins coin_9 = new Coins(18500, coinPoint2, enemySpeed, 200, MainActivity.this);
+        Coins coin_10 = new Coins(20300, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_11 = new Coins(20600, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_12 = new Coins(20900, coinPoint4, enemySpeed, 200, MainActivity.this);
+
 
 
 
         coin1.setX(coin_1.getX());
         coin1.setY(coin_1.getY());
+
+        coin2.setX(coin_2.getX());
+        coin2.setY(coin_2.getY());
+
+        coin3.setX(coin_3.getX());
+        coin3.setY(coin_3.getY());
+
+        coin4.setX(coin_4.getX());
+        coin4.setY(coin_4.getY());
+
+        coin5.setX(coin_5.getX());
+        coin5.setY(coin_5.getY());
+
+        coin6.setX(coin_6.getX());
+        coin6.setY(coin_6.getY());
+
+        coin7.setX(coin_7.getX());
+        coin7.setY(coin_7.getY());
+
+        coin8.setX(coin_8.getX());
+        coin8.setY(coin_8.getY());
+
+        coin9.setX(coin_9.getX());
+        coin9.setY(coin_9.getY());
+
+        coin10.setX(coin_10.getX());
+        coin10.setY(coin_10.getY());
+
+        coin11.setX(coin_11.getX());
+        coin11.setY(coin_11.getY());
+
+        coin12.setX(coin_12.getX());
+        coin12.setY(coin_12.getY());
+
 
         arrowEnemy.setX(arrow.getX());
         arrowEnemy.setY(arrow.getY());
@@ -208,6 +273,51 @@ public class MainActivity extends AppCompatActivity {
                     coin_1.moveEnemy();
                     coin1.setX(coin_1.getX());
                     coin1.setX(coin_1.getX());
+
+                    coin_2.moveEnemy();
+                    coin2.setX(coin_2.getX());
+                    coin2.setX(coin_2.getX());
+
+                    coin_3.moveEnemy();
+                    coin3.setX(coin_3.getX());
+                    coin3.setX(coin_3.getX());
+
+                    coin_4.moveEnemy();
+                    coin4.setX(coin_4.getX());
+                    coin4.setX(coin_4.getX());
+
+                    coin_5.moveEnemy();
+                    coin5.setX(coin_5.getX());
+                    coin5.setX(coin_5.getX());
+
+                    coin_6.moveEnemy();
+                    coin6.setX(coin_6.getX());
+                    coin6.setX(coin_6.getX());
+
+                    coin_7.moveEnemy();
+                    coin7.setX(coin_7.getX());
+                    coin7.setX(coin_7.getX());
+
+                    coin_8.moveEnemy();
+                    coin8.setX(coin_8.getX());
+                    coin8.setX(coin_8.getX());
+
+                    coin_9.moveEnemy();
+                    coin9.setX(coin_9.getX());
+                    coin9.setX(coin_9.getX());
+
+
+                    coin_10.moveEnemy();
+                    coin10.setX(coin_10.getX());
+                    coin10.setX(coin_10.getX());
+
+                    coin_11.moveEnemy();
+                    coin11.setX(coin_11.getX());
+                    coin11.setX(coin_11.getX());
+
+                    coin_12.moveEnemy();
+                    coin12.setX(coin_12.getX());
+                    coin12.setX(coin_12.getX());
 
                     arrow.moveEnemy();
                     arrowEnemy.setX(arrow.getX());
