@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_6 = new Coins(7900, coinPoint2, enemySpeed, 200, MainActivity.this);
         Coins coin_7 = new Coins(8100, coinPoint2, enemySpeed, 200, MainActivity.this);
         Coins coin_8 = new Coins(8300, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_9 = new Coins(18500, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_10 = new Coins(20300, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_11 = new Coins(20600, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_12 = new Coins(20900, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_9 = new Coins(8500, coinPoint2, enemySpeed, 200, MainActivity.this);
+        Coins coin_10 = new Coins(9000, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_11 = new Coins(9200, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_12 = new Coins(9400, coinPoint4, enemySpeed, 200, MainActivity.this);
 
 
 
@@ -363,11 +363,46 @@ public class MainActivity extends AppCompatActivity {
                     arrowEnemy10.setX(arrow10.getX());
                     arrowEnemy10.setY(arrow10.getY());
 
-                    if (coin_1.checkCollision(character) || arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
+                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
                         prueba.setText("colisionando");
-                    } else {
+                    } else if(coin_1.checkCollision(character)){
+                        coin1.setVisibility(View.INVISIBLE);
+                    }else if(coin_2.checkCollision(character)){
+                        coin2.setVisibility(View.INVISIBLE);
+                    }else if(coin_3.checkCollision(character)){
+                        coin3.setVisibility(View.INVISIBLE);
+                    }else if(coin_4.checkCollision(character)){
+                        coin4.setVisibility(View.INVISIBLE);
+                    }else if(coin_5.checkCollision(character)){
+                        coin5.setVisibility(View.INVISIBLE);
+                    }else if(coin_6.checkCollision(character)){
+                        coin6.setVisibility(View.INVISIBLE);
+                    }else if(coin_7.checkCollision(character)){
+                        coin7.setVisibility(View.INVISIBLE);
+                    }else if(coin_8.checkCollision(character)){
+                        coin8.setVisibility(View.INVISIBLE);
+                    }else if(coin_9.checkCollision(character)){
+                        coin9.setVisibility(View.INVISIBLE);
+                    }else if(coin_10.checkCollision(character)){
+                        coin10.setVisibility(View.INVISIBLE);
+                    }else if(coin_11.checkCollision(character)){
+                        coin11.setVisibility(View.INVISIBLE);
+                    }else if(coin_12.checkCollision(character)){
+                        coin12.setVisibility(View.INVISIBLE);
+                    }
+                    else {
                         prueba.setText("");
                     }
+
+
+//
+//                    if (coin_1.checkCollision(character)||coin_2.checkCollision(character)||coin_3.checkCollision(character)||coin_4.checkCollision(character)||coin_5.checkCollision(character)||coin_6.checkCollision(character)||coin_7.checkCollision(character)||coin_8.checkCollision(character)||coin_9.checkCollision(character)||coin_10.checkCollision(character)||coin_11.checkCollision(character)||coin_12.checkCollision(character)) {
+//
+//                    } else {
+//                        prueba.setText("");
+//                    }
+
+
 
                     handler.postDelayed(this, 20);
                 }
