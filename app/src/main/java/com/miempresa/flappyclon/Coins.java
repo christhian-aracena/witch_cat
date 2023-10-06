@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class Coins extends Enemys{
+
+    private boolean collected = false;
+
     Coins(float x, float y, float speed, float sizeEnemy, Context context) {
         super(x, y, speed, sizeEnemy);
         setX(x);
@@ -16,6 +19,14 @@ public class Coins extends Enemys{
         coinImageView.setLayoutParams(new ViewGroup.LayoutParams((int) sizeEnemy, (int) sizeEnemy));
     }
 
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
     @Override
     public void moveEnemy() {
         setX(getX() - getSpeed());

@@ -4,9 +4,9 @@ import android.graphics.Rect;
 import android.widget.ImageView;
 
 public abstract class Enemys {
-    private float x, y;  // Posición del enemigo
-    private float speed;  // Velocidad del enemigo
-    private float sizeEnemy;   // Tamaño del enemigo
+    protected float x, y;  // Posición del enemigo
+    protected float speed;  // Velocidad del enemigo
+    protected float sizeEnemy;   // Tamaño del enemigo
 
     public Enemys(float x, float y, float speed, float sizeEnemy) {
         this.x = x;

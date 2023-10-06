@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentPosition3 = 0;
     private ImageView pressLayout;
     private int margin = -18; //
-    int valor = 0;
+    int addCoinValue = 1;
 
     //enemigos
     private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
@@ -366,32 +366,54 @@ public class MainActivity extends AppCompatActivity {
 
                     if (arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
                         prueba.setText("colisionando");
-                    } else if(coin_1.checkCollision(character)){
+                    } else if (!coin_1.isCollected() && coin_1.checkCollision(character)) {
                         coin1.setVisibility(View.INVISIBLE);
-                        player.setCountCoins(0);
-                    }else if(coin_2.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_1.setCollected(true);
+                    } else if (!coin_2.isCollected() && coin_2.checkCollision(character)) {
                         coin2.setVisibility(View.INVISIBLE);
-                        player.setCountCoins(1);
-                    }else if(coin_3.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_2.setCollected(true);
+                    }else if(!coin_3.isCollected() && coin_3.checkCollision(character)){
                         coin3.setVisibility(View.INVISIBLE);
-                    }else if(coin_4.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_3.setCollected(true);
+                    }else if(!coin_4.isCollected() && coin_4.checkCollision(character)){
                         coin4.setVisibility(View.INVISIBLE);
-                    }else if(coin_5.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_4.setCollected(true);
+                    }else if(!coin_5.isCollected() && coin_5.checkCollision(character)){
                         coin5.setVisibility(View.INVISIBLE);
-                    }else if(coin_6.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_5.setCollected(true);
+                    }else if(!coin_6.isCollected() && coin_6.checkCollision(character)){
                         coin6.setVisibility(View.INVISIBLE);
-                    }else if(coin_7.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_6.setCollected(true);
+                    }else if(!coin_7.isCollected() && coin_7.checkCollision(character)){
                         coin7.setVisibility(View.INVISIBLE);
-                    }else if(coin_8.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_7.setCollected(true);
+                    }else if(!coin_8.isCollected() && coin_8.checkCollision(character)){
                         coin8.setVisibility(View.INVISIBLE);
-                    }else if(coin_9.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_8.setCollected(true);
+                    }else if(!coin_9.isCollected() && coin_9.checkCollision(character)){
                         coin9.setVisibility(View.INVISIBLE);
-                    }else if(coin_10.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_9.setCollected(true);
+                    }else if(!coin_10.isCollected() && coin_10.checkCollision(character)){
                         coin10.setVisibility(View.INVISIBLE);
-                    }else if(coin_11.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_10.setCollected(true);
+                    }else if(!coin_11.isCollected() && coin_11.checkCollision(character)){
                         coin11.setVisibility(View.INVISIBLE);
-                    }else if(coin_12.checkCollision(character)){
+                        player.setCountCoins(addCoinValue);
+                        coin_11.setCollected(true);
+                    }else if(!coin_12.isCollected() && coin_12.checkCollision(character)){
                         coin12.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_12.setCollected(true);
                     }
 
                     String getValue = String.valueOf(player.getCountCoins());
