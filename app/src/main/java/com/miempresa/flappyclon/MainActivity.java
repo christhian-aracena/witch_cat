@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentPosition3 = 0;
     private ImageView pressLayout;
     private int margin = -18; //
+    int valor = 0;
 
     //enemigos
     private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
-
+        Player player = new Player();
         // Calcula las coordenadas Y de los 4 puntos de paso en función del tamaño de la pantalla
         sizeMobile = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(sizeMobile);
@@ -119,18 +120,18 @@ public class MainActivity extends AppCompatActivity {
         arrow10 = new ArrowEnemy(13000, point4, enemySpeed, sizeEnemy);
 
 
-        Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_2 = new Coins(6300, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_3 = new Coins(6500, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_4 = new Coins(7500, coinPoint3, enemySpeed, 200, MainActivity.this);
-        Coins coin_5 = new Coins(7700, coinPoint3, enemySpeed, 200, MainActivity.this);
-        Coins coin_6 = new Coins(7900, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_7 = new Coins(8100, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_8 = new Coins(8300, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_9 = new Coins(8500, coinPoint2, enemySpeed, 200, MainActivity.this);
-        Coins coin_10 = new Coins(9000, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_11 = new Coins(9200, coinPoint4, enemySpeed, 200, MainActivity.this);
-        Coins coin_12 = new Coins(9400, coinPoint4, enemySpeed, 200, MainActivity.this);
+        Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_2 = new Coins(6300, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_3 = new Coins(6500, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_4 = new Coins(7500, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_5 = new Coins(7700, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_6 = new Coins(7900, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_7 = new Coins(8100, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_8 = new Coins(8300, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_9 = new Coins(8500, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_10 = new Coins(9000, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_11 = new Coins(9200, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_12 = new Coins(9400, coinPoint4, enemySpeed, 40, MainActivity.this);
 
 
 
@@ -367,8 +368,10 @@ public class MainActivity extends AppCompatActivity {
                         prueba.setText("colisionando");
                     } else if(coin_1.checkCollision(character)){
                         coin1.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(0);
                     }else if(coin_2.checkCollision(character)){
                         coin2.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(1);
                     }else if(coin_3.checkCollision(character)){
                         coin3.setVisibility(View.INVISIBLE);
                     }else if(coin_4.checkCollision(character)){
@@ -390,17 +393,11 @@ public class MainActivity extends AppCompatActivity {
                     }else if(coin_12.checkCollision(character)){
                         coin12.setVisibility(View.INVISIBLE);
                     }
-                    else {
-                        prueba.setText("");
-                    }
 
+                    String getValue = String.valueOf(player.getCountCoins());
+                    prueba.setText(getValue);
+//
 
-//
-//                    if (coin_1.checkCollision(character)||coin_2.checkCollision(character)||coin_3.checkCollision(character)||coin_4.checkCollision(character)||coin_5.checkCollision(character)||coin_6.checkCollision(character)||coin_7.checkCollision(character)||coin_8.checkCollision(character)||coin_9.checkCollision(character)||coin_10.checkCollision(character)||coin_11.checkCollision(character)||coin_12.checkCollision(character)) {
-//
-//                    } else {
-//                        prueba.setText("");
-//                    }
 
 
 
