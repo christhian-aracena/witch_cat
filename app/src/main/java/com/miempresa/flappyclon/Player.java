@@ -22,6 +22,7 @@ public class Player {
     }
 
     public void setLife(int life) {
-        this.life = life;
+
+        this.life--;
     }
 }

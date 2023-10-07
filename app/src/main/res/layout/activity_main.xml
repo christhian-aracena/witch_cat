@@ -122,86 +122,305 @@ android:id="@+id/press"
     <ImageView
         android:id="@+id/coinUno"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinDos"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinTres"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinCuatro"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinCinco"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinSeis"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinSiete"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinOcho"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinNueve"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinDiez"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinOnce"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/coinDoce"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/coin1"/>
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTrece"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCatorce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinQuince"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinDieciseis"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinDiecisiete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinDieciocho"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinDiecinueve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeinte"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintiuno"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintidos"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintitres"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeinticuatro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeinticinco"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+
+    <ImageView
+        android:id="@+id/coinVeintiseis"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintisiete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintiocho"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinVeintinueve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreinta"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaiuno"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaidos"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaitres"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaicuatro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaicinco"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaiseis"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaisiete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintaiocho"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinTreintainueve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarenta"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaiuno"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaidos"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaitres"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaicuatro"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaicinco"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+
+    <ImageView
+        android:id="@+id/coinCuarentaiseis"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaisiete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentaiocho"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCuarentainueve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/coinCincuenta"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textColor="@color/segundo_nuevo_color"
+        android:textSize="26dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
+        android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="6"
+        android:textStyle="bold|italic"
+
         />
 
+    <ImageView
+        android:id="@+id/heartOne"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/heart"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="7dp"
+        />
 
+    <ImageView
+        android:id="@+id/heartTwo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/heart"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="7dp"
+        />
 
-
+    <ImageView
+        android:id="@+id/heartThree"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/heart"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="7dp"
+        />
+    
+    
+    <ImageView
+        android:id="@+id/animation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        />
 
 </RelativeLayout>
