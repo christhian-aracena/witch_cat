@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private float sizeEnemy = 100;
     private TextView prueba;
+    private ImageView BirdEnemy;
 
     private float point1, point2, point3, point4;
     private float coinPoint1, coinPoint2, coinPoint3, coinPoint4;
@@ -82,10 +83,17 @@ public class MainActivity extends AppCompatActivity {
         coinPoint3 = screenHeight * 0.5f ;  // Porcentaje respecto a la pantalla (60%)
         coinPoint4 = screenHeight * 0.8f;  // Porcentaje respecto a la pantalla (80%)
 
+
+
+        BirdEnemy =findViewById(R.id.birdEnemy);
+        BirdEnemy.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        AnimationDrawable animationDrawable = (AnimationDrawable) BirdEnemy.getBackground();
+        animationDrawable.start();
         animationCoin = findViewById(R.id.animation);
         animationCoin.setBackgroundResource(R.drawable.coin_animation);
         // Obtiene la animación del ImageView
-        AnimationDrawable animationDrawable = (AnimationDrawable) animationCoin.getBackground();
+        animationDrawable = (AnimationDrawable) animationCoin.getBackground();
 
         // Inicia la animación
         animationDrawable.start();

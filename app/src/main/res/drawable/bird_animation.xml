@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+
+        android:drawable="@drawable/bird_sprite1"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite2"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite3"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite4"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite5"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite6"
+        android:duration="100"/>
+    <item
+
+        android:drawable="@drawable/bird_sprite7"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite8"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite9"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite10"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite11"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite12"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite13"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/bird_sprite14"
+        android:duration="100"/>
+
+
+</animation-list>
