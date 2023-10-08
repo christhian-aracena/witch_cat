@@ -8,7 +8,7 @@ public abstract class Enemys {
     protected float speed;  // Velocidad del enemigo
     protected float sizeEnemy;   // Tamaño del enemigo
 
-    protected Enemys(float x, float y, float speed, float sizeEnemy) {
+    public Enemys(float x, float y, float speed, float sizeEnemy) {
         this.x = x;
         this.y = y;
         this.speed = speed;

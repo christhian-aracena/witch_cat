@@ -1,7 +1,5 @@
 package com.miempresa.flappyclon;
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -41,7 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
     //enemigos
     private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
-            arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10;
+            arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10, arrowEnemy11, arrowEnemy12, arrowEnemy13, arrowEnemy14, arrowEnemy15,
+            arrowEnemy16, arrowEnemy17, arrowEnemy18, arrowEnemy19, arrowEnemy20,
+            arrowEnemy21, arrowEnemy22, arrowEnemy23, arrowEnemy24, arrowEnemy25,
+            arrowEnemy26, arrowEnemy27, arrowEnemy28, arrowEnemy29, arrowEnemy30,
+            arrowEnemy31, arrowEnemy32, arrowEnemy33, arrowEnemy34, arrowEnemy35,
+            arrowEnemy36, arrowEnemy37, arrowEnemy38, arrowEnemy39, arrowEnemy40,
+            arrowEnemy41, arrowEnemy42, arrowEnemy43, arrowEnemy44, arrowEnemy45,
+            arrowEnemy46, arrowEnemy47, arrowEnemy48, arrowEnemy49, arrowEnemy50;
+
+//    polimorfismo para sobreescribir la subclase arrow de la clase Enemys
     private Enemys arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
 
     private ImageView coin1, coin2, coin3, coin4, coin5, coin6, coin7, coin8, coin9, coin10, coin11, coin12,
@@ -54,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private float sizeEnemy = 100;
     private TextView prueba;
-    private ImageView BirdEnemy;
+    private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4,birdEnemy5,birdEnemy6,birdEnemy7,birdEnemy8,birdEnemy9, birdEnemy10;
+    private Enemys bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10;
 
     private float point1, point2, point3, point4;
     private float coinPoint1, coinPoint2, coinPoint3, coinPoint4;
@@ -85,17 +93,78 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        BirdEnemy =findViewById(R.id.birdEnemy);
-        BirdEnemy.setBackgroundResource(R.drawable.bird_animation);
+
+
+        birdEnemy1 =findViewById(R.id.birdEnemy1);
+        birdEnemy1.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
-        AnimationDrawable animationDrawable = (AnimationDrawable) BirdEnemy.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) birdEnemy1.getBackground();
         animationDrawable.start();
+
+
+
+        birdEnemy2 =findViewById(R.id.birdEnemy2);
+        birdEnemy2.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy2.getBackground();
+        animationDrawable.start();
+
+
+        birdEnemy3 =findViewById(R.id.birdEnemy3);
+        birdEnemy3.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy3.getBackground();
+        animationDrawable.start();
+
+
+        birdEnemy4 =findViewById(R.id.birdEnemy4);
+        birdEnemy4.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy4.getBackground();
+        animationDrawable.start();
+
+        birdEnemy5 =findViewById(R.id.birdEnemy5);
+        birdEnemy5.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy5.getBackground();
+        animationDrawable.start();
+
+        birdEnemy6 =findViewById(R.id.birdEnemy6);
+        birdEnemy6.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy6.getBackground();
+        animationDrawable.start();
+
+        birdEnemy7 =findViewById(R.id.birdEnemy7);
+        birdEnemy7.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy7.getBackground();
+        animationDrawable.start();
+
+        birdEnemy8 =findViewById(R.id.birdEnemy8);
+        birdEnemy8.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy8.getBackground();
+        animationDrawable.start();
+
+        birdEnemy9 =findViewById(R.id.birdEnemy9);
+        birdEnemy9.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy9.getBackground();
+        animationDrawable.start();
+
+        birdEnemy10 =findViewById(R.id.birdEnemy10);
+        birdEnemy10.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy10.getBackground();
+        animationDrawable.start();
+
+
+
         animationCoin = findViewById(R.id.animation);
         animationCoin.setBackgroundResource(R.drawable.coin_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) animationCoin.getBackground();
-
-        // Inicia la animación
         animationDrawable.start();
 
         backgroundImage = findViewById(R.id.bg_bottom);
@@ -327,11 +396,74 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy8 = findViewById(R.id.arrow_enemy8);
         arrowEnemy9 = findViewById(R.id.arrow_enemy9);
         arrowEnemy10 = findViewById(R.id.arrow_enemy10);
+        arrowEnemy11 = findViewById(R.id.arrow_enemy11);
+        arrowEnemy12 = findViewById(R.id.arrow_enemy12);
+        arrowEnemy13 = findViewById(R.id.arrow_enemy13);
+        arrowEnemy14 = findViewById(R.id.arrow_enemy14);
+        arrowEnemy15 = findViewById(R.id.arrow_enemy15);
+        arrowEnemy16 = findViewById(R.id.arrow_enemy16);
+        arrowEnemy17 = findViewById(R.id.arrow_enemy17);
+        arrowEnemy18 = findViewById(R.id.arrow_enemy18);
+        arrowEnemy19 = findViewById(R.id.arrow_enemy19);
+        arrowEnemy20 = findViewById(R.id.arrow_enemy20);
+        arrowEnemy21 = findViewById(R.id.arrow_enemy21);
+        arrowEnemy22 = findViewById(R.id.arrow_enemy22);
+        arrowEnemy23 = findViewById(R.id.arrow_enemy23);
+        arrowEnemy24 = findViewById(R.id.arrow_enemy24);
+        arrowEnemy25 = findViewById(R.id.arrow_enemy25);
+        arrowEnemy26 = findViewById(R.id.arrow_enemy26);
+        arrowEnemy27 = findViewById(R.id.arrow_enemy27);
+        arrowEnemy28 = findViewById(R.id.arrow_enemy28);
+        arrowEnemy29 = findViewById(R.id.arrow_enemy29);
+        arrowEnemy30 = findViewById(R.id.arrow_enemy30);
+        arrowEnemy31 = findViewById(R.id.arrow_enemy31);
+        arrowEnemy32 = findViewById(R.id.arrow_enemy32);
+        arrowEnemy33 = findViewById(R.id.arrow_enemy33);
+        arrowEnemy34 = findViewById(R.id.arrow_enemy34);
+        arrowEnemy35 = findViewById(R.id.arrow_enemy35);
+        arrowEnemy36 = findViewById(R.id.arrow_enemy36);
+        arrowEnemy37 = findViewById(R.id.arrow_enemy37);
+        arrowEnemy38 = findViewById(R.id.arrow_enemy38);
+        arrowEnemy39 = findViewById(R.id.arrow_enemy39);
+        arrowEnemy40 = findViewById(R.id.arrow_enemy40);
+        arrowEnemy41 = findViewById(R.id.arrow_enemy41);
+        arrowEnemy42 = findViewById(R.id.arrow_enemy42);
+        arrowEnemy43 = findViewById(R.id.arrow_enemy43);
+        arrowEnemy44 = findViewById(R.id.arrow_enemy44);
+        arrowEnemy45 = findViewById(R.id.arrow_enemy45);
+        arrowEnemy46 = findViewById(R.id.arrow_enemy46);
+        arrowEnemy47 = findViewById(R.id.arrow_enemy47);
+        arrowEnemy48 = findViewById(R.id.arrow_enemy48);
+        arrowEnemy49 = findViewById(R.id.arrow_enemy49);
+        arrowEnemy50 = findViewById(R.id.arrow_enemy50);
+
+
+
+
+
+
+
+        //        Instancias bird
+
+        bird1 = new Bird(5000,point1,enemySpeed,100);
+        bird2 = new Bird(6000,point2,enemySpeed,100);
+        bird3 = new Bird(10000,point1,enemySpeed,100);
+        bird4 = new Bird(17500,point2,33,100);
+        bird5 = new Bird(18000,point2,enemySpeed,100);
+        bird6 = new Bird(20000,point4,enemySpeed,100);
+        bird7 = new Bird(20000,point1,enemySpeed,100);
+        bird8 = new Bird(21900,point2,enemySpeed,100);
+        bird9 = new Bird(22900,point2,enemySpeed,100);
+        bird10 = new Bird(23650,point2,enemySpeed,100);
+
+
+
+
 
         arrow = new ArrowEnemy(3000, point4, enemySpeed, sizeEnemy);
         arrow1 = new ArrowEnemy(4000, point3, enemySpeed, sizeEnemy);
         arrow2 = new ArrowEnemy(5000, point4, enemySpeed, sizeEnemy);
-        arrow3 = new ArrowEnemy(6000, point2, enemySpeed, sizeEnemy);
+        arrow3 = new ArrowEnemy(20750, point1, 38, sizeEnemy);
         arrow4 = new ArrowEnemy(7000, point2, enemySpeed, sizeEnemy);
         arrow5 = new ArrowEnemy(8000, point4, enemySpeed, sizeEnemy);
         arrow6 = new ArrowEnemy(9000, point1, enemySpeed, sizeEnemy);
@@ -362,15 +494,15 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_17 = new Coins(10800, coinPoint3, enemySpeed, 40, MainActivity.this);
         Coins coin_18 = new Coins(11000, coinPoint2, enemySpeed, 40, MainActivity.this);
         Coins coin_19 = new Coins(11200, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_20 = new Coins(18300, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_21 = new Coins(18500, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_22 = new Coins(19000, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_23 = new Coins(19200, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_24 = new Coins(19400, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_20 = new Coins(11500, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_21 = new Coins(11700, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_22 = new Coins(11900, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_23 = new Coins(12400, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_24 = new Coins(12600, coinPoint1, enemySpeed, 40, MainActivity.this);
 
-        Coins coin_25 = new Coins(20000, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_26 = new Coins(20200, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_27 = new Coins(20400, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_25 = new Coins(12800, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_26 = new Coins(13000, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_27 = new Coins(13000, coinPoint1, enemySpeed, 40, MainActivity.this);
         Coins coin_28 = new Coins(20600, coinPoint3, enemySpeed, 40, MainActivity.this);
         Coins coin_29 = new Coins(20800, coinPoint3, enemySpeed, 40, MainActivity.this);
         Coins coin_30 = new Coins(21000, coinPoint2, enemySpeed, 40, MainActivity.this);
@@ -393,9 +525,40 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_47 = new Coins(24400, coinPoint1, enemySpeed, 40, MainActivity.this);
         Coins coin_48 = new Coins(24600, coinPoint2, enemySpeed, 40, MainActivity.this);
         Coins coin_49 = new Coins(24800, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_50 = new Coins(25000, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_50 = new Coins(20070, coinPoint2+63, enemySpeed, 40, MainActivity.this);
 
         prueba.setText("0/99");
+
+
+        birdEnemy1.setX(bird1.getX());
+        birdEnemy1.setY(bird1.getY());
+
+        birdEnemy2.setX(bird2.getX());
+        birdEnemy2.setY(bird2.getY());
+
+        birdEnemy3.setX(bird3.getX());
+        birdEnemy3.setY(bird3.getY());
+
+        birdEnemy4.setX(bird4.getX());
+        birdEnemy4.setY(bird4.getY());
+
+        birdEnemy5.setX(bird5.getX());
+        birdEnemy5.setY(bird5.getY());
+
+        birdEnemy6.setX(bird6.getX());
+        birdEnemy6.setY(bird6.getY());
+
+        birdEnemy7.setX(bird7.getX());
+        birdEnemy7.setY(bird7.getY());
+
+        birdEnemy8.setX(bird8.getX());
+        birdEnemy8.setY(bird8.getY());
+
+        birdEnemy9.setX(bird9.getX());
+        birdEnemy9.setY(bird9.getY());
+
+        birdEnemy10.setX(bird10.getX());
+        birdEnemy10.setY(bird10.getY());
 
 
         coin1.setX(coin_1.getX());
@@ -646,6 +809,47 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     character.setY(birdY);
+
+                    bird1.moveEnemy();
+                    birdEnemy1.setX(bird1.getX());
+                    birdEnemy1.setY(bird1.getY());
+
+                    bird2.moveEnemy();
+                    birdEnemy2.setX(bird2.getX());
+                    birdEnemy2.setY(bird2.getY());
+
+                    bird3.moveEnemy();
+                    birdEnemy3.setX(bird3.getX());
+                    birdEnemy3.setY(bird3.getY());
+
+                    bird4.moveEnemy();
+                    birdEnemy4.setX(bird4.getX());
+                    birdEnemy4.setY(bird4.getY());
+
+                    bird5.moveEnemy();
+                    birdEnemy5.setX(bird5.getX());
+                    birdEnemy5.setY(bird5.getY());
+
+                    bird6.moveEnemy();
+                    birdEnemy6.setX(bird6.getX());
+                    birdEnemy6.setY(bird6.getY());
+
+                    bird7.moveEnemy();
+                    birdEnemy7.setX(bird7.getX());
+                    birdEnemy7.setY(bird7.getY());
+
+                    bird8.moveEnemy();
+                    birdEnemy8.setX(bird8.getX());
+                    birdEnemy8.setY(bird8.getY());
+
+                    bird9.moveEnemy();
+                    birdEnemy9.setX(bird9.getX());
+                    birdEnemy9.setY(bird9.getY());
+
+                    bird10.moveEnemy();
+                    birdEnemy10.setX(bird10.getX());
+                    birdEnemy10.setY(bird10.getY());
+
 
                     coin_1.moveEnemy();
                     coin1.setX(coin_1.getX());

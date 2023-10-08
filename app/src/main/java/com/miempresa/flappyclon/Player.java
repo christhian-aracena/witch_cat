@@ -22,7 +22,10 @@ public class Player {
     }
 
     public void setLife(int life) {
+        if(this.life>3){
+            this.life=3;
+        }
 
-        this.life--;
+        this.life += life;
     }
 }
