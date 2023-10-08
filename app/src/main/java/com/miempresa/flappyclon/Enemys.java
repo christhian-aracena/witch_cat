@@ -8,16 +8,16 @@ public abstract class Enemys {
     protected float speed;  // Velocidad del enemigo
     protected float sizeEnemy;   // Tamaño del enemigo
 
-    public Enemys(float x, float y, float speed, float sizeEnemy) {
+    protected Enemys(float x, float y, float speed, float sizeEnemy) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.sizeEnemy = sizeEnemy;
     }
 
-    public void moveEnemy(){}
+    protected void moveEnemy(){}
 
-    public boolean checkCollision(ImageView bird) {
+    protected boolean checkCollision(ImageView bird) {
         Rect birdRect = new Rect();
         bird.getHitRect(birdRect);
 
@@ -33,35 +33,35 @@ public abstract class Enemys {
 
 
 
-    public float getX() {
+    protected float getX() {
         return x;
     }
 
-    public void setX(float x) {
+    protected void setX(float x) {
         this.x = x;
     }
 
-    public float getY() {
+    protected float getY() {
         return y;
     }
 
-    public void setY(float y) {
+    protected void setY(float y) {
         this.y = y;
     }
 
-    public float getSpeed() {
+    protected float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(float speed) {
+    protected void setSpeed(float speed) {
         this.speed = speed;
     }
 
-    public float getSizeEnemy() {
+    protected float getSizeEnemy() {
         return sizeEnemy;
     }
 
-    public void setSizeEnemy(float sizeEnemy) {
+    protected void setSizeEnemy(float sizeEnemy) {
         this.sizeEnemy = sizeEnemy;
     }
 }

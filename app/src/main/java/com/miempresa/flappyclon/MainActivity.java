@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //enemigos
     private ImageView arrowEnemy, arrowEnemy1, arrowEnemy2, arrowEnemy3, arrowEnemy4, arrowEnemy5,
             arrowEnemy6, arrowEnemy7, arrowEnemy8, arrowEnemy9, arrowEnemy10;
-    private ArrowEnemy arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
+    private Enemys arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
 
     private ImageView coin1, coin2, coin3, coin4, coin5, coin6, coin7, coin8, coin9, coin10, coin11, coin12,
             coin13, coin14, coin15, coin16, coin17, coin18, coin19, coin20, coin21, coin22, coin23, coin24,
@@ -613,7 +613,7 @@ public class MainActivity extends AppCompatActivity {
                         jump();
                         break;
                     case MotionEvent.ACTION_UP:
-                        // Se ha soltado la pantalla (no hagas nada al soltar)
+                        // Se hace nada al soltar
                         break;
                 }
 

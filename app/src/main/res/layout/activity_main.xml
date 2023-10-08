@@ -391,27 +391,27 @@ android:id="@+id/press"
 
     <ImageView
         android:id="@+id/heartOne"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/heart"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/heart_full"
         android:layout_marginStart="130dp"
         android:layout_marginTop="7dp"
         />
 
     <ImageView
         android:id="@+id/heartTwo"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/heart"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/heart_full"
         android:layout_marginStart="160dp"
         android:layout_marginTop="7dp"
         />
 
     <ImageView
         android:id="@+id/heartThree"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/heart"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/heart_empty"
         android:layout_marginStart="190dp"
         android:layout_marginTop="7dp"
         />
