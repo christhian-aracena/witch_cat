@@ -33,7 +33,8 @@ public class MainMenu extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
         // Inicializa el reproductor multimedia
-        mediaPlayer = MediaPlayer.create(this, R.raw.intro_theme);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.intro_theme);
+
         mediaPlayer.setVolume(1.9f, 1.9f);
 
         // Reproduce la música
@@ -57,7 +58,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                mediaPlayer = null;
+
                 if (!femaleRButton.isChecked() && !maleRButton.isChecked()) {
                     check = 1;
                 } else {
@@ -89,48 +90,20 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
-//        if (selectCharacterSound != null) {
-//            selectCharacterSound.release();
-//            selectCharacterSound = null;
-//        }
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
-//        if (selectCharacterSound != null) {
-//            selectCharacterSound.release();
-//            selectCharacterSound = null;
-//        }
-//    }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
-//        if (selectCharacterSound != null) {
-//            selectCharacterSound.release();
-//            selectCharacterSound = null;
-//        }
-//    }
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar recursos del reproductor multimedia al destruir la actividad
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        // Liberar recursos del reproductor de sonido de selección
+        if (selectCharacterSound != null) {
+            selectCharacterSound.release();
+            selectCharacterSound = null;
+        }
+    }
     public void animationMenu(ImageView character) {
         // Crear un ObjectAnimator para la propiedad "translationY"
         characterAnimator = ObjectAnimator.ofFloat(character, "translationY", 0f, 100f);

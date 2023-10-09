@@ -29,11 +29,11 @@ public class GameOver extends AppCompatActivity {
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (gameOverMusic != null) {
-                    gameOverMusic.stop();
-                    gameOverMusic.release();
-                    gameOverMusic = null;
-                }
+        if (gameOverMusic != null) {
+            gameOverMusic.stop();
+            gameOverMusic.release();
+            gameOverMusic = null;
+        }
                 startActivity(intentGoHome);
 
             }
@@ -44,6 +44,11 @@ public class GameOver extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(intentTryAgain);
+                if (gameOverMusic != null) {
+                    gameOverMusic.stop();
+                    gameOverMusic.release();
+                    gameOverMusic = null;
+                }
                 finish();
             }
         });
