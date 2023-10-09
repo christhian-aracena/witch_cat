@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+
         fullHeart1 =findViewById(R.id.heartOneFull);
         fullHeart2 =findViewById(R.id.heartTwoFull);
         fullHeart3 =findViewById(R.id.heartThreeFull);
@@ -1395,8 +1396,10 @@ public class MainActivity extends AppCompatActivity {
 
         moveBackground();
         gameStarted = false;
-        gameLayout.setOnTouchListener(new View.OnTouchListener() {
 
+
+        gameLayout.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("deprecation")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
@@ -1442,9 +1445,218 @@ public class MainActivity extends AppCompatActivity {
                         fullHeart3.setVisibility(View.INVISIBLE);
 
 
+
+                        animationCoin.clearAnimation();
+                        coin1.clearAnimation();
+                        coin2.clearAnimation();
+                        coin3.clearAnimation();
+                        coin4.clearAnimation();
+                        coin5.clearAnimation();
+                        coin6.clearAnimation();
+                        coin7.clearAnimation();
+                        coin8.clearAnimation();
+                        coin9.clearAnimation();
+                        coin10.clearAnimation();
+                        coin11.clearAnimation();
+                        coin12.clearAnimation();
+                        coin13.clearAnimation();
+                        coin14.clearAnimation();
+                        coin15.clearAnimation();
+                        coin16.clearAnimation();
+                        coin17.clearAnimation();
+                        coin18.clearAnimation();
+                        coin19.clearAnimation();
+                        coin20.clearAnimation();
+                        coin21.clearAnimation();
+                        coin22.clearAnimation();
+                        coin23.clearAnimation();
+                        coin24.clearAnimation();
+                        coin25.clearAnimation();
+                        coin26.clearAnimation();
+                        coin27.clearAnimation();
+                        coin28.clearAnimation();
+                        coin29.clearAnimation();
+                        coin30.clearAnimation();
+                        coin31.clearAnimation();
+                        coin32.clearAnimation();
+                        coin33.clearAnimation();
+                        coin34.clearAnimation();
+                        coin35.clearAnimation();
+                        coin36.clearAnimation();
+                        coin37.clearAnimation();
+                        coin38.clearAnimation();
+                        coin39.clearAnimation();
+                        coin40.clearAnimation();
+                        coin41.clearAnimation();
+                        coin42.clearAnimation();
+                        coin43.clearAnimation();
+                        coin44.clearAnimation();
+                        coin45.clearAnimation();
+                        coin46.clearAnimation();
+                        coin47.clearAnimation();
+                        coin48.clearAnimation();
+                        coin49.clearAnimation();
+                        coin50.clearAnimation();
+                        coin51.clearAnimation();
+                        coin52.clearAnimation();
+                        coin53.clearAnimation();
+                        coin54.clearAnimation();
+                        coin55.clearAnimation();
+                        coin56.clearAnimation();
+                        coin57.clearAnimation();
+                        coin58.clearAnimation();
+                        coin59.clearAnimation();
+                        coin60.clearAnimation();
+                        coin61.clearAnimation();
+                        coin62.clearAnimation();
+                        coin63.clearAnimation();
+                        coin64.clearAnimation();
+                        coin65.clearAnimation();
+                        coin66.clearAnimation();
+                        coin67.clearAnimation();
+                        coin68.clearAnimation();
+                        coin69.clearAnimation();
+                        coin70.clearAnimation();
+                        coin71.clearAnimation();
+                        coin72.clearAnimation();
+                        coin73.clearAnimation();
+                        coin74.clearAnimation();
+                        coin75.clearAnimation();
+                        coin76.clearAnimation();
+                        coin77.clearAnimation();
+                        coin78.clearAnimation();
+                        coin79.clearAnimation();
+                        coin80.clearAnimation();
+                        coin81.clearAnimation();
+                        coin82.clearAnimation();
+                        coin83.clearAnimation();
+                        coin84.clearAnimation();
+                        coin85.clearAnimation();
+                        coin86.clearAnimation();
+                        coin87.clearAnimation();
+                        coin88.clearAnimation();
+                        coin89.clearAnimation();
+                        coin90.clearAnimation();
+                        coin91.clearAnimation();
+                        coin92.clearAnimation();
+                        coin93.clearAnimation();
+                        coin94.clearAnimation();
+                        coin95.clearAnimation();
+                        coin96.clearAnimation();
+                        coin97.clearAnimation();
+                        coin98.clearAnimation();
+                        coin99.clearAnimation();
+
+
+                        arrowEnemy.clearAnimation();
+                        arrowEnemy1.clearAnimation();
+                        arrowEnemy2.clearAnimation();
+                        arrowEnemy3.clearAnimation();
+                        arrowEnemy4.clearAnimation();
+                        arrowEnemy5.clearAnimation();
+                        arrowEnemy6.clearAnimation();
+                        arrowEnemy7.clearAnimation();
+                        arrowEnemy8.clearAnimation();
+                        arrowEnemy9.clearAnimation();
+                        arrowEnemy10.clearAnimation();
+                        arrowEnemy11.clearAnimation();
+                        arrowEnemy12.clearAnimation();
+                        arrowEnemy13.clearAnimation();
+                        arrowEnemy14.clearAnimation();
+                        arrowEnemy15.clearAnimation();
+                        arrowEnemy16.clearAnimation();
+                        arrowEnemy17.clearAnimation();
+                        arrowEnemy18.clearAnimation();
+                        arrowEnemy19.clearAnimation();
+                        arrowEnemy20.clearAnimation();
+                        arrowEnemy21.clearAnimation();
+                        arrowEnemy22.clearAnimation();
+                        arrowEnemy23.clearAnimation();
+                        arrowEnemy24.clearAnimation();
+                        arrowEnemy25.clearAnimation();
+                        arrowEnemy26.clearAnimation();
+                        arrowEnemy27.clearAnimation();
+                        arrowEnemy28.clearAnimation();
+                        arrowEnemy29.clearAnimation();
+                        arrowEnemy30.clearAnimation();
+                        arrowEnemy31.clearAnimation();
+                        arrowEnemy32.clearAnimation();
+                        arrowEnemy33.clearAnimation();
+                        arrowEnemy34.clearAnimation();
+                        arrowEnemy35.clearAnimation();
+                        arrowEnemy36.clearAnimation();
+                        arrowEnemy37.clearAnimation();
+                        arrowEnemy38.clearAnimation();
+                        arrowEnemy39.clearAnimation();
+                        arrowEnemy40.clearAnimation();
+                        arrowEnemy41.clearAnimation();
+                        arrowEnemy42.clearAnimation();
+                        arrowEnemy43.clearAnimation();
+                        arrowEnemy44.clearAnimation();
+                        arrowEnemy45.clearAnimation();
+                        arrowEnemy46.clearAnimation();
+                        arrowEnemy47.clearAnimation();
+                        arrowEnemy48.clearAnimation();
+                        arrowEnemy49.clearAnimation();
+                        arrowEnemy50.clearAnimation();
+                        backgroundImage.clearAnimation();
+                        backgroundImage2.clearAnimation();
+                        backgroundImage3.clearAnimation();
                         mediaPlayer.stop();
                         coinSound.stop();
                         hitSound.stop();
+                        arrowEnemy.clearAnimation();
+                        arrowEnemy1.clearAnimation();
+                        arrowEnemy2.clearAnimation();
+                        arrowEnemy3.clearAnimation();
+                        arrowEnemy4.clearAnimation();
+                        arrowEnemy5.clearAnimation();
+                        arrowEnemy6.clearAnimation();
+                        arrowEnemy7.clearAnimation();
+                        arrowEnemy8.clearAnimation();
+                        arrowEnemy9.clearAnimation();
+                        arrowEnemy10.clearAnimation();
+                        arrowEnemy11.clearAnimation();
+                        arrowEnemy12.clearAnimation();
+                        arrowEnemy13.clearAnimation();
+                        arrowEnemy14.clearAnimation();
+                        arrowEnemy15.clearAnimation();
+                        arrowEnemy16.clearAnimation();
+                        arrowEnemy17.clearAnimation();
+                        arrowEnemy18.clearAnimation();
+                        arrowEnemy19.clearAnimation();
+                        arrowEnemy20.clearAnimation();
+                        arrowEnemy21.clearAnimation();
+                        arrowEnemy22.clearAnimation();
+                        arrowEnemy23.clearAnimation();
+                        arrowEnemy24.clearAnimation();
+                        arrowEnemy25.clearAnimation();
+                        arrowEnemy26.clearAnimation();
+                        arrowEnemy27.clearAnimation();
+                        arrowEnemy28.clearAnimation();
+                        arrowEnemy29.clearAnimation();
+                        arrowEnemy30.clearAnimation();
+                        arrowEnemy31.clearAnimation();
+                        arrowEnemy32.clearAnimation();
+                        arrowEnemy33.clearAnimation();
+                        arrowEnemy34.clearAnimation();
+                        arrowEnemy35.clearAnimation();
+                        arrowEnemy36.clearAnimation();
+                        arrowEnemy37.clearAnimation();
+                        arrowEnemy38.clearAnimation();
+                        arrowEnemy39.clearAnimation();
+                        arrowEnemy40.clearAnimation();
+                        arrowEnemy41.clearAnimation();
+                        arrowEnemy42.clearAnimation();
+                        arrowEnemy43.clearAnimation();
+                        arrowEnemy44.clearAnimation();
+                        arrowEnemy45.clearAnimation();
+                        arrowEnemy46.clearAnimation();
+                        arrowEnemy47.clearAnimation();
+                        arrowEnemy48.clearAnimation();
+                        arrowEnemy49.clearAnimation();
+                        arrowEnemy50.clearAnimation();
+
                         startActivity(intentGameOver);
                         finish();
                         // Marcar la lógica como ejecutada
@@ -1457,7 +1669,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            private Runnable gameRunnable = new Runnable() {
+            private final Runnable gameRunnable = new Runnable() {
                 @Override
                 public void run() {
 
@@ -3094,7 +3306,7 @@ public class MainActivity extends AppCompatActivity {
 //
 
 
-                    handler.postDelayed(this, 22);
+                    handler.postDelayed(this, 20);
                 }
             };
         });
@@ -3132,8 +3344,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 //    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
+//    protected void onStop() {
+//        super.onStop();
 //
 //        // Libera recursos cuando se destruye la actividad
 //        if (mediaPlayer != null) {
@@ -3144,6 +3356,22 @@ public class MainActivity extends AppCompatActivity {
 //            mediaPlayer = null;
 //        }
 //    }
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        // Libera recursos cuando se destruye la actividad
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer.stop();
+//            coinSound.stop();
+//            hitSound.stop();
+//            mediaPlayer = null;
+//        }
+//    }
+
+
 
 
     private void setCharacterImage(int seleccion) {
@@ -3189,4 +3417,175 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 16);
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        coin1.clearAnimation();
+        coin2.clearAnimation();
+        coin3.clearAnimation();
+        coin4.clearAnimation();
+        coin5.clearAnimation();
+        coin6.clearAnimation();
+        coin7.clearAnimation();
+        coin8.clearAnimation();
+        coin9.clearAnimation();
+        coin10.clearAnimation();
+        coin11.clearAnimation();
+        coin12.clearAnimation();
+        coin13.clearAnimation();
+        coin14.clearAnimation();
+        coin15.clearAnimation();
+        coin16.clearAnimation();
+        coin17.clearAnimation();
+        coin18.clearAnimation();
+        coin19.clearAnimation();
+        coin20.clearAnimation();
+        coin21.clearAnimation();
+        coin22.clearAnimation();
+        coin23.clearAnimation();
+        coin24.clearAnimation();
+        coin25.clearAnimation();
+        coin26.clearAnimation();
+        coin27.clearAnimation();
+        coin28.clearAnimation();
+        coin29.clearAnimation();
+        coin30.clearAnimation();
+        coin31.clearAnimation();
+        coin32.clearAnimation();
+        coin33.clearAnimation();
+        coin34.clearAnimation();
+        coin35.clearAnimation();
+        coin36.clearAnimation();
+        coin37.clearAnimation();
+        coin38.clearAnimation();
+        coin39.clearAnimation();
+        coin40.clearAnimation();
+        coin41.clearAnimation();
+        coin42.clearAnimation();
+        coin43.clearAnimation();
+        coin44.clearAnimation();
+        coin45.clearAnimation();
+        coin46.clearAnimation();
+        coin47.clearAnimation();
+        coin48.clearAnimation();
+        coin49.clearAnimation();
+        coin50.clearAnimation();
+        coin51.clearAnimation();
+        coin52.clearAnimation();
+        coin53.clearAnimation();
+        coin54.clearAnimation();
+        coin55.clearAnimation();
+        coin56.clearAnimation();
+        coin57.clearAnimation();
+        coin58.clearAnimation();
+        coin59.clearAnimation();
+        coin60.clearAnimation();
+        coin61.clearAnimation();
+        coin62.clearAnimation();
+        coin63.clearAnimation();
+        coin64.clearAnimation();
+        coin65.clearAnimation();
+        coin66.clearAnimation();
+        coin67.clearAnimation();
+        coin68.clearAnimation();
+        coin69.clearAnimation();
+        coin70.clearAnimation();
+        coin71.clearAnimation();
+        coin72.clearAnimation();
+        coin73.clearAnimation();
+        coin74.clearAnimation();
+        coin75.clearAnimation();
+        coin76.clearAnimation();
+        coin77.clearAnimation();
+        coin78.clearAnimation();
+        coin79.clearAnimation();
+        coin80.clearAnimation();
+        coin81.clearAnimation();
+        coin82.clearAnimation();
+        coin83.clearAnimation();
+        coin84.clearAnimation();
+        coin85.clearAnimation();
+        coin86.clearAnimation();
+        coin87.clearAnimation();
+        coin88.clearAnimation();
+        coin89.clearAnimation();
+        coin90.clearAnimation();
+        coin91.clearAnimation();
+        coin92.clearAnimation();
+        coin93.clearAnimation();
+        coin94.clearAnimation();
+        coin95.clearAnimation();
+        coin96.clearAnimation();
+        coin97.clearAnimation();
+        coin98.clearAnimation();
+        coin99.clearAnimation();
+
+        arrowEnemy.clearAnimation();
+        arrowEnemy1.clearAnimation();
+        arrowEnemy2.clearAnimation();
+        arrowEnemy3.clearAnimation();
+        arrowEnemy4.clearAnimation();
+        arrowEnemy5.clearAnimation();
+        arrowEnemy6.clearAnimation();
+        arrowEnemy7.clearAnimation();
+        arrowEnemy8.clearAnimation();
+        arrowEnemy9.clearAnimation();
+        arrowEnemy10.clearAnimation();
+        arrowEnemy11.clearAnimation();
+        arrowEnemy12.clearAnimation();
+        arrowEnemy13.clearAnimation();
+        arrowEnemy14.clearAnimation();
+        arrowEnemy15.clearAnimation();
+        arrowEnemy16.clearAnimation();
+        arrowEnemy17.clearAnimation();
+        arrowEnemy18.clearAnimation();
+        arrowEnemy19.clearAnimation();
+        arrowEnemy20.clearAnimation();
+        arrowEnemy21.clearAnimation();
+        arrowEnemy22.clearAnimation();
+        arrowEnemy23.clearAnimation();
+        arrowEnemy24.clearAnimation();
+        arrowEnemy25.clearAnimation();
+        arrowEnemy26.clearAnimation();
+        arrowEnemy27.clearAnimation();
+        arrowEnemy28.clearAnimation();
+        arrowEnemy29.clearAnimation();
+        arrowEnemy30.clearAnimation();
+        arrowEnemy31.clearAnimation();
+        arrowEnemy32.clearAnimation();
+        arrowEnemy33.clearAnimation();
+        arrowEnemy34.clearAnimation();
+        arrowEnemy35.clearAnimation();
+        arrowEnemy36.clearAnimation();
+        arrowEnemy37.clearAnimation();
+        arrowEnemy38.clearAnimation();
+        arrowEnemy39.clearAnimation();
+        arrowEnemy40.clearAnimation();
+        arrowEnemy41.clearAnimation();
+        arrowEnemy42.clearAnimation();
+        arrowEnemy43.clearAnimation();
+        arrowEnemy44.clearAnimation();
+        arrowEnemy45.clearAnimation();
+        arrowEnemy46.clearAnimation();
+        arrowEnemy47.clearAnimation();
+        arrowEnemy48.clearAnimation();
+        arrowEnemy49.clearAnimation();
+        arrowEnemy50.clearAnimation();
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+
+        }
+        if (coinSound != null) {
+            coinSound.stop();
+
+
+        }
+        if (hitSound != null) {
+            hitSound.stop();
+
+        }
+    }
+
 }

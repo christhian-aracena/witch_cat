@@ -8,10 +8,6 @@ import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,9 +22,8 @@ public class MainMenu extends AppCompatActivity {
     private RadioGroup radioGroup;
     private ObjectAnimator characterAnimator;
     int check;
-    private MediaPlayer mediaPlayer = new MediaPlayer();
-    private MediaPlayer selectCharacterSound = new MediaPlayer();
-
+    private MediaPlayer mediaPlayer;
+    private MediaPlayer selectCharacterSound;
     Intent newIntent;
 
     @Override
@@ -39,10 +34,11 @@ public class MainMenu extends AppCompatActivity {
 
         // Inicializa el reproductor multimedia
         mediaPlayer = MediaPlayer.create(this, R.raw.intro_theme);
-
         mediaPlayer.setVolume(1.9f, 1.9f);
-        // Reproducir la música
+
+        // Reproduce la música
         mediaPlayer.start();
+
         selectCharacterSound = MediaPlayer.create(this, R.raw.select_character);
         btn_start = findViewById(R.id.btn_start);
         femaleCharacter = findViewById(R.id.female_witch);
@@ -50,23 +46,19 @@ public class MainMenu extends AppCompatActivity {
         femaleRButton = findViewById(R.id.witch_girl_selected);
         maleRButton = findViewById(R.id.witch_boy_selected);
         radioGroup = findViewById(R.id.rGroup);
-        newIntent =new Intent(MainMenu.this, MainActivity.class);
+        newIntent = new Intent(MainMenu.this, MainActivity.class);
         newIntent.putExtra("seleccion", check);
-        //llamo al metodo para especificar el personaje seleccionado por default
+
+        // Llama al método para especificar el personaje seleccionado por defecto
         animationMenu(femaleCharacter);
-
-
 
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 mediaPlayer.stop();
                 mediaPlayer.release();
-
+                mediaPlayer = null;
                 if (!femaleRButton.isChecked() && !maleRButton.isChecked()) {
-
                     check = 1;
                 } else {
                     if (femaleRButton.isChecked()) {
@@ -74,18 +66,12 @@ public class MainMenu extends AppCompatActivity {
                     } else if (maleRButton.isChecked()) {
                         check = 2;
                     }
-
                 }
 
                 startActivity(newIntent);
-                finish();
-
-
-
+//                finish();
             }
         });
-
-
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -94,57 +80,54 @@ public class MainMenu extends AppCompatActivity {
                     selectCharacterSound.start();
                     stopAnimator();
                     animationMenu(femaleCharacter);
-
                 } else if (i == R.id.witch_boy_selected) {
                     selectCharacterSound.start();
                     stopAnimator();
                     animationMenu(maleCharacter);
-
                 }
-
-
             }
         });
-
-
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//        }
+//        if (selectCharacterSound != null) {
+//            selectCharacterSound.release();
+//            selectCharacterSound = null;
+//        }
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//        }
+//        if (selectCharacterSound != null) {
+//            selectCharacterSound.release();
+//            selectCharacterSound = null;
+//        }
+//    }
 
-        // Libera recursos cuando se destruye la actividad
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer.stop();
-            mediaPlayer = null;
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//        }
+//        if (selectCharacterSound != null) {
+//            selectCharacterSound.release();
+//            selectCharacterSound = null;
+//        }
+//    }
 
-            finish();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mediaPlayer.release();
-        mediaPlayer.stop();
-        finish();
-
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.release();
-        mediaPlayer.stop();
-        finish();
-
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Reanuda la reproducción de la música si estaba pausada
-        mediaPlayer.start();
-    }
 
 
 
@@ -155,7 +138,7 @@ public class MainMenu extends AppCompatActivity {
         // Configurar la duración de la animación en milisegundos
         characterAnimator.setDuration(800); // 1000 milisegundos = 1 segundo
 
-        // Configurar el linearInterpolator para obtener un movimiento suave
+        // Configurar el LinearInterpolator para obtener un movimiento suave
         characterAnimator.setInterpolator(new LinearInterpolator());
 
         // Configurar la repetición infinita

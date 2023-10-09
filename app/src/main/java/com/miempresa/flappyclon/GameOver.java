@@ -32,10 +32,9 @@ public class GameOver extends AppCompatActivity {
                 if (gameOverMusic != null) {
                     gameOverMusic.stop();
                     gameOverMusic.release();
+                    gameOverMusic = null;
                 }
                 startActivity(intentGoHome);
-                gameOverMusic.release();
-                gameOverMusic.stop();
 
             }
         });
@@ -43,42 +42,48 @@ public class GameOver extends AppCompatActivity {
         btnTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (gameOverMusic != null) {
-                    gameOverMusic.stop();
-                    gameOverMusic.release();
-                }
-                startActivity(intentTryAgain);
-                gameOverMusic.release();
-                gameOverMusic.stop();
 
+                startActivity(intentTryAgain);
+                finish();
             }
         });
 
         gameOverMusic = new MediaPlayer();
 
         gameOverMusic = MediaPlayer.create(this, R.raw.game_over);
-        gameOverMusic.seekTo(0);
         gameOverMusic.start();
 
 
 
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-        // Libera recursos cuando se destruye la actividad
-        if (gameOverMusic != null ) {
-            gameOverMusic.release();
-            gameOverMusic = null;
-        }
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameOverMusic.release();
-        gameOverMusic.stop();
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (gameOverMusic != null) {
+//            gameOverMusic.stop();
+//            gameOverMusic.release();
+//            gameOverMusic = null;
+//        }
+//    }
 
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (gameOverMusic != null) {
+//            gameOverMusic.stop();
+//            gameOverMusic.release();
+//            gameOverMusic = null;
+//        }
+//    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        if (gameOverMusic != null) {
+//            gameOverMusic.stop();
+//            gameOverMusic.release();
+//            gameOverMusic = null;
+//        }
+//    }
 }

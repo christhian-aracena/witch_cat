@@ -1,6 +1,7 @@
 package com.miempresa.flappyclon;
 
 public class Player {
+    private boolean perdiste;
     private int countCoins;
     private int life;
     public Player(){
@@ -17,10 +18,11 @@ public class Player {
 
     }
 
-    public void GameOver(){
+    public boolean GameOver(){
         if(this.life<1){
-            System.out.println("Perdiste");
+            return perdiste=true;
         }
+        else {return false;}
     }
 
     public int getLife() {
