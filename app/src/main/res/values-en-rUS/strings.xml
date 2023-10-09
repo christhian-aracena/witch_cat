@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">FlappyClon</string>
     <string name="msg_start">Start</string>
+    <string name="msg_game_over">Game Over</string>
+    <string name="msg_select_option">What do you want to do?</string>
+    <string name="msg_try_again">Try Again</string>
+    <string name="msg_go_to_home">Go to Home</string>
 </resources>

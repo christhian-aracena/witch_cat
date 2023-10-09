@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private MediaPlayer coinSound;  // Nuevo MediaPlayer para el sonido de la moneda
+    private MediaPlayer hitSound; //sonido cuando el jugador ese tocado por el enemigo
+    private boolean isLogicExecuted = false;
+    Intent intentGameOver;
+
+    ImageView fullHeart1;
+    ImageView fullHeart2;
+    ImageView fullHeart3;
     private Handler handler = new Handler();
     DisplayMetrics sizeMobile;
     private ImageView character;
@@ -48,20 +60,30 @@ public class MainActivity extends AppCompatActivity {
             arrowEnemy41, arrowEnemy42, arrowEnemy43, arrowEnemy44, arrowEnemy45,
             arrowEnemy46, arrowEnemy47, arrowEnemy48, arrowEnemy49, arrowEnemy50;
 
-//    polimorfismo para sobreescribir la subclase arrow de la clase Enemys
-    private Enemys arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10;
+    //    polimorfismo para sobreescribir la subclase arrow de la clase Enemys
+    private Enemys arrow, arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10,
+            arrow11, arrow12, arrow13, arrow14, arrow15, arrow16, arrow17, arrow18, arrow19, arrow20,
+            arrow21, arrow22, arrow23, arrow24, arrow25, arrow26, arrow27, arrow28, arrow29, arrow30,
+            arrow31, arrow32, arrow33, arrow34, arrow35, arrow36, arrow37, arrow38, arrow39, arrow40,
+            arrow41, arrow42, arrow43, arrow44, arrow45, arrow46, arrow47, arrow48, arrow49, arrow50;
+
 
     private ImageView coin1, coin2, coin3, coin4, coin5, coin6, coin7, coin8, coin9, coin10, coin11, coin12,
             coin13, coin14, coin15, coin16, coin17, coin18, coin19, coin20, coin21, coin22, coin23, coin24,
             coin25, coin26, coin27, coin28, coin29, coin30, coin31, coin32, coin33, coin34, coin35, coin36,
             coin37, coin38, coin39, coin40, coin41, coin42, coin43, coin44, coin45, coin46, coin47, coin48,
-            coin49, coin50;
+            coin49, coin50, coin51, coin52, coin53, coin54, coin55, coin56, coin57, coin58, coin59, coin60,
+            coin61, coin62, coin63, coin64, coin65, coin66, coin67, coin68, coin69, coin70, coin71, coin72,
+            coin73, coin74, coin75, coin76, coin77, coin78, coin79, coin80, coin81, coin82, coin83, coin84,
+            coin85, coin86, coin87, coin88, coin89, coin90, coin91, coin92, coin93, coin94, coin95, coin96,
+            coin97, coin98, coin99;
+
 
     private float enemySpeed = 24;
 
     private float sizeEnemy = 100;
     private TextView prueba;
-    private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4,birdEnemy5,birdEnemy6,birdEnemy7,birdEnemy8,birdEnemy9, birdEnemy10;
+    private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4, birdEnemy5, birdEnemy6, birdEnemy7, birdEnemy8, birdEnemy9, birdEnemy10;
     private Enemys bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10;
 
     private float point1, point2, point3, point4;
@@ -75,6 +97,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+        fullHeart1 =findViewById(R.id.heartOneFull);
+        fullHeart2 =findViewById(R.id.heartTwoFull);
+        fullHeart3 =findViewById(R.id.heartThreeFull);
+
+        intentGameOver = new Intent(MainActivity.this, GameOver.class);
+
+        //Se inicializa el reproductor multimedia
+        mediaPlayer = MediaPlayer.create(this, R.raw.main_theme);
+        mediaPlayer.setVolume(0.4f, 0.4f);
+
+
+        // Inicializa el reproductor multimedia para el sonido de la moneda
+        coinSound = MediaPlayer.create(this, R.raw.coin_sound);
+
+        hitSound = MediaPlayer.create(this, R.raw.hit_enemy);
+
         Player player = new Player();
         // Calcula las coordenadas Y de los 4 puntos de paso en función del tamaño de la pantalla
         sizeMobile = new DisplayMetrics();
@@ -86,81 +124,77 @@ public class MainActivity extends AppCompatActivity {
         point4 = screenHeight * 0.7f;  // Porcentaje respecto a la pantalla (80%)
 
 
-        coinPoint1 = screenHeight * 0.2f ;  // Porcentaje respecto a la pantalla (20%)
-        coinPoint2 = screenHeight * 0.4f  ;  // Porcentaje respecto a la pantalla (40%)
-        coinPoint3 = screenHeight * 0.5f ;  // Porcentaje respecto a la pantalla (60%)
+        coinPoint1 = screenHeight * 0.2f;  // Porcentaje respecto a la pantalla (20%)
+        coinPoint2 = screenHeight * 0.4f;  // Porcentaje respecto a la pantalla (40%)
+        coinPoint3 = screenHeight * 0.5f;  // Porcentaje respecto a la pantalla (60%)
         coinPoint4 = screenHeight * 0.8f;  // Porcentaje respecto a la pantalla (80%)
 
 
-
-
-
-        birdEnemy1 =findViewById(R.id.birdEnemy1);
+        birdEnemy1 = findViewById(R.id.birdEnemy1);
         birdEnemy1.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         AnimationDrawable animationDrawable = (AnimationDrawable) birdEnemy1.getBackground();
         animationDrawable.start();
 
 
-
-        birdEnemy2 =findViewById(R.id.birdEnemy2);
+        birdEnemy2 = findViewById(R.id.birdEnemy2);
         birdEnemy2.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy2.getBackground();
         animationDrawable.start();
 
 
-        birdEnemy3 =findViewById(R.id.birdEnemy3);
+        birdEnemy3 = findViewById(R.id.birdEnemy3);
         birdEnemy3.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy3.getBackground();
         animationDrawable.start();
 
 
-        birdEnemy4 =findViewById(R.id.birdEnemy4);
+        birdEnemy4 = findViewById(R.id.birdEnemy4);
         birdEnemy4.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy4.getBackground();
         animationDrawable.start();
 
-        birdEnemy5 =findViewById(R.id.birdEnemy5);
+        birdEnemy5 = findViewById(R.id.birdEnemy5);
         birdEnemy5.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy5.getBackground();
         animationDrawable.start();
 
-        birdEnemy6 =findViewById(R.id.birdEnemy6);
+        birdEnemy6 = findViewById(R.id.birdEnemy6);
         birdEnemy6.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy6.getBackground();
         animationDrawable.start();
 
-        birdEnemy7 =findViewById(R.id.birdEnemy7);
+        birdEnemy7 = findViewById(R.id.birdEnemy7);
         birdEnemy7.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy7.getBackground();
         animationDrawable.start();
 
-        birdEnemy8 =findViewById(R.id.birdEnemy8);
+        birdEnemy8 = findViewById(R.id.birdEnemy8);
         birdEnemy8.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy8.getBackground();
         animationDrawable.start();
 
-        birdEnemy9 =findViewById(R.id.birdEnemy9);
+        birdEnemy9 = findViewById(R.id.birdEnemy9);
         birdEnemy9.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy9.getBackground();
         animationDrawable.start();
 
-        birdEnemy10 =findViewById(R.id.birdEnemy10);
+        birdEnemy10 = findViewById(R.id.birdEnemy10);
         birdEnemy10.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy10.getBackground();
         animationDrawable.start();
 
 
-
+//        Animacion de moneda de conteo
         animationCoin = findViewById(R.id.animation);
         animationCoin.setBackgroundResource(R.drawable.coin_animation);
         // Obtiene la animación del ImageView
@@ -383,6 +417,250 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable = (AnimationDrawable) coin50.getBackground();
         animationDrawable.start();
 
+        coin51 = findViewById(R.id.coinCincuentauno);
+        coin51.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin51.getBackground();
+        animationDrawable.start();
+
+        coin52 = findViewById(R.id.coinCincuentaidos);
+        coin52.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin52.getBackground();
+        animationDrawable.start();
+
+        coin53 = findViewById(R.id.coinCincuentaitres);
+        coin53.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin53.getBackground();
+        animationDrawable.start();
+
+        coin54 = findViewById(R.id.coinCincuentaicuatro);
+        coin54.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin54.getBackground();
+        animationDrawable.start();
+
+        coin55 = findViewById(R.id.coinCincuentaicinco);
+        coin55.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin55.getBackground();
+        animationDrawable.start();
+
+        coin56 = findViewById(R.id.coinCincuentaiseis);
+        coin56.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin56.getBackground();
+        animationDrawable.start();
+
+        coin57 = findViewById(R.id.coinCincuentaisiete);
+        coin57.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin57.getBackground();
+        animationDrawable.start();
+
+        coin58 = findViewById(R.id.coinCincuentaiocho);
+        coin58.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin58.getBackground();
+        animationDrawable.start();
+
+        coin59 = findViewById(R.id.coinCincuentainueve);
+        coin59.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin59.getBackground();
+        animationDrawable.start();
+
+        coin60 = findViewById(R.id.coinSesenta);
+        coin60.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin60.getBackground();
+        animationDrawable.start();
+
+        coin61 = findViewById(R.id.coinSesentaiuno);
+        coin61.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin61.getBackground();
+        animationDrawable.start();
+
+        coin62 = findViewById(R.id.coinSesentaidos);
+        coin62.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin62.getBackground();
+        animationDrawable.start();
+
+        coin63 = findViewById(R.id.coinSesentaitres);
+        coin63.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin63.getBackground();
+        animationDrawable.start();
+
+        coin64 = findViewById(R.id.coinSesentaicuatro);
+        coin64.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin64.getBackground();
+        animationDrawable.start();
+
+        coin65 = findViewById(R.id.coinSesentaicinco);
+        coin65.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin65.getBackground();
+        animationDrawable.start();
+
+        coin66 = findViewById(R.id.coinSesentaiseis);
+        coin66.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin66.getBackground();
+        animationDrawable.start();
+
+        coin67 = findViewById(R.id.coinSesentaisiete);
+        coin67.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin67.getBackground();
+        animationDrawable.start();
+
+        coin68 = findViewById(R.id.coinSesentaiocho);
+        coin68.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin68.getBackground();
+        animationDrawable.start();
+
+        coin69 = findViewById(R.id.coinSesentainueve);
+        coin69.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin69.getBackground();
+        animationDrawable.start();
+
+        coin70 = findViewById(R.id.coinSetenta);
+        coin70.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin70.getBackground();
+        animationDrawable.start();
+
+        coin71 = findViewById(R.id.coinSetentaiuno);
+        coin71.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin71.getBackground();
+        animationDrawable.start();
+
+        coin72 = findViewById(R.id.coinSetentaidos);
+        coin72.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin72.getBackground();
+        animationDrawable.start();
+
+        coin73 = findViewById(R.id.coinSetentaitres);
+        coin73.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin73.getBackground();
+        animationDrawable.start();
+
+        coin74 = findViewById(R.id.coinSetentaicuatro);
+        coin74.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin74.getBackground();
+        animationDrawable.start();
+
+        coin75 = findViewById(R.id.coinSetentaicinco);
+        coin75.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin75.getBackground();
+        animationDrawable.start();
+
+        coin76 = findViewById(R.id.coinSetentaiseis);
+        coin76.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin76.getBackground();
+        animationDrawable.start();
+
+        coin77 = findViewById(R.id.coinSetentaisiete);
+        coin77.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin77.getBackground();
+        animationDrawable.start();
+
+        coin78 = findViewById(R.id.coinSetentaiocho);
+        coin78.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin78.getBackground();
+        animationDrawable.start();
+
+        coin79 = findViewById(R.id.coinSetentainueve);
+        coin79.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin79.getBackground();
+        animationDrawable.start();
+
+        coin80 = findViewById(R.id.coinOchenta);
+        coin80.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin80.getBackground();
+        animationDrawable.start();
+
+        coin81 = findViewById(R.id.coinOchentaiuno);
+        coin81.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin81.getBackground();
+        animationDrawable.start();
+
+        coin82 = findViewById(R.id.coinOchentaidos);
+        coin82.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin82.getBackground();
+        animationDrawable.start();
+
+        coin83 = findViewById(R.id.coinOchentaitres);
+        coin83.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin83.getBackground();
+        animationDrawable.start();
+
+        coin84 = findViewById(R.id.coinOchentaicuatro);
+        coin84.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin84.getBackground();
+        animationDrawable.start();
+
+        coin85 = findViewById(R.id.coinOchentaicinco);
+        coin85.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin85.getBackground();
+        animationDrawable.start();
+
+        coin86 = findViewById(R.id.coinOchentaiseis);
+        coin86.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin86.getBackground();
+        animationDrawable.start();
+
+        coin87 = findViewById(R.id.coinOchentaisiete);
+        coin87.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin87.getBackground();
+        animationDrawable.start();
+
+        coin88 = findViewById(R.id.coinOchentaiocho);
+        coin88.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin88.getBackground();
+        animationDrawable.start();
+
+        coin89 = findViewById(R.id.coinOchentainueve);
+        coin89.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin89.getBackground();
+        animationDrawable.start();
+
+        coin90 = findViewById(R.id.coinNoventa);
+        coin90.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin90.getBackground();
+        animationDrawable.start();
+
+        coin91 = findViewById(R.id.coinNoventaiuno);
+        coin91.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin91.getBackground();
+        animationDrawable.start();
+
+        coin92 = findViewById(R.id.coinNoventaidos);
+        coin92.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin92.getBackground();
+        animationDrawable.start();
+
+        coin93 = findViewById(R.id.coinNoventaitres);
+        coin93.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin93.getBackground();
+        animationDrawable.start();
+
+        coin94 = findViewById(R.id.coinNoventaicuatro);
+        coin94.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin94.getBackground();
+        animationDrawable.start();
+
+        coin95 = findViewById(R.id.coinNoventaicinco);
+        coin95.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin95.getBackground();
+        animationDrawable.start();
+
+        coin96 = findViewById(R.id.coinNoventaiseis);
+        coin96.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin96.getBackground();
+        animationDrawable.start();
+
+        coin97 = findViewById(R.id.coinNoventaisiete);
+        coin97.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin97.getBackground();
+        animationDrawable.start();
+
+        coin98 = findViewById(R.id.coinNoventaiocho);
+        coin98.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin98.getBackground();
+        animationDrawable.start();
+
+        coin99 = findViewById(R.id.coinNoventainueve);
+        coin99.setBackgroundResource(R.drawable.coin_animation);
+        animationDrawable = (AnimationDrawable) coin99.getBackground();
+        animationDrawable.start();
 
 
         arrowEnemy = findViewById(R.id.arrow_enemy);
@@ -438,26 +716,18 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy50 = findViewById(R.id.arrow_enemy50);
 
 
-
-
-
-
-
         //        Instancias bird
 
-        bird1 = new Bird(5000,point1,enemySpeed,100);
-        bird2 = new Bird(6000,point2,enemySpeed,100);
-        bird3 = new Bird(10000,point1,enemySpeed,100);
-        bird4 = new Bird(17500,point2,33,100);
-        bird5 = new Bird(18000,point2,enemySpeed,100);
-        bird6 = new Bird(20000,point4,enemySpeed,100);
-        bird7 = new Bird(20000,point1,enemySpeed,100);
-        bird8 = new Bird(21900,point2,enemySpeed,100);
-        bird9 = new Bird(22900,point2,enemySpeed,100);
-        bird10 = new Bird(23650,point2,enemySpeed,100);
-
-
-
+        bird1 = new Bird(5000, point1, enemySpeed, 100);
+        bird2 = new Bird(6000, point2, enemySpeed, 100);
+        bird3 = new Bird(10000, point1, enemySpeed, 100);
+        bird4 = new Bird(17500, point2, 33, 100);
+        bird5 = new Bird(18000, point2, enemySpeed, 100);
+        bird6 = new Bird(20000, point4, enemySpeed, 100);
+        bird7 = new Bird(20000, point1, enemySpeed, 100);
+        bird8 = new Bird(25500, point1, enemySpeed, 100);
+        bird9 = new Bird(25500, point4, enemySpeed, 100);
+        bird10 = new Bird(27500, point2, enemySpeed, 100);
 
 
         arrow = new ArrowEnemy(3000, point4, enemySpeed, sizeEnemy);
@@ -471,6 +741,50 @@ public class MainActivity extends AppCompatActivity {
         arrow8 = new ArrowEnemy(11000, point3, enemySpeed, sizeEnemy);
         arrow9 = new ArrowEnemy(12000, point1, enemySpeed, sizeEnemy);
         arrow10 = new ArrowEnemy(13000, point4, enemySpeed, sizeEnemy);
+
+        arrow11 = new ArrowEnemy(14000, point3, enemySpeed, sizeEnemy);
+        arrow12 = new ArrowEnemy(15000, point4, enemySpeed, sizeEnemy);
+        arrow13 = new ArrowEnemy(16000, point3 + 80, enemySpeed, sizeEnemy);
+        arrow14 = new ArrowEnemy(17000, point4, enemySpeed, sizeEnemy);
+        arrow15 = new ArrowEnemy(18000, point3, enemySpeed, sizeEnemy);
+        arrow16 = new ArrowEnemy(18000, point1, enemySpeed, sizeEnemy);
+        arrow17 = new ArrowEnemy(14000, point1 - 100, enemySpeed, sizeEnemy);
+        arrow18 = new ArrowEnemy(15000, point1 - 100, enemySpeed, sizeEnemy);
+        arrow19 = new ArrowEnemy(16000, point1 - 100, enemySpeed, sizeEnemy);
+        arrow20 = new ArrowEnemy(17000, point1 - 100, enemySpeed, sizeEnemy);
+        arrow21 = new ArrowEnemy(19000, point4, enemySpeed, sizeEnemy);
+        arrow22 = new ArrowEnemy(19500, point4, enemySpeed, sizeEnemy);
+        arrow23 = new ArrowEnemy(19000, point1, enemySpeed, sizeEnemy);
+        arrow24 = new ArrowEnemy(19500, point1, enemySpeed, sizeEnemy);
+
+        arrow25 = new ArrowEnemy(20700, point1, enemySpeed, sizeEnemy);
+        arrow26 = new ArrowEnemy(20700, point2, enemySpeed, sizeEnemy);
+        arrow27 = new ArrowEnemy(21000, point1, enemySpeed, sizeEnemy);
+        arrow28 = new ArrowEnemy(21000, point2, enemySpeed, sizeEnemy);
+        arrow29 = new ArrowEnemy(21700, point4, enemySpeed, sizeEnemy);
+        arrow30 = new ArrowEnemy(21700, point3, enemySpeed, sizeEnemy);
+        arrow31 = new ArrowEnemy(22000, point4, enemySpeed, sizeEnemy);
+        arrow32 = new ArrowEnemy(22000, point3, enemySpeed, sizeEnemy);
+
+        arrow33 = new ArrowEnemy(22700, point1, enemySpeed, sizeEnemy);
+        arrow34 = new ArrowEnemy(22700, point2, enemySpeed, sizeEnemy);
+        arrow35 = new ArrowEnemy(23000, point1, enemySpeed, sizeEnemy);
+        arrow36 = new ArrowEnemy(23000, point2, enemySpeed, sizeEnemy);
+        arrow37 = new ArrowEnemy(23700, point4, enemySpeed, sizeEnemy);
+        arrow38 = new ArrowEnemy(23700, point3, enemySpeed, sizeEnemy);
+        arrow39 = new ArrowEnemy(24000, point4, enemySpeed, sizeEnemy);
+        arrow40 = new ArrowEnemy(24000, point3, enemySpeed, sizeEnemy);
+
+        arrow41 = new ArrowEnemy(44000, point4, enemySpeed, sizeEnemy);
+        arrow42 = new ArrowEnemy(45000, point3, enemySpeed, sizeEnemy);
+        arrow43 = new ArrowEnemy(46000, point4, enemySpeed, sizeEnemy);
+        arrow44 = new ArrowEnemy(47000, point1, enemySpeed, sizeEnemy);
+        arrow45 = new ArrowEnemy(48000, point4, enemySpeed, sizeEnemy);
+        arrow46 = new ArrowEnemy(49000, point2, enemySpeed, sizeEnemy);
+        arrow47 = new ArrowEnemy(50000, point4, enemySpeed, sizeEnemy);
+        arrow48 = new ArrowEnemy(51000, point3, enemySpeed, sizeEnemy);
+        arrow49 = new ArrowEnemy(52000, point1, enemySpeed, sizeEnemy);
+        arrow50 = new ArrowEnemy(53000, point4, enemySpeed, sizeEnemy);
 
 
         Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 40, MainActivity.this);
@@ -525,10 +839,60 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_47 = new Coins(24400, coinPoint1, enemySpeed, 40, MainActivity.this);
         Coins coin_48 = new Coins(24600, coinPoint2, enemySpeed, 40, MainActivity.this);
         Coins coin_49 = new Coins(24800, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_50 = new Coins(20070, coinPoint2+63, enemySpeed, 40, MainActivity.this);
+        Coins coin_50 = new Coins(20070, coinPoint2 + 63, enemySpeed, 40, MainActivity.this);
+
+
+        Coins coin_51 = new Coins(14000, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_52 = new Coins(14400, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_53 = new Coins(14800, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_54 = new Coins(15200, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_55 = new Coins(15600, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_56 = new Coins(16000, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_57 = new Coins(16400, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_58 = new Coins(16800, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_59 = new Coins(17200, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_60 = new Coins(17600, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_61 = new Coins(18000, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_62 = new Coins(18300, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_63 = new Coins(18600, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_64 = new Coins(21190, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_65 = new Coins(21270, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_66 = new Coins(21350, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_67 = new Coins(21430, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_68 = new Coins(21510, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_69 = new Coins(21590, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_70 = new Coins(21670, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_71 = new Coins(21750, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_72 = new Coins(21830, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_73 = new Coins(21910, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_74 = new Coins(21990, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_75 = new Coins(22070, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_76 = new Coins(22150, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_77 = new Coins(22230, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_78 = new Coins(22310, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_79 = new Coins(22390, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_80 = new Coins(22470, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_81 = new Coins(22550, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_82 = new Coins(22630, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_83 = new Coins(22710, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_84 = new Coins(22790, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_85 = new Coins(22870, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_86 = new Coins(22950, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_87 = new Coins(23030, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_88 = new Coins(23110, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_89 = new Coins(23190, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_90 = new Coins(23270, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_91 = new Coins(23350, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_92 = new Coins(23430, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_93 = new Coins(23510, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_94 = new Coins(23590, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_95 = new Coins(23670, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_96 = new Coins(23750, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_97 = new Coins(23830, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_98 = new Coins(23910, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_99 = new Coins(23990, coinPoint3, enemySpeed, 40, MainActivity.this);
 
         prueba.setText("0/99");
-
 
         birdEnemy1.setX(bird1.getX());
         birdEnemy1.setY(bird1.getY());
@@ -711,6 +1075,154 @@ public class MainActivity extends AppCompatActivity {
         coin50.setX(coin_50.getX());
         coin50.setY(coin_50.getY());
 
+        // Continue the pattern for coins 51 to 99
+        coin51.setX(coin_51.getX());
+        coin51.setY(coin_51.getY());
+
+        coin52.setX(coin_52.getX());
+        coin52.setY(coin_52.getY());
+
+        coin53.setX(coin_53.getX());
+        coin53.setY(coin_53.getY());
+
+        coin54.setX(coin_54.getX());
+        coin54.setY(coin_54.getY());
+
+        coin55.setX(coin_55.getX());
+        coin55.setY(coin_55.getY());
+
+        coin56.setX(coin_56.getX());
+        coin56.setY(coin_56.getY());
+
+        coin57.setX(coin_57.getX());
+        coin57.setY(coin_57.getY());
+
+        coin58.setX(coin_58.getX());
+        coin58.setY(coin_58.getY());
+
+        coin59.setX(coin_59.getX());
+        coin59.setY(coin_59.getY());
+
+        coin60.setX(coin_60.getX());
+        coin60.setY(coin_60.getY());
+
+        coin61.setX(coin_61.getX());
+        coin61.setY(coin_61.getY());
+
+        coin62.setX(coin_62.getX());
+        coin62.setY(coin_62.getY());
+
+        coin63.setX(coin_63.getX());
+        coin63.setY(coin_63.getY());
+
+        coin64.setX(coin_64.getX());
+        coin64.setY(coin_64.getY());
+
+        coin65.setX(coin_65.getX());
+        coin65.setY(coin_65.getY());
+
+        coin66.setX(coin_66.getX());
+        coin66.setY(coin_66.getY());
+
+        coin67.setX(coin_67.getX());
+        coin67.setY(coin_67.getY());
+
+        coin68.setX(coin_68.getX());
+        coin68.setY(coin_68.getY());
+
+        coin69.setX(coin_69.getX());
+        coin69.setY(coin_69.getY());
+
+        coin70.setX(coin_70.getX());
+        coin70.setY(coin_70.getY());
+
+        coin71.setX(coin_71.getX());
+        coin71.setY(coin_71.getY());
+
+        coin72.setX(coin_72.getX());
+        coin72.setY(coin_72.getY());
+
+        coin73.setX(coin_73.getX());
+        coin73.setY(coin_73.getY());
+
+        coin74.setX(coin_74.getX());
+        coin74.setY(coin_74.getY());
+
+        coin75.setX(coin_75.getX());
+        coin75.setY(coin_75.getY());
+
+        coin76.setX(coin_76.getX());
+        coin76.setY(coin_76.getY());
+
+        coin77.setX(coin_77.getX());
+        coin77.setY(coin_77.getY());
+
+        coin78.setX(coin_78.getX());
+        coin78.setY(coin_78.getY());
+
+        coin79.setX(coin_79.getX());
+        coin79.setY(coin_79.getY());
+
+        coin80.setX(coin_80.getX());
+        coin80.setY(coin_80.getY());
+
+        coin81.setX(coin_81.getX());
+        coin81.setY(coin_81.getY());
+
+        coin82.setX(coin_82.getX());
+        coin82.setY(coin_82.getY());
+
+        coin83.setX(coin_83.getX());
+        coin83.setY(coin_83.getY());
+
+        coin84.setX(coin_84.getX());
+        coin84.setY(coin_84.getY());
+
+        coin85.setX(coin_85.getX());
+        coin85.setY(coin_85.getY());
+
+        coin86.setX(coin_86.getX());
+        coin86.setY(coin_86.getY());
+
+        coin87.setX(coin_87.getX());
+        coin87.setY(coin_87.getY());
+
+        coin88.setX(coin_88.getX());
+        coin88.setY(coin_88.getY());
+
+        coin89.setX(coin_89.getX());
+        coin89.setY(coin_89.getY());
+
+        coin90.setX(coin_90.getX());
+        coin90.setY(coin_90.getY());
+
+        coin91.setX(coin_91.getX());
+        coin91.setY(coin_91.getY());
+
+        coin92.setX(coin_92.getX());
+        coin92.setY(coin_92.getY());
+
+        coin93.setX(coin_93.getX());
+        coin93.setY(coin_93.getY());
+
+        coin94.setX(coin_94.getX());
+        coin94.setY(coin_94.getY());
+
+        coin95.setX(coin_95.getX());
+        coin95.setY(coin_95.getY());
+
+        coin96.setX(coin_96.getX());
+        coin96.setY(coin_96.getY());
+
+        coin97.setX(coin_97.getX());
+        coin97.setY(coin_97.getY());
+
+        coin98.setX(coin_98.getX());
+        coin98.setY(coin_98.getY());
+
+        coin99.setX(coin_99.getX());
+        coin99.setY(coin_99.getY());
+
 
         arrowEnemy.setX(arrow.getX());
         arrowEnemy.setY(arrow.getY());
@@ -745,6 +1257,127 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy10.setX(arrow1.getX());
         arrowEnemy10.setY(arrow1.getY());
 
+        arrowEnemy11.setX(arrow11.getX());
+        arrowEnemy11.setY(arrow11.getY());
+
+        arrowEnemy12.setX(arrow12.getX());
+        arrowEnemy12.setY(arrow12.getY());
+
+        arrowEnemy13.setX(arrow13.getX());
+        arrowEnemy13.setY(arrow13.getY());
+
+        arrowEnemy14.setX(arrow14.getX());
+        arrowEnemy14.setY(arrow14.getY());
+
+        arrowEnemy15.setX(arrow15.getX());
+        arrowEnemy15.setY(arrow15.getY());
+
+        arrowEnemy16.setX(arrow16.getX());
+        arrowEnemy16.setY(arrow16.getY());
+
+        arrowEnemy17.setX(arrow17.getX());
+        arrowEnemy17.setY(arrow17.getY());
+
+        arrowEnemy18.setX(arrow18.getX());
+        arrowEnemy18.setY(arrow18.getY());
+
+        arrowEnemy19.setX(arrow19.getX());
+        arrowEnemy19.setY(arrow19.getY());
+
+        arrowEnemy20.setX(arrow20.getX());
+        arrowEnemy20.setY(arrow20.getY());
+
+        arrowEnemy21.setX(arrow21.getX());
+        arrowEnemy21.setY(arrow21.getY());
+
+        arrowEnemy22.setX(arrow22.getX());
+        arrowEnemy22.setY(arrow22.getY());
+
+        arrowEnemy23.setX(arrow23.getX());
+        arrowEnemy23.setY(arrow23.getY());
+
+        arrowEnemy24.setX(arrow24.getX());
+        arrowEnemy24.setY(arrow24.getY());
+
+        arrowEnemy25.setX(arrow25.getX());
+        arrowEnemy25.setY(arrow25.getY());
+
+        arrowEnemy26.setX(arrow26.getX());
+        arrowEnemy26.setY(arrow26.getY());
+
+        arrowEnemy27.setX(arrow27.getX());
+        arrowEnemy27.setY(arrow27.getY());
+
+        arrowEnemy28.setX(arrow28.getX());
+        arrowEnemy28.setY(arrow28.getY());
+
+        arrowEnemy29.setX(arrow29.getX());
+        arrowEnemy29.setY(arrow29.getY());
+
+        arrowEnemy30.setX(arrow30.getX());
+        arrowEnemy30.setY(arrow30.getY());
+
+        arrowEnemy31.setX(arrow31.getX());
+        arrowEnemy31.setY(arrow31.getY());
+
+        arrowEnemy32.setX(arrow32.getX());
+        arrowEnemy32.setY(arrow32.getY());
+
+        arrowEnemy33.setX(arrow33.getX());
+        arrowEnemy33.setY(arrow33.getY());
+
+        arrowEnemy34.setX(arrow34.getX());
+        arrowEnemy34.setY(arrow34.getY());
+
+        arrowEnemy35.setX(arrow35.getX());
+        arrowEnemy35.setY(arrow35.getY());
+
+        arrowEnemy36.setX(arrow36.getX());
+        arrowEnemy36.setY(arrow36.getY());
+
+        arrowEnemy37.setX(arrow37.getX());
+        arrowEnemy37.setY(arrow37.getY());
+
+        arrowEnemy38.setX(arrow38.getX());
+        arrowEnemy38.setY(arrow38.getY());
+
+        arrowEnemy39.setX(arrow39.getX());
+        arrowEnemy39.setY(arrow39.getY());
+
+        arrowEnemy40.setX(arrow40.getX());
+        arrowEnemy40.setY(arrow40.getY());
+
+        arrowEnemy41.setX(arrow41.getX());
+        arrowEnemy41.setY(arrow41.getY());
+
+        arrowEnemy42.setX(arrow42.getX());
+        arrowEnemy42.setY(arrow42.getY());
+
+        arrowEnemy43.setX(arrow43.getX());
+        arrowEnemy43.setY(arrow43.getY());
+
+        arrowEnemy44.setX(arrow44.getX());
+        arrowEnemy44.setY(arrow44.getY());
+
+        arrowEnemy45.setX(arrow45.getX());
+        arrowEnemy45.setY(arrow45.getY());
+
+        arrowEnemy46.setX(arrow46.getX());
+        arrowEnemy46.setY(arrow46.getY());
+
+        arrowEnemy47.setX(arrow47.getX());
+        arrowEnemy47.setY(arrow47.getY());
+
+        arrowEnemy48.setX(arrow48.getX());
+        arrowEnemy48.setY(arrow48.getY());
+
+        arrowEnemy49.setX(arrow49.getX());
+        arrowEnemy49.setY(arrow49.getY());
+
+        arrowEnemy50.setX(arrow50.getX());
+        arrowEnemy50.setY(arrow50.getY());
+
+
         character.setX(SET_CHARACTER_POSITION_X);
         character.setY(SET_CHARACTER_POSITION_Y);
 
@@ -754,7 +1387,6 @@ public class MainActivity extends AppCompatActivity {
         sizeMobile = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(sizeMobile);
         screenWidth = sizeMobile.widthPixels;
-
 
 
         currentPosition = 0;
@@ -772,6 +1404,8 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                         if (!gameStarted) {
                             startGame();
+                            mediaPlayer.start();
+
                         }
                         jump();
                         break;
@@ -784,6 +1418,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             private void startGame() {
+                // Reproducir la música
                 gameStarted = true;
                 birdSpeed = -1;
                 birdY = (int) character.getY();
@@ -794,9 +1429,40 @@ public class MainActivity extends AppCompatActivity {
                 birdSpeed = -32;
             }
 
+            private void SetHeart() {
+                if (!isLogicExecuted) {
+                    if (player.getLife() == 2) {
+                        fullHeart3.setVisibility(View.INVISIBLE);
+                    } else if (player.getLife() == 1) {
+                        fullHeart2.setVisibility(View.INVISIBLE);
+                        fullHeart3.setVisibility(View.INVISIBLE);
+                    } else if (player.getLife() == 0) {
+                        fullHeart1.setVisibility(View.INVISIBLE);
+                        fullHeart2.setVisibility(View.INVISIBLE);
+                        fullHeart3.setVisibility(View.INVISIBLE);
+
+
+                        mediaPlayer.stop();
+                        coinSound.stop();
+                        hitSound.stop();
+                        startActivity(intentGameOver);
+                        finish();
+                        // Marcar la lógica como ejecutada
+                        isLogicExecuted = true;
+                    }
+
+                }
+            }
+
+
+
+
             private Runnable gameRunnable = new Runnable() {
                 @Override
                 public void run() {
+
+                    SetHeart();
+
                     birdSpeed += 2;
                     birdY += birdSpeed;
 
@@ -1051,6 +1717,203 @@ public class MainActivity extends AppCompatActivity {
                     coin50.setX(coin_50.getX());
                     coin50.setY(coin_50.getY());
 
+                    // Continue the pattern for moving and updating positions for coins 51 to 99
+                    coin_51.moveEnemy();
+                    coin51.setX(coin_51.getX());
+                    coin51.setY(coin_51.getY());
+
+                    coin_52.moveEnemy();
+                    coin52.setX(coin_52.getX());
+                    coin52.setY(coin_52.getY());
+
+                    coin_53.moveEnemy();
+                    coin53.setX(coin_53.getX());
+                    coin53.setY(coin_53.getY());
+
+                    coin_54.moveEnemy();
+                    coin54.setX(coin_54.getX());
+                    coin54.setY(coin_54.getY());
+
+                    coin_55.moveEnemy();
+                    coin55.setX(coin_55.getX());
+                    coin55.setY(coin_55.getY());
+
+                    coin_56.moveEnemy();
+                    coin56.setX(coin_56.getX());
+                    coin56.setY(coin_56.getY());
+
+                    coin_57.moveEnemy();
+                    coin57.setX(coin_57.getX());
+                    coin57.setY(coin_57.getY());
+
+                    coin_58.moveEnemy();
+                    coin58.setX(coin_58.getX());
+                    coin58.setY(coin_58.getY());
+
+                    coin_59.moveEnemy();
+                    coin59.setX(coin_59.getX());
+                    coin59.setY(coin_59.getY());
+
+                    coin_60.moveEnemy();
+                    coin60.setX(coin_60.getX());
+                    coin60.setY(coin_60.getY());
+
+                    coin_61.moveEnemy();
+                    coin61.setX(coin_61.getX());
+                    coin61.setY(coin_61.getY());
+
+                    coin_62.moveEnemy();
+                    coin62.setX(coin_62.getX());
+                    coin62.setY(coin_62.getY());
+
+                    coin_63.moveEnemy();
+                    coin63.setX(coin_63.getX());
+                    coin63.setY(coin_63.getY());
+
+                    coin_64.moveEnemy();
+                    coin64.setX(coin_64.getX());
+                    coin64.setY(coin_64.getY());
+
+                    coin_65.moveEnemy();
+                    coin65.setX(coin_65.getX());
+                    coin65.setY(coin_65.getY());
+
+                    coin_66.moveEnemy();
+                    coin66.setX(coin_66.getX());
+                    coin66.setY(coin_66.getY());
+
+                    coin_67.moveEnemy();
+                    coin67.setX(coin_67.getX());
+                    coin67.setY(coin_67.getY());
+
+                    coin_68.moveEnemy();
+                    coin68.setX(coin_68.getX());
+                    coin68.setY(coin_68.getY());
+
+                    coin_69.moveEnemy();
+                    coin69.setX(coin_69.getX());
+                    coin69.setY(coin_69.getY());
+
+                    coin_70.moveEnemy();
+                    coin70.setX(coin_70.getX());
+                    coin70.setY(coin_70.getY());
+
+                    coin_71.moveEnemy();
+                    coin71.setX(coin_71.getX());
+                    coin71.setY(coin_71.getY());
+
+                    coin_72.moveEnemy();
+                    coin72.setX(coin_72.getX());
+                    coin72.setY(coin_72.getY());
+
+                    coin_73.moveEnemy();
+                    coin73.setX(coin_73.getX());
+                    coin73.setY(coin_73.getY());
+
+                    coin_74.moveEnemy();
+                    coin74.setX(coin_74.getX());
+                    coin74.setY(coin_74.getY());
+
+                    coin_75.moveEnemy();
+                    coin75.setX(coin_75.getX());
+                    coin75.setY(coin_75.getY());
+
+                    coin_76.moveEnemy();
+                    coin76.setX(coin_76.getX());
+                    coin76.setY(coin_76.getY());
+
+                    coin_77.moveEnemy();
+                    coin77.setX(coin_77.getX());
+                    coin77.setY(coin_77.getY());
+
+                    coin_78.moveEnemy();
+                    coin78.setX(coin_78.getX());
+                    coin78.setY(coin_78.getY());
+
+                    coin_79.moveEnemy();
+                    coin79.setX(coin_79.getX());
+                    coin79.setY(coin_79.getY());
+
+                    coin_80.moveEnemy();
+                    coin80.setX(coin_80.getX());
+                    coin80.setY(coin_80.getY());
+
+                    coin_81.moveEnemy();
+                    coin81.setX(coin_81.getX());
+                    coin81.setY(coin_81.getY());
+
+                    coin_82.moveEnemy();
+                    coin82.setX(coin_82.getX());
+                    coin82.setY(coin_82.getY());
+
+                    coin_83.moveEnemy();
+                    coin83.setX(coin_83.getX());
+                    coin83.setY(coin_83.getY());
+
+                    coin_84.moveEnemy();
+                    coin84.setX(coin_84.getX());
+                    coin84.setY(coin_84.getY());
+
+                    coin_85.moveEnemy();
+                    coin85.setX(coin_85.getX());
+                    coin85.setY(coin_85.getY());
+
+                    coin_86.moveEnemy();
+                    coin86.setX(coin_86.getX());
+                    coin86.setY(coin_86.getY());
+
+                    coin_87.moveEnemy();
+                    coin87.setX(coin_87.getX());
+                    coin87.setY(coin_87.getY());
+
+                    coin_88.moveEnemy();
+                    coin88.setX(coin_88.getX());
+                    coin88.setY(coin_88.getY());
+
+                    coin_89.moveEnemy();
+                    coin89.setX(coin_89.getX());
+                    coin89.setY(coin_89.getY());
+
+                    coin_90.moveEnemy();
+                    coin90.setX(coin_90.getX());
+                    coin90.setY(coin_90.getY());
+
+                    coin_91.moveEnemy();
+                    coin91.setX(coin_91.getX());
+                    coin91.setY(coin_91.getY());
+
+                    coin_92.moveEnemy();
+                    coin92.setX(coin_92.getX());
+                    coin92.setY(coin_92.getY());
+
+                    coin_93.moveEnemy();
+                    coin93.setX(coin_93.getX());
+                    coin93.setY(coin_93.getY());
+
+                    coin_94.moveEnemy();
+                    coin94.setX(coin_94.getX());
+                    coin94.setY(coin_94.getY());
+
+                    coin_95.moveEnemy();
+                    coin95.setX(coin_95.getX());
+                    coin95.setY(coin_95.getY());
+
+                    coin_96.moveEnemy();
+                    coin96.setX(coin_96.getX());
+                    coin96.setY(coin_96.getY());
+
+                    coin_97.moveEnemy();
+                    coin97.setX(coin_97.getX());
+                    coin97.setY(coin_97.getY());
+
+                    coin_98.moveEnemy();
+                    coin98.setX(coin_98.getX());
+                    coin98.setY(coin_98.getY());
+
+                    coin_99.moveEnemy();
+                    coin99.setX(coin_99.getX());
+                    coin99.setY(coin_99.getY());
+
 
                     arrow.moveEnemy();
                     arrowEnemy.setX(arrow.getX());
@@ -1096,223 +1959,1192 @@ public class MainActivity extends AppCompatActivity {
                     arrowEnemy10.setX(arrow10.getX());
                     arrowEnemy10.setY(arrow10.getY());
 
+                    arrow11.moveEnemy();
+                    arrowEnemy11.setX(arrow11.getX());
+                    arrowEnemy11.setY(arrow11.getY());
 
-                    if (arrow.checkCollision(character) || arrow1.checkCollision(character)|| arrow2.checkCollision(character)|| arrow3.checkCollision(character)|| arrow4.checkCollision(character)|| arrow5.checkCollision(character)|| arrow6.checkCollision(character)|| arrow7.checkCollision(character)|| arrow8.checkCollision(character)|| arrow9.checkCollision(character)|| arrow10.checkCollision(character)) {
+                    arrow12.moveEnemy();
+                    arrowEnemy12.setX(arrow12.getX());
+                    arrowEnemy12.setY(arrow12.getY());
 
-                    } else if (!coin_1.isCollected() && coin_1.checkCollision(character)) {
+                    arrow13.moveEnemy();
+                    arrowEnemy13.setX(arrow13.getX());
+                    arrowEnemy13.setY(arrow13.getY());
+
+                    arrow14.moveEnemy();
+                    arrowEnemy14.setX(arrow14.getX());
+                    arrowEnemy14.setY(arrow14.getY());
+
+                    arrow15.moveEnemy();
+                    arrowEnemy15.setX(arrow15.getX());
+                    arrowEnemy15.setY(arrow15.getY());
+
+                    arrow16.moveEnemy();
+                    arrowEnemy16.setX(arrow16.getX());
+                    arrowEnemy16.setY(arrow16.getY());
+
+                    arrow17.moveEnemy();
+                    arrowEnemy17.setX(arrow17.getX());
+                    arrowEnemy17.setY(arrow17.getY());
+
+                    arrow18.moveEnemy();
+                    arrowEnemy18.setX(arrow18.getX());
+                    arrowEnemy18.setY(arrow18.getY());
+
+                    arrow19.moveEnemy();
+                    arrowEnemy19.setX(arrow19.getX());
+                    arrowEnemy19.setY(arrow19.getY());
+
+                    arrow20.moveEnemy();
+                    arrowEnemy20.setX(arrow20.getX());
+                    arrowEnemy20.setY(arrow20.getY());
+
+                    arrow21.moveEnemy();
+                    arrowEnemy21.setX(arrow21.getX());
+                    arrowEnemy21.setY(arrow21.getY());
+
+                    arrow22.moveEnemy();
+                    arrowEnemy22.setX(arrow22.getX());
+                    arrowEnemy22.setY(arrow22.getY());
+
+                    arrow23.moveEnemy();
+                    arrowEnemy23.setX(arrow23.getX());
+                    arrowEnemy23.setY(arrow23.getY());
+
+                    arrow24.moveEnemy();
+                    arrowEnemy24.setX(arrow24.getX());
+                    arrowEnemy24.setY(arrow24.getY());
+
+                    arrow25.moveEnemy();
+                    arrowEnemy25.setX(arrow25.getX());
+                    arrowEnemy25.setY(arrow25.getY());
+
+                    arrow26.moveEnemy();
+                    arrowEnemy26.setX(arrow26.getX());
+                    arrowEnemy26.setY(arrow26.getY());
+
+                    arrow27.moveEnemy();
+                    arrowEnemy27.setX(arrow27.getX());
+                    arrowEnemy27.setY(arrow27.getY());
+
+                    arrow28.moveEnemy();
+                    arrowEnemy28.setX(arrow28.getX());
+                    arrowEnemy28.setY(arrow28.getY());
+
+                    arrow29.moveEnemy();
+                    arrowEnemy29.setX(arrow29.getX());
+                    arrowEnemy29.setY(arrow29.getY());
+
+                    arrow30.moveEnemy();
+                    arrowEnemy30.setX(arrow30.getX());
+                    arrowEnemy30.setY(arrow30.getY());
+
+                    arrow31.moveEnemy();
+                    arrowEnemy31.setX(arrow31.getX());
+                    arrowEnemy31.setY(arrow31.getY());
+
+                    arrow32.moveEnemy();
+                    arrowEnemy32.setX(arrow32.getX());
+                    arrowEnemy32.setY(arrow32.getY());
+
+                    arrow33.moveEnemy();
+                    arrowEnemy33.setX(arrow33.getX());
+                    arrowEnemy33.setY(arrow33.getY());
+
+                    arrow34.moveEnemy();
+                    arrowEnemy34.setX(arrow34.getX());
+                    arrowEnemy34.setY(arrow34.getY());
+
+                    arrow35.moveEnemy();
+                    arrowEnemy35.setX(arrow35.getX());
+                    arrowEnemy35.setY(arrow35.getY());
+
+                    arrow36.moveEnemy();
+                    arrowEnemy36.setX(arrow36.getX());
+                    arrowEnemy36.setY(arrow36.getY());
+
+                    arrow37.moveEnemy();
+                    arrowEnemy37.setX(arrow37.getX());
+                    arrowEnemy37.setY(arrow37.getY());
+
+                    arrow38.moveEnemy();
+                    arrowEnemy38.setX(arrow38.getX());
+                    arrowEnemy38.setY(arrow38.getY());
+
+                    arrow39.moveEnemy();
+                    arrowEnemy39.setX(arrow39.getX());
+                    arrowEnemy39.setY(arrow39.getY());
+
+                    arrow40.moveEnemy();
+                    arrowEnemy40.setX(arrow40.getX());
+                    arrowEnemy40.setY(arrow40.getY());
+
+                    arrow41.moveEnemy();
+                    arrowEnemy41.setX(arrow41.getX());
+                    arrowEnemy41.setY(arrow41.getY());
+
+                    arrow42.moveEnemy();
+                    arrowEnemy42.setX(arrow42.getX());
+                    arrowEnemy42.setY(arrow42.getY());
+
+                    arrow43.moveEnemy();
+                    arrowEnemy43.setX(arrow43.getX());
+                    arrowEnemy43.setY(arrow43.getY());
+
+                    arrow44.moveEnemy();
+                    arrowEnemy44.setX(arrow44.getX());
+                    arrowEnemy44.setY(arrow44.getY());
+
+                    arrow45.moveEnemy();
+                    arrowEnemy45.setX(arrow45.getX());
+                    arrowEnemy45.setY(arrow45.getY());
+
+                    arrow46.moveEnemy();
+                    arrowEnemy46.setX(arrow46.getX());
+                    arrowEnemy46.setY(arrow46.getY());
+
+                    arrow47.moveEnemy();
+                    arrowEnemy47.setX(arrow47.getX());
+                    arrowEnemy47.setY(arrow47.getY());
+
+                    arrow48.moveEnemy();
+                    arrowEnemy48.setX(arrow48.getX());
+                    arrowEnemy48.setY(arrow48.getY());
+
+                    arrow49.moveEnemy();
+                    arrowEnemy49.setX(arrow49.getX());
+                    arrowEnemy49.setY(arrow49.getY());
+
+                    arrow50.moveEnemy();
+                    arrowEnemy50.setX(arrow50.getX());
+                    arrowEnemy50.setY(arrow50.getY());
+
+
+
+
+
+                    if (arrow.checkCollision(character) && !arrow.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow1.checkCollision(character) && !arrow1.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow1.setCollected(true);
+                        player.GameOver();
+                    }else if (arrow2.checkCollision(character) && !arrow2.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow2.setCollected(true);
+                        player.GameOver();
+                    }else if (arrow3.checkCollision(character) && !arrow3.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow3.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow4.checkCollision(character) && !arrow4.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow4.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow5.checkCollision(character) && !arrow5.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow5.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow6.checkCollision(character) && !arrow6.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow6.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow7.checkCollision(character) && !arrow7.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow7.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow8.checkCollision(character) && !arrow8.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow8.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow9.checkCollision(character) && !arrow9.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow9.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow10.checkCollision(character) && !arrow10.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow10.setCollected(true);
+                        player.GameOver();
+                    }else if (arrow11.checkCollision(character) && !arrow11.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow11.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow12.checkCollision(character) && !arrow12.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow12.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow13.checkCollision(character) && !arrow13.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow13.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow14.checkCollision(character) && !arrow14.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow14.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow15.checkCollision(character) && !arrow15.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow15.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow16.checkCollision(character) && !arrow16.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow16.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow17.checkCollision(character) && !arrow17.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow17.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow18.checkCollision(character) && !arrow18.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow18.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow19.checkCollision(character) && !arrow19.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow19.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow20.checkCollision(character) && !arrow20.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow20.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow21.checkCollision(character) && !arrow21.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow21.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow22.checkCollision(character) && !arrow22.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow22.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow23.checkCollision(character) && !arrow23.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow23.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow24.checkCollision(character) && !arrow24.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow24.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow25.checkCollision(character) && !arrow25.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow25.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow26.checkCollision(character) && !arrow26.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow26.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow27.checkCollision(character) && !arrow27.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow27.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow28.checkCollision(character) && !arrow28.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow28.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow29.checkCollision(character) && !arrow29.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow29.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow30.checkCollision(character) && !arrow30.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow30.setCollected(true);
+                        player.GameOver();
+
+                    } else if (arrow21.checkCollision(character) && !arrow21.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow21.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow22.checkCollision(character) && !arrow22.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow22.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow23.checkCollision(character) && !arrow23.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow23.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow24.checkCollision(character) && !arrow24.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow24.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow25.checkCollision(character) && !arrow25.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow25.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow26.checkCollision(character) && !arrow26.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow26.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow27.checkCollision(character) && !arrow27.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow27.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow28.checkCollision(character) && !arrow28.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow28.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow29.checkCollision(character) && !arrow29.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow29.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow30.checkCollision(character) && !arrow30.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow30.setCollected(true);
+                        player.GameOver();
+                    }else if (arrow31.checkCollision(character) && !arrow31.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow31.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow32.checkCollision(character) && !arrow32.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow32.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow33.checkCollision(character) && !arrow33.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow33.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow34.checkCollision(character) && !arrow34.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow34.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow35.checkCollision(character) && !arrow35.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow35.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow36.checkCollision(character) && !arrow36.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow36.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow37.checkCollision(character) && !arrow37.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow37.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow38.checkCollision(character) && !arrow38.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow38.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow39.checkCollision(character) && !arrow39.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow39.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow40.checkCollision(character) && !arrow40.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow40.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow41.checkCollision(character) && !arrow41.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow41.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow42.checkCollision(character) && !arrow42.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow42.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow43.checkCollision(character) && !arrow43.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow43.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow44.checkCollision(character) && !arrow44.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow44.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow45.checkCollision(character) && !arrow45.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow45.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow46.checkCollision(character) && !arrow46.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow46.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow47.checkCollision(character) && !arrow47.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow47.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow48.checkCollision(character) && !arrow48.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow48.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow49.checkCollision(character) && !arrow49.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow49.setCollected(true);
+                        player.GameOver();
+                    } else if (arrow50.checkCollision(character) && !arrow50.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        arrow50.setCollected(true);
+                        player.GameOver();
+                    }else
+
+
+                    if (!coin_1.isCollected() && coin_1.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin1.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_1.setCollected(true);
                     } else if (!coin_2.isCollected() && coin_2.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin2.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_2.setCollected(true);
-                    }else if(!coin_3.isCollected() && coin_3.checkCollision(character)){
+                    } else if (!coin_3.isCollected() && coin_3.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin3.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_3.setCollected(true);
-                    }else if(!coin_4.isCollected() && coin_4.checkCollision(character)){
+                    } else if (!coin_4.isCollected() && coin_4.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin4.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_4.setCollected(true);
-                    }else if(!coin_5.isCollected() && coin_5.checkCollision(character)){
+                    } else if (!coin_5.isCollected() && coin_5.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin5.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_5.setCollected(true);
-                    }else if(!coin_6.isCollected() && coin_6.checkCollision(character)){
+                    } else if (!coin_6.isCollected() && coin_6.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin6.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_6.setCollected(true);
-                    }else if(!coin_7.isCollected() && coin_7.checkCollision(character)){
+                    } else if (!coin_7.isCollected() && coin_7.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin7.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_7.setCollected(true);
-                    }else if(!coin_8.isCollected() && coin_8.checkCollision(character)){
+                    } else if (!coin_8.isCollected() && coin_8.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin8.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_8.setCollected(true);
-                    }else if(!coin_9.isCollected() && coin_9.checkCollision(character)){
+                    } else if (!coin_9.isCollected() && coin_9.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin9.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_9.setCollected(true);
-                    }else if(!coin_10.isCollected() && coin_10.checkCollision(character)){
+                    } else if (!coin_10.isCollected() && coin_10.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin10.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_10.setCollected(true);
-                    }else if(!coin_11.isCollected() && coin_11.checkCollision(character)){
+                    } else if (!coin_11.isCollected() && coin_11.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin11.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_11.setCollected(true);
-                    }else if(!coin_12.isCollected() && coin_12.checkCollision(character)){
+                    } else if (!coin_12.isCollected() && coin_12.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin12.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_12.setCollected(true);
-                    }else if (!coin_13.isCollected() && coin_13.checkCollision(character)) {
+                    } else if (!coin_13.isCollected() && coin_13.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin13.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_13.setCollected(true);
                     } else if (!coin_14.isCollected() && coin_14.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin14.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_14.setCollected(true);
                     } else if (!coin_15.isCollected() && coin_15.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin15.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_15.setCollected(true);
                     } else if (!coin_16.isCollected() && coin_16.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin16.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_16.setCollected(true);
                     } else if (!coin_17.isCollected() && coin_17.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin17.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_17.setCollected(true);
                     } else if (!coin_18.isCollected() && coin_18.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin18.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_18.setCollected(true);
                     } else if (!coin_19.isCollected() && coin_19.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin19.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_19.setCollected(true);
                     } else if (!coin_20.isCollected() && coin_20.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin20.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_20.setCollected(true);
                     } else if (!coin_21.isCollected() && coin_21.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin21.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_21.setCollected(true);
                     } else if (!coin_22.isCollected() && coin_22.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin22.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_22.setCollected(true);
                     } else if (!coin_23.isCollected() && coin_23.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin23.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_23.setCollected(true);
                     } else if (!coin_24.isCollected() && coin_24.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin24.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_24.setCollected(true);
                     } else if (!coin_25.isCollected() && coin_25.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin25.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_25.setCollected(true);
                     } else if (!coin_26.isCollected() && coin_26.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin26.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_26.setCollected(true);
                     } else if (!coin_27.isCollected() && coin_27.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin27.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_27.setCollected(true);
                     } else if (!coin_28.isCollected() && coin_28.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin28.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_28.setCollected(true);
                     } else if (!coin_29.isCollected() && coin_29.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin29.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_29.setCollected(true);
                     } else if (!coin_30.isCollected() && coin_30.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin30.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_30.setCollected(true);
                     } else if (!coin_31.isCollected() && coin_31.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin31.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_31.setCollected(true);
                     } else if (!coin_32.isCollected() && coin_32.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin32.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_32.setCollected(true);
                     } else if (!coin_33.isCollected() && coin_33.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin33.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_33.setCollected(true);
                     } else if (!coin_34.isCollected() && coin_34.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin34.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_34.setCollected(true);
                     } else if (!coin_35.isCollected() && coin_35.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin35.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_35.setCollected(true);
                     } else if (!coin_36.isCollected() && coin_36.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin36.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
-                       coin_36.setCollected(true);
+                        coin_36.setCollected(true);
                     } else if (!coin_37.isCollected() && coin_37.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin37.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_37.setCollected(true);
                     } else if (!coin_38.isCollected() && coin_38.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin38.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_38.setCollected(true);
                     } else if (!coin_39.isCollected() && coin_39.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin39.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_39.setCollected(true);
                     } else if (!coin_40.isCollected() && coin_40.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin40.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_40.setCollected(true);
                     } else if (!coin_41.isCollected() && coin_41.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin41.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_41.setCollected(true);
                     } else if (!coin_42.isCollected() && coin_42.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin42.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_42.setCollected(true);
                     } else if (!coin_43.isCollected() && coin_43.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin43.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_43.setCollected(true);
                     } else if (!coin_44.isCollected() && coin_44.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin44.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_44.setCollected(true);
                     } else if (!coin_45.isCollected() && coin_45.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin45.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_45.setCollected(true);
                     } else if (!coin_46.isCollected() && coin_46.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin46.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_46.setCollected(true);
                     } else if (!coin_47.isCollected() && coin_47.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin47.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_47.setCollected(true);
                     } else if (!coin_48.isCollected() && coin_48.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin48.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_48.setCollected(true);
                     } else if (!coin_49.isCollected() && coin_49.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin49.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_49.setCollected(true);
                     } else if (!coin_50.isCollected() && coin_50.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
                         coin50.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_50.setCollected(true);
-                  }
+                    } else if (!coin_51.isCollected() && coin_51.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin51.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_51.setCollected(true);
+                    } else if (!coin_52.isCollected() && coin_52.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin52.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_52.setCollected(true);
+                    } else if (!coin_53.isCollected() && coin_53.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin53.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_53.setCollected(true);
+                    } else if (!coin_54.isCollected() && coin_54.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin54.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_54.setCollected(true);
+                    } else if (!coin_55.isCollected() && coin_55.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin55.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_55.setCollected(true);
+                    } else if (!coin_56.isCollected() && coin_56.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin56.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_56.setCollected(true);
+                    } else if (!coin_57.isCollected() && coin_57.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin57.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_57.setCollected(true);
+                    } else if (!coin_58.isCollected() && coin_58.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin58.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_58.setCollected(true);
+                    } else if (!coin_59.isCollected() && coin_59.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin59.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_59.setCollected(true);
+                    } else if (!coin_60.isCollected() && coin_60.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin60.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_60.setCollected(true);
+                    } else if (!coin_61.isCollected() && coin_61.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin61.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_61.setCollected(true);
+                    } else if (!coin_62.isCollected() && coin_62.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin62.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_62.setCollected(true);
+                    } else if (!coin_63.isCollected() && coin_63.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin63.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_63.setCollected(true);
+                    } else if (!coin_64.isCollected() && coin_64.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin64.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_64.setCollected(true);
+                    } else if (!coin_65.isCollected() && coin_65.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin65.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_65.setCollected(true);
+                    } else if (!coin_66.isCollected() && coin_66.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin66.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_66.setCollected(true);
+                    } else if (!coin_67.isCollected() && coin_67.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin67.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_67.setCollected(true);
+                    } else if (!coin_68.isCollected() && coin_68.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin68.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_68.setCollected(true);
+                    } else if (!coin_69.isCollected() && coin_69.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin69.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_69.setCollected(true);
+                    } else if (!coin_70.isCollected() && coin_70.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin70.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_70.setCollected(true);
+                    } else if (!coin_71.isCollected() && coin_71.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin71.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_71.setCollected(true);
+                    } else if (!coin_72.isCollected() && coin_72.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin72.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_72.setCollected(true);
+                    } else if (!coin_73.isCollected() && coin_73.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin73.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_73.setCollected(true);
+                    } else if (!coin_74.isCollected() && coin_74.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin74.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_74.setCollected(true);
+                    } else if (!coin_75.isCollected() && coin_75.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin75.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_75.setCollected(true);
+                    } else if (!coin_76.isCollected() && coin_76.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin76.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_76.setCollected(true);
+                    } else if (!coin_77.isCollected() && coin_77.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin77.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_77.setCollected(true);
+                    } else if (!coin_78.isCollected() && coin_78.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin78.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_78.setCollected(true);
+                    } else if (!coin_79.isCollected() && coin_79.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin79.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_79.setCollected(true);
+                    } else if (!coin_80.isCollected() && coin_80.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin80.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_80.setCollected(true);
+                    } else if (!coin_81.isCollected() && coin_81.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin81.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_81.setCollected(true);
+                    } else if (!coin_82.isCollected() && coin_82.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin82.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_82.setCollected(true);
+                    } else if (!coin_83.isCollected() && coin_83.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin83.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_83.setCollected(true);
+                    } else if (!coin_84.isCollected() && coin_84.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        player.setCountCoins(addCoinValue);
+                        coin_84.setCollected(true);
+                    } else if (!coin_85.isCollected() && coin_85.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin85.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_85.setCollected(true);
+                    } else if (!coin_86.isCollected() && coin_86.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin86.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_86.setCollected(true);
+                    } else if (!coin_87.isCollected() && coin_87.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin87.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_87.setCollected(true);
+                    } else if (!coin_88.isCollected() && coin_88.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin88.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_88.setCollected(true);
+                    } else if (!coin_89.isCollected() && coin_89.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin89.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_89.setCollected(true);
+                    } else if (!coin_90.isCollected() && coin_90.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin90.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_90.setCollected(true);
+                    } else if (!coin_91.isCollected() && coin_91.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin91.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_91.setCollected(true);
+                    } else if (!coin_92.isCollected() && coin_92.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin92.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_92.setCollected(true);
+                    } else if (!coin_93.isCollected() && coin_93.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin93.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_93.setCollected(true);
+                    } else if (!coin_94.isCollected() && coin_94.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin94.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_94.setCollected(true);
+                    } else if (!coin_95.isCollected() && coin_95.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin95.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_95.setCollected(true);
+                    } else if (!coin_96.isCollected() && coin_96.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin96.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_96.setCollected(true);
+                    } else if (!coin_97.isCollected() && coin_97.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin97.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_97.setCollected(true);
+                    } else if (!coin_98.isCollected() && coin_98.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin98.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_98.setCollected(true);
+                    } else if (!coin_99.isCollected() && coin_99.checkCollision(character)) {
+                        coinSound.seekTo(0);
+                        coinSound.start();
+                        coin99.setVisibility(View.INVISIBLE);
+                        player.setCountCoins(addCoinValue);
+                        coin_99.setCollected(true);
+                    }
+
 
                     String getValue = String.valueOf(player.getCountCoins());
-                    prueba.setText(getValue+"/99");
+                    prueba.setText(getValue + "/99");
 //
 
 
-
-
-                    handler.postDelayed(this, 20);
+                    handler.postDelayed(this, 22);
                 }
             };
         });
+
     }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        mediaPlayer.release();
+//        mediaPlayer.stop();
+//        coinSound.stop();
+//        hitSound.stop();
+//        backgroundImage2.clearAnimation();
+//        backgroundImage.clearAnimation();
+//        backgroundImage3.clearAnimation();
+//
+//        animationCoin.clearAnimation();
+//
+//
+//    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mediaPlayer.release();
+//        mediaPlayer.stop();
+//        coinSound.stop();
+//        hitSound.stop();
+//        backgroundImage2.clearAnimation();
+//        backgroundImage.clearAnimation();
+//        backgroundImage3.clearAnimation();
+//
+//        coin1.clearAnimation();
+//        coin2.clearAnimation();
+//        coin3.clearAnimation();
+//
+//    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//
+//        // Libera recursos cuando se destruye la actividad
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer.stop();
+//            coinSound.stop();
+//            hitSound.stop();
+//            mediaPlayer = null;
+//        }
+//    }
+
 
     private void setCharacterImage(int seleccion) {
         switch (seleccion) {

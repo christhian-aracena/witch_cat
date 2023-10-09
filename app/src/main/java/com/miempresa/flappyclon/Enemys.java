@@ -7,6 +7,7 @@ public abstract class Enemys {
     protected float x, y;  // Posición del enemigo
     protected float speed;  // Velocidad del enemigo
     protected float sizeEnemy;   // Tamaño del enemigo
+    private boolean collected = false;
 
     public Enemys(float x, float y, float speed, float sizeEnemy) {
         this.x = x;
@@ -14,6 +15,14 @@ public abstract class Enemys {
         this.speed = speed;
         this.sizeEnemy = sizeEnemy;
     }
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
+
 
     protected void moveEnemy(){}
 

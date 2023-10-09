@@ -17,15 +17,31 @@ public class Player {
 
     }
 
+    public void GameOver(){
+        if(this.life<1){
+            System.out.println("Perdiste");
+        }
+    }
+
     public int getLife() {
         return life;
     }
 
     public void setLife(int life) {
-        if(this.life>3){
+        if(this.life+life>3){
             this.life=3;
         }
+        else {
+            this.life++;
+        }
 
-        this.life += life;
+
+    }
+
+    public void setLifeDamage(){
+        if (this.life > 0) {
+            this.life--;
+        }
+
     }
 }

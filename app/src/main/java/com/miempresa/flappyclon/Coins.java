@@ -19,11 +19,11 @@ public class Coins extends Enemys{
         coinImageView.setLayoutParams(new ViewGroup.LayoutParams((int) sizeEnemy, (int) sizeEnemy));
     }
 
-
+    @Override
     public boolean isCollected() {
         return collected;
     }
-
+    @Override
     public void setCollected(boolean collected) {
         this.collected = collected;
     }

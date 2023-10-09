@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -19,12 +20,16 @@ import android.widget.RadioGroup;
 
 public class MainMenu extends AppCompatActivity {
 
-    Button btn_start;
-    ImageView femaleCharacter, maleCharacter;
-    RadioButton femaleRButton, maleRButton;
-    RadioGroup radioGroup;
+    private Button btn_start;
+    private ImageView femaleCharacter, maleCharacter;
+    private RadioButton femaleRButton, maleRButton;
+    private RadioGroup radioGroup;
     private ObjectAnimator characterAnimator;
     int check;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private MediaPlayer selectCharacterSound = new MediaPlayer();
+
+    Intent newIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +37,24 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+        // Inicializa el reproductor multimedia
+        mediaPlayer = MediaPlayer.create(this, R.raw.intro_theme);
+
+        mediaPlayer.setVolume(1.9f, 1.9f);
+        // Reproducir la música
+        mediaPlayer.start();
+        selectCharacterSound = MediaPlayer.create(this, R.raw.select_character);
         btn_start = findViewById(R.id.btn_start);
         femaleCharacter = findViewById(R.id.female_witch);
         maleCharacter = findViewById(R.id.male_witch);
         femaleRButton = findViewById(R.id.witch_girl_selected);
         maleRButton = findViewById(R.id.witch_boy_selected);
         radioGroup = findViewById(R.id.rGroup);
-
-
+        newIntent =new Intent(MainMenu.this, MainActivity.class);
+        newIntent.putExtra("seleccion", check);
         //llamo al metodo para especificar el personaje seleccionado por default
         animationMenu(femaleCharacter);
+
 
 
         btn_start.setOnClickListener(new View.OnClickListener() {
@@ -49,9 +62,11 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Intent newIntent = new Intent(MainMenu.this, MainActivity.class);
+                mediaPlayer.stop();
+                mediaPlayer.release();
 
                 if (!femaleRButton.isChecked() && !maleRButton.isChecked()) {
+
                     check = 1;
                 } else {
                     if (femaleRButton.isChecked()) {
@@ -59,23 +74,29 @@ public class MainMenu extends AppCompatActivity {
                     } else if (maleRButton.isChecked()) {
                         check = 2;
                     }
+
                 }
 
-
-                newIntent.putExtra("seleccion", check);
                 startActivity(newIntent);
+                finish();
+
+
 
             }
         });
+
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.witch_girl_selected) {
+                    selectCharacterSound.start();
                     stopAnimator();
                     animationMenu(femaleCharacter);
 
                 } else if (i == R.id.witch_boy_selected) {
+                    selectCharacterSound.start();
                     stopAnimator();
                     animationMenu(maleCharacter);
 
@@ -87,6 +108,45 @@ public class MainMenu extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Libera recursos cuando se destruye la actividad
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer.stop();
+            mediaPlayer = null;
+
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mediaPlayer.release();
+        mediaPlayer.stop();
+        finish();
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.release();
+        mediaPlayer.stop();
+        finish();
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reanuda la reproducción de la música si estaba pausada
+        mediaPlayer.start();
+    }
+
+
 
     public void animationMenu(ImageView character) {
         // Crear un ObjectAnimator para la propiedad "translationY"

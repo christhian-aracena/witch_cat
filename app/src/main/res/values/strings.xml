@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">FlappyClon</string>
     <string name="msg_start">Iniciar</string>
+    <string name="msg_game_over">El juego termino</string>
+    <string name="msg_select_option">¿Que desea hacer?</string>
+    <string name="msg_try_again">Jugar nuevamente</string>
+    <string name="msg_go_to_home">Volver al Inicio</string>
 </resources>
