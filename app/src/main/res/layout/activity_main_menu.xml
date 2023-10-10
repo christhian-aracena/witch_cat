@@ -46,16 +46,22 @@
     <TextView
         android:id="@+id/seleccionar"
         android:layout_width="wrap_content"
+        android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="6"
+        android:textColor="@color/nuevoColor"
+        android:textSize="26dp"
+        android:textStyle="bold|italic"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:fontFamily="sans-serif"
         android:text="Selecciona un personaje"
-        android:textColor="@color/black"
-        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent
+
 " />
 
 

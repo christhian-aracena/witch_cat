@@ -84,7 +84,10 @@ public class MainActivity extends AppCompatActivity {
     private float sizeEnemy = 100;
     private TextView prueba;
     private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4, birdEnemy5, birdEnemy6, birdEnemy7, birdEnemy8, birdEnemy9, birdEnemy10;
-    private Enemys bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10;
+    private Enemys bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10,
+            bird11, bird12, bird13, bird14, bird15, bird16, bird17, bird18, bird19, bird20,
+            bird21, bird22, bird23, bird24, bird25, bird26, bird27, bird28, bird29, bird30;
+
 
     private float point1, point2, point3, point4;
     private float coinPoint1, coinPoint2, coinPoint3, coinPoint4;
@@ -776,16 +779,16 @@ public class MainActivity extends AppCompatActivity {
         arrow39 = new ArrowEnemy(24000, point4, enemySpeed, sizeEnemy);
         arrow40 = new ArrowEnemy(24000, point3, enemySpeed, sizeEnemy);
 
-        arrow41 = new ArrowEnemy(44000, point4, enemySpeed, sizeEnemy);
-        arrow42 = new ArrowEnemy(45000, point3, enemySpeed, sizeEnemy);
-        arrow43 = new ArrowEnemy(46000, point4, enemySpeed, sizeEnemy);
-        arrow44 = new ArrowEnemy(47000, point1, enemySpeed, sizeEnemy);
-        arrow45 = new ArrowEnemy(48000, point4, enemySpeed, sizeEnemy);
-        arrow46 = new ArrowEnemy(49000, point2, enemySpeed, sizeEnemy);
-        arrow47 = new ArrowEnemy(50000, point4, enemySpeed, sizeEnemy);
-        arrow48 = new ArrowEnemy(51000, point3, enemySpeed, sizeEnemy);
-        arrow49 = new ArrowEnemy(52000, point1, enemySpeed, sizeEnemy);
-        arrow50 = new ArrowEnemy(53000, point4, enemySpeed, sizeEnemy);
+        arrow41 = new ArrowEnemy(26200, point4, enemySpeed, sizeEnemy);
+        arrow42 = new ArrowEnemy(26200, point1, enemySpeed, sizeEnemy);
+        arrow43 = new ArrowEnemy(28900, point4, enemySpeed, sizeEnemy);
+        arrow44 = new ArrowEnemy(28900, point1, enemySpeed, sizeEnemy);
+        arrow45 = new ArrowEnemy(30000, point1, enemySpeed, sizeEnemy);
+        arrow46 = new ArrowEnemy(30000, point4, enemySpeed, sizeEnemy);
+        arrow47 = new ArrowEnemy(31800, point2, enemySpeed, sizeEnemy);
+        arrow48 = new ArrowEnemy(32800, point3, enemySpeed, sizeEnemy);
+        arrow49 = new ArrowEnemy(33800, point1, enemySpeed, sizeEnemy);
+        arrow50 = new ArrowEnemy(34800, point4, enemySpeed, sizeEnemy);
 
 
         Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 40, MainActivity.this);
@@ -818,80 +821,80 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_25 = new Coins(12800, coinPoint1, enemySpeed, 40, MainActivity.this);
         Coins coin_26 = new Coins(13000, coinPoint1, enemySpeed, 40, MainActivity.this);
         Coins coin_27 = new Coins(13000, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_28 = new Coins(20600, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_29 = new Coins(20800, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_30 = new Coins(21000, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_31 = new Coins(21200, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_32 = new Coins(21400, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_33 = new Coins(21600, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_34 = new Coins(21800, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_35 = new Coins(22000, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_36 = new Coins(22200, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_37 = new Coins(22400, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_38 = new Coins(22600, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_39 = new Coins(22800, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_40 = new Coins(23000, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_41 = new Coins(23200, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_42 = new Coins(23400, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_43 = new Coins(23600, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_44 = new Coins(23800, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_45 = new Coins(24000, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_46 = new Coins(24200, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_47 = new Coins(24400, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_48 = new Coins(24600, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_49 = new Coins(24800, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_50 = new Coins(20070, coinPoint2 + 63, enemySpeed, 40, MainActivity.this);
+        Coins coin_28 = new Coins(14600, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_29 = new Coins(14800, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_30 = new Coins(15000, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_31 = new Coins(15200, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_32 = new Coins(15400, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_33 = new Coins(15600, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_34 = new Coins(18000, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_35 = new Coins(18200, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_36 = new Coins(18400, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_37 = new Coins(19600, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_38 = new Coins(19800, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_39 = new Coins(20000, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_40 = new Coins(20500, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_41 = new Coins(20700, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_42 = new Coins(20900, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_43 = new Coins(21100, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_44 = new Coins(21600, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_45 = new Coins(21800, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_46 = new Coins(22000, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_47 = new Coins(22200, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_48 = new Coins(22700, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_49 = new Coins(22900, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_50 = new Coins(23100, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_51 = new Coins(23300, coinPoint4, enemySpeed, 40, MainActivity.this);
 
+        Coins coin_52 = new Coins(24100, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_53 = new Coins(24300, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_54 = new Coins(24500, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_55 = new Coins(24700, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_56 = new Coins(24900, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_57 = new Coins(25100, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_58 = new Coins(25300, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_59 = new Coins(25500, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_60 = new Coins(25700, coinPoint3, enemySpeed, 40, MainActivity.this);
 
-        Coins coin_51 = new Coins(14000, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_52 = new Coins(14400, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_53 = new Coins(14800, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_54 = new Coins(15200, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_55 = new Coins(15600, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_56 = new Coins(16000, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_57 = new Coins(16400, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_58 = new Coins(16800, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_59 = new Coins(17200, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_60 = new Coins(17600, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_61 = new Coins(18000, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_62 = new Coins(18300, coinPoint4, enemySpeed, 40, MainActivity.this);
-        Coins coin_63 = new Coins(18600, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_64 = new Coins(21190, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_65 = new Coins(21270, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_66 = new Coins(21350, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_67 = new Coins(21430, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_68 = new Coins(21510, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_69 = new Coins(21590, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_70 = new Coins(21670, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_71 = new Coins(21750, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_72 = new Coins(21830, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_73 = new Coins(21910, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_74 = new Coins(21990, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_75 = new Coins(22070, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_76 = new Coins(22150, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_77 = new Coins(22230, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_78 = new Coins(22310, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_79 = new Coins(22390, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_80 = new Coins(22470, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_81 = new Coins(22550, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_82 = new Coins(22630, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_83 = new Coins(22710, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_84 = new Coins(22790, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_85 = new Coins(22870, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_86 = new Coins(22950, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_87 = new Coins(23030, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_88 = new Coins(23110, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_89 = new Coins(23190, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_90 = new Coins(23270, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_91 = new Coins(23350, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_92 = new Coins(23430, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_93 = new Coins(23510, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_94 = new Coins(23590, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_95 = new Coins(23670, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_96 = new Coins(23750, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_97 = new Coins(23830, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_98 = new Coins(23910, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_99 = new Coins(23990, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_61 = new Coins(26200, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_62 = new Coins(26400, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_63 = new Coins(27500, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_64 = new Coins(27700, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_65 = new Coins(28900, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_66 = new Coins(29100, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_67 = new Coins(30000, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_68 = new Coins(30200, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_69 = new Coins(71590, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_70 = new Coins(71670, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_71 = new Coins(71750, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_72 = new Coins(71830, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_73 = new Coins(71910, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_74 = new Coins(71990, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_75 = new Coins(72070, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_76 = new Coins(72150, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_77 = new Coins(72230, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_78 = new Coins(72310, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_79 = new Coins(72390, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_80 = new Coins(72470, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_81 = new Coins(72550, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_82 = new Coins(72630, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_83 = new Coins(72710, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_84 = new Coins(72790, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_85 = new Coins(72870, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_86 = new Coins(72950, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_87 = new Coins(73030, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_88 = new Coins(73110, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_89 = new Coins(73190, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_90 = new Coins(73270, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_91 = new Coins(73350, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_92 = new Coins(73430, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_93 = new Coins(73510, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_94 = new Coins(73590, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_95 = new Coins(73670, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_96 = new Coins(73750, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_97 = new Coins(73830, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_98 = new Coins(73910, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_99 = new Coins(73990, coinPoint3, enemySpeed, 40, MainActivity.this);
 
         prueba.setText("0/99");
 
@@ -2333,6 +2336,67 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+                    if(bird1.checkCollision(character) && !bird1.isCollected()){
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird1.setCollected(true);
+                        player.GameOver();
+                    } else if (bird2.checkCollision(character) && !bird2.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird2.setCollected(true);
+                        player.GameOver();
+                    }else if (bird3.checkCollision(character) && !bird3.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird3.setCollected(true);
+                        player.GameOver();
+                    } else if (bird4.checkCollision(character) && !bird4.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird4.setCollected(true);
+                        player.GameOver();
+                    } else if (bird5.checkCollision(character) && !bird5.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird5.setCollected(true);
+                        player.GameOver();
+                    } else if (bird6.checkCollision(character) && !bird6.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird6.setCollected(true);
+                        player.GameOver();
+                    } else if (bird7.checkCollision(character) && !bird7.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird7.setCollected(true);
+                        player.GameOver();
+                    } else if (bird8.checkCollision(character) && !bird8.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird8.setCollected(true);
+                        player.GameOver();
+                    } else if (bird9.checkCollision(character) && !bird9.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird9.setCollected(true);
+                        player.GameOver();
+                    } else if (bird10.checkCollision(character) && !bird10.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird10.setCollected(true);
+                        player.GameOver();
+                    }
 
 
                     if (arrow.checkCollision(character) && !arrow.isCollected()) {
