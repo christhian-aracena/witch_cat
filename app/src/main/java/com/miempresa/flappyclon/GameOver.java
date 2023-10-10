@@ -43,13 +43,12 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(intentTryAgain);
                 if (gameOverMusic != null) {
                     gameOverMusic.stop();
                     gameOverMusic.release();
                     gameOverMusic = null;
                 }
-                finish();
+                startActivity(intentTryAgain);
             }
         });
 
@@ -63,32 +62,24 @@ public class GameOver extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (gameOverMusic != null) {
-//            gameOverMusic.stop();
-//            gameOverMusic.release();
-//            gameOverMusic = null;
-//        }
-//    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (gameOverMusic != null) {
+            gameOverMusic.stop();
+            gameOverMusic.release();
+            gameOverMusic = null;
+        }
+    }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (gameOverMusic != null) {
-//            gameOverMusic.stop();
-//            gameOverMusic.release();
-//            gameOverMusic = null;
-//        }
-//    }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        if (gameOverMusic != null) {
-//            gameOverMusic.stop();
-//            gameOverMusic.release();
-//            gameOverMusic = null;
-//        }
-//    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (gameOverMusic != null) {
+            gameOverMusic.stop();
+            gameOverMusic.release();
+            gameOverMusic = null;
+        }
+    }
 }

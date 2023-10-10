@@ -3421,6 +3421,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+
+        }
+        if (coinSound != null) {
+            coinSound.stop();
+
+
+        }
+        if (hitSound != null) {
+            hitSound.stop();
+
+        }
+
         coin1.clearAnimation();
         coin2.clearAnimation();
         coin3.clearAnimation();
@@ -3573,19 +3587,12 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy49.clearAnimation();
         arrowEnemy50.clearAnimation();
 
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
 
-        }
-        if (coinSound != null) {
-            coinSound.stop();
-
-
-        }
-        if (hitSound != null) {
-            hitSound.stop();
-
-        }
     }
+
+
+
+
+
 
 }

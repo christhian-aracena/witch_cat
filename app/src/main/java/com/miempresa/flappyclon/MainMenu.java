@@ -39,6 +39,7 @@ public class MainMenu extends AppCompatActivity {
 
         // Reproduce la música
         mediaPlayer.start();
+        mediaPlayer.setLooping(true);
 
         selectCharacterSound = MediaPlayer.create(this, R.raw.select_character);
         btn_start = findViewById(R.id.btn_start);
@@ -48,7 +49,7 @@ public class MainMenu extends AppCompatActivity {
         maleRButton = findViewById(R.id.witch_boy_selected);
         radioGroup = findViewById(R.id.rGroup);
         newIntent = new Intent(MainMenu.this, MainActivity.class);
-        newIntent.putExtra("seleccion", check);
+
 
         // Llama al método para especificar el personaje seleccionado por defecto
         animationMenu(femaleCharacter);
@@ -68,7 +69,7 @@ public class MainMenu extends AppCompatActivity {
                         check = 2;
                     }
                 }
-
+                newIntent.putExtra("seleccion", check);
                 startActivity(newIntent);
 //                finish();
             }
