@@ -8,11 +8,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameOver extends AppCompatActivity {
     MediaPlayer gameOverMusic;
    private  Button btnTryAgain, btnGoHome;
    private Intent intentTryAgain, intentGoHome;
+
+   private TextView nCount;
+   private int nCountCoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,15 @@ public class GameOver extends AppCompatActivity {
         btnGoHome = findViewById(R.id.btn_home);
         intentGoHome = new Intent(GameOver.this, MainMenu.class);
         intentTryAgain = new Intent(GameOver.this, MainActivity.class);
+        nCount = findViewById(R.id.nCountCoin);
+
+        Intent intent = getIntent();
+
+        nCountCoin = intent.getIntExtra("coins",0);
+
+
+
+        nCount.setText("Monedas recogidas: "+nCountCoin);
 
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {

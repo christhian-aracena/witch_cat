@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer coinSound;  // Nuevo MediaPlayer para el sonido de la moneda
     private MediaPlayer hitSound; //sonido cuando el jugador ese tocado por el enemigo
     private boolean isLogicExecuted = false;
+    private TextView start;
     Intent intentGameOver;
-
+    Intent winner;
     ImageView fullHeart1;
     ImageView fullHeart2;
     ImageView fullHeart3;
@@ -35,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout gameLayout;
     private int birdY;
     private int birdSpeed;
+    private static final float SPEED_FAST_BIRD = 43;
     private boolean gameStarted = false;
     private static final int SET_CHARACTER_POSITION_X = 300;
-    private static final int SET_CHARACTER_POSITION_Y = 100;
+    private static final int SET_CHARACTER_POSITION_Y = 300;
     private ImageView backgroundImage;
     private ImageView backgroundImage2;
     private ImageView backgroundImage3;
+    private ImageView goal;
+    private Goal greatGoal;
     private int screenWidth;
     private int currentPosition = 0;
     private int currentPosition2 = 0;
@@ -78,19 +80,23 @@ public class MainActivity extends AppCompatActivity {
             coin85, coin86, coin87, coin88, coin89, coin90, coin91, coin92, coin93, coin94, coin95, coin96,
             coin97, coin98, coin99;
 
+    private ImageView yellowBird1, yellowBird2, yellowBird3, yellowBird4, yellowBird5, yellowBird6, yellowBird7, yellowBird8, yellowBird9, yellowBird10, yellowBird11, yellowBird12, yellowBird13, yellowBird14, yellowBird15, yellowBird16, yellowBird17, yellowBird18, yellowBird19, yellowBird20, yellowBird21, yellowBird22, yellowBird23, yellowBird24, yellowBird25, yellowBird26, yellowBird27, yellowBird28, yellowBird29, yellowBird30;
+
+    private Enemys yellowBird_1, yellowBird_2, yellowBird_3, yellowBird_4, yellowBird_5, yellowBird_6, yellowBird_7, yellowBird_8, yellowBird_9, yellowBird_10, yellowBird_11, yellowBird_12, yellowBird_13, yellowBird_14, yellowBird_15, yellowBird_16, yellowBird_17, yellowBird_18, yellowBird_19, yellowBird_20, yellowBird_21, yellowBird_22, yellowBird_23, yellowBird_24, yellowBird_25, yellowBird_26, yellowBird_27, yellowBird_28, yellowBird_29, yellowBird_30;
+
 
     private float enemySpeed = 24;
 
     private float sizeEnemy = 100;
     private TextView prueba;
-    private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4, birdEnemy5, birdEnemy6, birdEnemy7, birdEnemy8, birdEnemy9, birdEnemy10;
+    private ImageView birdEnemy1, birdEnemy2, birdEnemy3, birdEnemy4, birdEnemy5, birdEnemy6, birdEnemy7, birdEnemy8, birdEnemy9, birdEnemy10, birdEnemy11, birdEnemy12, birdEnemy13, birdEnemy14, birdEnemy15, birdEnemy16, birdEnemy17, birdEnemy18, birdEnemy19, birdEnemy20;
     private Enemys bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8, bird9, bird10,
-            bird11, bird12, bird13, bird14, bird15, bird16, bird17, bird18, bird19, bird20,
-            bird21, bird22, bird23, bird24, bird25, bird26, bird27, bird28, bird29, bird30;
+            bird11, bird12, bird13, bird14, bird15, bird16, bird17, bird18, bird19, bird20;
 
 
     private float point1, point2, point3, point4;
     private float coinPoint1, coinPoint2, coinPoint3, coinPoint4;
+    private AnimationDrawable animationDrawable;
     ImageView animationCoin;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -100,10 +106,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+        winner = new Intent(MainActivity.this, winner.class);
 
-        fullHeart1 =findViewById(R.id.heartOneFull);
-        fullHeart2 =findViewById(R.id.heartTwoFull);
-        fullHeart3 =findViewById(R.id.heartThreeFull);
+        fullHeart1 = findViewById(R.id.heartOneFull);
+        fullHeart2 = findViewById(R.id.heartTwoFull);
+        fullHeart3 = findViewById(R.id.heartThreeFull);
+
+        start = findViewById(R.id.startGame);
+
+
 
         intentGameOver = new Intent(MainActivity.this, GameOver.class);
 
@@ -116,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         coinSound = MediaPlayer.create(this, R.raw.coin_sound);
 
         hitSound = MediaPlayer.create(this, R.raw.hit_enemy);
+
 
         Player player = new Player();
         // Calcula las coordenadas Y de los 4 puntos de paso en función del tamaño de la pantalla
@@ -133,11 +145,164 @@ public class MainActivity extends AppCompatActivity {
         coinPoint3 = screenHeight * 0.5f;  // Porcentaje respecto a la pantalla (60%)
         coinPoint4 = screenHeight * 0.8f;  // Porcentaje respecto a la pantalla (80%)
 
+        float goalPosition = screenHeight *0.2f;
+
+
+        yellowBird1 = findViewById(R.id.yellowBird1);
+        yellowBird1.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird1.getBackground();
+        animationDrawable.start();
+
+        yellowBird2 = findViewById(R.id.yellowBird2);
+        yellowBird2.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird2.getBackground();
+        animationDrawable.start();
+
+        yellowBird3 = findViewById(R.id.yellowBird3);
+        yellowBird3.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird3.getBackground();
+        animationDrawable.start();
+
+        yellowBird4 = findViewById(R.id.yellowBird4);
+        yellowBird4.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird4.getBackground();
+        animationDrawable.start();
+
+        yellowBird5 = findViewById(R.id.yellowBird5);
+        yellowBird5.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird5.getBackground();
+        animationDrawable.start();
+
+        yellowBird6 = findViewById(R.id.yellowBird6);
+        yellowBird6.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird6.getBackground();
+        animationDrawable.start();
+
+        yellowBird7 = findViewById(R.id.yellowBird7);
+        yellowBird7.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird7.getBackground();
+        animationDrawable.start();
+
+        yellowBird8 = findViewById(R.id.yellowBird8);
+        yellowBird8.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird8.getBackground();
+        animationDrawable.start();
+
+        yellowBird9 = findViewById(R.id.yellowBird9);
+        yellowBird9.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird9.getBackground();
+        animationDrawable.start();
+
+        yellowBird10 = findViewById(R.id.yellowBird10);
+        yellowBird10.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird10.getBackground();
+        animationDrawable.start();
+
+        yellowBird11 = findViewById(R.id.yellowBird11);
+        yellowBird11.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird11.getBackground();
+        animationDrawable.start();
+
+        yellowBird12 = findViewById(R.id.yellowBird12);
+        yellowBird12.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird12.getBackground();
+        animationDrawable.start();
+
+        yellowBird13 = findViewById(R.id.yellowBird13);
+        yellowBird13.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird13.getBackground();
+        animationDrawable.start();
+
+        yellowBird14 = findViewById(R.id.yellowBird14);
+        yellowBird14.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird14.getBackground();
+        animationDrawable.start();
+
+        yellowBird15 = findViewById(R.id.yellowBird15);
+        yellowBird15.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird15.getBackground();
+        animationDrawable.start();
+
+        yellowBird16 = findViewById(R.id.yellowBird16);
+        yellowBird16.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird16.getBackground();
+        animationDrawable.start();
+
+        yellowBird17 = findViewById(R.id.yellowBird17);
+        yellowBird17.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird17.getBackground();
+        animationDrawable.start();
+
+        yellowBird18 = findViewById(R.id.yellowBird18);
+        yellowBird18.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird18.getBackground();
+        animationDrawable.start();
+
+        yellowBird19 = findViewById(R.id.yellowBird19);
+        yellowBird19.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird19.getBackground();
+        animationDrawable.start();
+
+        yellowBird20 = findViewById(R.id.yellowBird20);
+        yellowBird20.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird20.getBackground();
+        animationDrawable.start();
+
+        yellowBird21 = findViewById(R.id.yellowBird21);
+        yellowBird21.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird21.getBackground();
+        animationDrawable.start();
+
+        yellowBird22 = findViewById(R.id.yellowBird22);
+        yellowBird22.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird22.getBackground();
+        animationDrawable.start();
+
+        yellowBird23 = findViewById(R.id.yellowBird23);
+        yellowBird23.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird23.getBackground();
+        animationDrawable.start();
+
+        yellowBird24 = findViewById(R.id.yellowBird24);
+        yellowBird24.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird24.getBackground();
+        animationDrawable.start();
+
+        yellowBird25 = findViewById(R.id.yellowBird25);
+        yellowBird25.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird25.getBackground();
+        animationDrawable.start();
+
+        yellowBird26 = findViewById(R.id.yellowBird26);
+        yellowBird26.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird26.getBackground();
+        animationDrawable.start();
+
+        yellowBird27 = findViewById(R.id.yellowBird27);
+        yellowBird27.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird27.getBackground();
+        animationDrawable.start();
+
+        yellowBird28 = findViewById(R.id.yellowBird28);
+        yellowBird28.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird28.getBackground();
+        animationDrawable.start();
+
+        yellowBird29 = findViewById(R.id.yellowBird29);
+        yellowBird29.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird29.getBackground();
+        animationDrawable.start();
+
+        yellowBird30 = findViewById(R.id.yellowBird30);
+        yellowBird30.setBackgroundResource(R.drawable.yellow_bird_animation);
+        animationDrawable = (AnimationDrawable) yellowBird30.getBackground();
+        animationDrawable.start();
+
 
         birdEnemy1 = findViewById(R.id.birdEnemy1);
         birdEnemy1.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
-        AnimationDrawable animationDrawable = (AnimationDrawable) birdEnemy1.getBackground();
+        animationDrawable = (AnimationDrawable) birdEnemy1.getBackground();
         animationDrawable.start();
 
 
@@ -195,6 +360,66 @@ public class MainActivity extends AppCompatActivity {
         birdEnemy10.setBackgroundResource(R.drawable.bird_animation);
         // Obtiene la animación del ImageView
         animationDrawable = (AnimationDrawable) birdEnemy10.getBackground();
+        animationDrawable.start();
+
+        birdEnemy11 = findViewById(R.id.birdEnemy11);
+        birdEnemy11.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy11.getBackground();
+        animationDrawable.start();
+
+        birdEnemy12 = findViewById(R.id.birdEnemy12);
+        birdEnemy12.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy12.getBackground();
+        animationDrawable.start();
+
+        birdEnemy13 = findViewById(R.id.birdEnemy13);
+        birdEnemy13.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy13.getBackground();
+        animationDrawable.start();
+
+        birdEnemy14 = findViewById(R.id.birdEnemy14);
+        birdEnemy14.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy14.getBackground();
+        animationDrawable.start();
+
+        birdEnemy15 = findViewById(R.id.birdEnemy15);
+        birdEnemy15.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy15.getBackground();
+        animationDrawable.start();
+
+        birdEnemy16 = findViewById(R.id.birdEnemy16);
+        birdEnemy16.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy16.getBackground();
+        animationDrawable.start();
+
+        birdEnemy17 = findViewById(R.id.birdEnemy17);
+        birdEnemy17.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy17.getBackground();
+        animationDrawable.start();
+
+        birdEnemy18 = findViewById(R.id.birdEnemy18);
+        birdEnemy18.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy18.getBackground();
+        animationDrawable.start();
+
+        birdEnemy19 = findViewById(R.id.birdEnemy19);
+        birdEnemy19.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy19.getBackground();
+        animationDrawable.start();
+
+        birdEnemy20 = findViewById(R.id.birdEnemy20);
+        birdEnemy20.setBackgroundResource(R.drawable.bird_animation);
+        // Obtiene la animación del ImageView
+        animationDrawable = (AnimationDrawable) birdEnemy20.getBackground();
         animationDrawable.start();
 
 
@@ -719,6 +944,8 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy49 = findViewById(R.id.arrow_enemy49);
         arrowEnemy50 = findViewById(R.id.arrow_enemy50);
 
+        goal = findViewById(R.id.goal);
+
 
         //        Instancias bird
 
@@ -732,6 +959,17 @@ public class MainActivity extends AppCompatActivity {
         bird8 = new Bird(25500, point1, enemySpeed, 100);
         bird9 = new Bird(25500, point4, enemySpeed, 100);
         bird10 = new Bird(27500, point2, enemySpeed, 100);
+
+        bird11 = new Bird(28000, point3, enemySpeed, 100);
+        bird12 = new Bird(34500, point4, enemySpeed, 100);
+        bird13 = new Bird(34500, point3, enemySpeed, 100);
+        bird14 = new Bird(34500, point2, enemySpeed, 100);
+        bird15 = new Bird(35500, point1, enemySpeed, 100);
+        bird16 = new Bird(35500, point2, enemySpeed, 100);
+        bird17 = new Bird(35500, point3, enemySpeed, 100);
+        bird18 = new Bird(36500, point4, enemySpeed, 100);
+        bird19 = new Bird(36500, point3, enemySpeed, 100);
+        bird20 = new Bird(36500, point2, enemySpeed, 100);
 
 
         arrow = new ArrowEnemy(3000, point4, enemySpeed, sizeEnemy);
@@ -785,11 +1023,42 @@ public class MainActivity extends AppCompatActivity {
         arrow44 = new ArrowEnemy(28900, point1, enemySpeed, sizeEnemy);
         arrow45 = new ArrowEnemy(30000, point1, enemySpeed, sizeEnemy);
         arrow46 = new ArrowEnemy(30000, point4, enemySpeed, sizeEnemy);
-        arrow47 = new ArrowEnemy(31800, point2, enemySpeed, sizeEnemy);
-        arrow48 = new ArrowEnemy(32800, point3, enemySpeed, sizeEnemy);
-        arrow49 = new ArrowEnemy(33800, point1, enemySpeed, sizeEnemy);
-        arrow50 = new ArrowEnemy(34800, point4, enemySpeed, sizeEnemy);
+        arrow47 = new ArrowEnemy(31800, point1, enemySpeed, sizeEnemy);
+        arrow48 = new ArrowEnemy(31800, point4, enemySpeed, sizeEnemy);
+        arrow49 = new ArrowEnemy(32800, point4, enemySpeed, sizeEnemy);
+        arrow50 = new ArrowEnemy(32800, point3, enemySpeed, sizeEnemy);
 
+
+        yellowBird_1 = new YellowBird(58500, point1 - 100, 51.5f, sizeEnemy);
+        yellowBird_2 = new YellowBird(65000, point2, 51, sizeEnemy);
+        yellowBird_3 = new YellowBird(59500, point1 + 100, 43, sizeEnemy);
+        yellowBird_4 = new YellowBird(70000, point2, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_5 = new YellowBird(71000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_6 = new YellowBird(72000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_7 = new YellowBird(73000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_8 = new YellowBird(74000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_9 = new YellowBird(75000, point2, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_10 = new YellowBird(76000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_11 = new YellowBird(77000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_12 = new YellowBird(78000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_13 = new YellowBird(79000, point2, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_14 = new YellowBird(80000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_15 = new YellowBird(81000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_16 = new YellowBird(82000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_17 = new YellowBird(83000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_18 = new YellowBird(84000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_19 = new YellowBird(85000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_20 = new YellowBird(86000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_21 = new YellowBird(87000, point2, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_22 = new YellowBird(88000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_23 = new YellowBird(89000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_24 = new YellowBird(90000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_25 = new YellowBird(91000, point3, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_26 = new YellowBird(92000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_27 = new YellowBird(93000, point2, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_28 = new YellowBird(94000, point1, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_29 = new YellowBird(95000, point4, SPEED_FAST_BIRD, sizeEnemy);
+        yellowBird_30 = new YellowBird(96000, point2, SPEED_FAST_BIRD, sizeEnemy);
 
         Coins coin_1 = new Coins(6100, coinPoint4, enemySpeed, 40, MainActivity.this);
         Coins coin_2 = new Coins(6300, coinPoint4, enemySpeed, 40, MainActivity.this);
@@ -864,39 +1133,44 @@ public class MainActivity extends AppCompatActivity {
         Coins coin_66 = new Coins(29100, coinPoint3, enemySpeed, 40, MainActivity.this);
         Coins coin_67 = new Coins(30000, coinPoint3, enemySpeed, 40, MainActivity.this);
         Coins coin_68 = new Coins(30200, coinPoint3, enemySpeed, 40, MainActivity.this);
-        Coins coin_69 = new Coins(71590, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_70 = new Coins(71670, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_71 = new Coins(71750, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_72 = new Coins(71830, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_73 = new Coins(71910, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_74 = new Coins(71990, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_75 = new Coins(72070, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_76 = new Coins(72150, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_77 = new Coins(72230, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_78 = new Coins(72310, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_79 = new Coins(72390, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_80 = new Coins(72470, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_81 = new Coins(72550, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_82 = new Coins(72630, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_83 = new Coins(72710, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_84 = new Coins(72790, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_85 = new Coins(72870, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_86 = new Coins(72950, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_87 = new Coins(73030, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_88 = new Coins(73110, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_89 = new Coins(73190, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_90 = new Coins(73270, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_91 = new Coins(73350, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_92 = new Coins(73430, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_93 = new Coins(73510, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_94 = new Coins(73590, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_95 = new Coins(73670, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_96 = new Coins(73750, coinPoint1, enemySpeed, 40, MainActivity.this);
-        Coins coin_97 = new Coins(73830, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_98 = new Coins(73910, coinPoint2, enemySpeed, 40, MainActivity.this);
-        Coins coin_99 = new Coins(73990, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_69 = new Coins(31000, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_70 = new Coins(31300, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_71 = new Coins(31900, coinPoint3, enemySpeed, 40, MainActivity.this);
+        Coins coin_72 = new Coins(31900, coinPoint2 - 80, enemySpeed, 40, MainActivity.this);
+        Coins coin_73 = new Coins(32700, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_74 = new Coins(32700, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_75 = new Coins(32900, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_76 = new Coins(32900, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_77 = new Coins(33100, coinPoint1, enemySpeed, 40, MainActivity.this);
+        Coins coin_78 = new Coins(33100, coinPoint2, enemySpeed, 40, MainActivity.this);
+        Coins coin_79 = new Coins(34500, coinPoint1-100, enemySpeed, 40, MainActivity.this);
+        Coins coin_80 = new Coins(35500, coinPoint4, enemySpeed, 40, MainActivity.this);
+        Coins coin_81 = new Coins(36500, coinPoint1-100, enemySpeed, 40, MainActivity.this);
+        Coins coin_82 = new Coins(71500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_83 = new Coins(73500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_84 = new Coins(75500, coinPoint1, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_85 = new Coins(77500, coinPoint1, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_86 = new Coins(79500, coinPoint1, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_87 = new Coins(80500, coinPoint1, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_88 = new Coins(82500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_89 = new Coins(83500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_90 = new Coins(84500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_91 = new Coins(85500, coinPoint3, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_92 = new Coins(86500, coinPoint4, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_93 = new Coins(87500, coinPoint3, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_94 = new Coins(88500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_95 = new Coins(89500, coinPoint3, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_96 = new Coins(80500, coinPoint1, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_97 = new Coins(91500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_98 = new Coins(92500, coinPoint2, SPEED_FAST_BIRD, 40, MainActivity.this);
+        Coins coin_99 = new Coins(93500, coinPoint3, SPEED_FAST_BIRD, 40, MainActivity.this);
+
+        greatGoal = new Goal(40000, goalPosition, 17, screenHeight);
 
         prueba.setText("0/99");
+
+        goal.setX(greatGoal.getX());
+        goal.setY(greatGoal.getY());
 
         birdEnemy1.setX(bird1.getX());
         birdEnemy1.setY(bird1.getY());
@@ -927,6 +1201,36 @@ public class MainActivity extends AppCompatActivity {
 
         birdEnemy10.setX(bird10.getX());
         birdEnemy10.setY(bird10.getY());
+
+        birdEnemy11.setX(bird11.getX());
+        birdEnemy11.setY(bird11.getY());
+
+        birdEnemy12.setX(bird12.getX());
+        birdEnemy12.setY(bird12.getY());
+
+        birdEnemy13.setX(bird13.getX());
+        birdEnemy13.setY(bird13.getY());
+
+        birdEnemy14.setX(bird14.getX());
+        birdEnemy14.setY(bird14.getY());
+
+        birdEnemy15.setX(bird15.getX());
+        birdEnemy15.setY(bird15.getY());
+
+        birdEnemy16.setX(bird16.getX());
+        birdEnemy16.setY(bird16.getY());
+
+        birdEnemy17.setX(bird17.getX());
+        birdEnemy17.setY(bird17.getY());
+
+        birdEnemy18.setX(bird18.getX());
+        birdEnemy18.setY(bird18.getY());
+
+        birdEnemy19.setX(bird19.getX());
+        birdEnemy19.setY(bird19.getY());
+
+        birdEnemy20.setX(bird20.getX());
+        birdEnemy20.setY(bird20.getY());
 
 
         coin1.setX(coin_1.getX());
@@ -1079,7 +1383,7 @@ public class MainActivity extends AppCompatActivity {
         coin50.setX(coin_50.getX());
         coin50.setY(coin_50.getY());
 
-        // Continue the pattern for coins 51 to 99
+
         coin51.setX(coin_51.getX());
         coin51.setY(coin_51.getY());
 
@@ -1381,6 +1685,96 @@ public class MainActivity extends AppCompatActivity {
         arrowEnemy50.setX(arrow50.getX());
         arrowEnemy50.setY(arrow50.getY());
 
+        yellowBird1.setX(yellowBird_1.getX());
+        yellowBird1.setY(yellowBird_1.getY());
+
+        yellowBird2.setX(yellowBird_2.getX());
+        yellowBird2.setY(yellowBird_2.getY());
+
+        yellowBird3.setX(yellowBird_3.getX());
+        yellowBird3.setY(yellowBird_3.getY());
+
+        yellowBird4.setX(yellowBird_4.getX());
+        yellowBird4.setY(yellowBird_4.getY());
+
+        yellowBird5.setX(yellowBird_5.getX());
+        yellowBird5.setY(yellowBird_5.getY());
+
+        yellowBird6.setX(yellowBird_6.getX());
+        yellowBird6.setY(yellowBird_6.getY());
+
+        yellowBird7.setX(yellowBird_7.getX());
+        yellowBird7.setY(yellowBird_7.getY());
+
+        yellowBird8.setX(yellowBird_8.getX());
+        yellowBird8.setY(yellowBird_8.getY());
+
+        yellowBird9.setX(yellowBird_9.getX());
+        yellowBird9.setY(yellowBird_9.getY());
+
+        yellowBird10.setX(yellowBird_10.getX());
+        yellowBird10.setY(yellowBird_10.getY());
+
+        yellowBird11.setX(yellowBird_11.getX());
+        yellowBird11.setY(yellowBird_11.getY());
+
+        yellowBird12.setX(yellowBird_12.getX());
+        yellowBird12.setY(yellowBird_12.getY());
+
+        yellowBird13.setX(yellowBird_13.getX());
+        yellowBird13.setY(yellowBird_13.getY());
+
+        yellowBird14.setX(yellowBird_14.getX());
+        yellowBird14.setY(yellowBird_14.getY());
+
+        yellowBird15.setX(yellowBird_15.getX());
+        yellowBird15.setY(yellowBird_15.getY());
+
+        yellowBird16.setX(yellowBird_16.getX());
+        yellowBird16.setY(yellowBird_16.getY());
+
+        yellowBird17.setX(yellowBird_17.getX());
+        yellowBird17.setY(yellowBird_17.getY());
+
+        yellowBird18.setX(yellowBird_18.getX());
+        yellowBird18.setY(yellowBird_18.getY());
+
+        yellowBird19.setX(yellowBird_19.getX());
+        yellowBird19.setY(yellowBird_19.getY());
+
+        yellowBird20.setX(yellowBird_20.getX());
+        yellowBird20.setY(yellowBird_20.getY());
+
+        yellowBird21.setX(yellowBird_21.getX());
+        yellowBird21.setY(yellowBird_21.getY());
+
+        yellowBird22.setX(yellowBird_22.getX());
+        yellowBird22.setY(yellowBird_22.getY());
+
+        yellowBird23.setX(yellowBird_23.getX());
+        yellowBird23.setY(yellowBird_23.getY());
+
+        yellowBird24.setX(yellowBird_24.getX());
+        yellowBird24.setY(yellowBird_24.getY());
+
+        yellowBird25.setX(yellowBird_25.getX());
+        yellowBird25.setY(yellowBird_25.getY());
+
+        yellowBird26.setX(yellowBird_26.getX());
+        yellowBird26.setY(yellowBird_26.getY());
+
+        yellowBird27.setX(yellowBird_27.getX());
+        yellowBird27.setY(yellowBird_27.getY());
+
+        yellowBird28.setX(yellowBird_28.getX());
+        yellowBird28.setY(yellowBird_28.getY());
+
+        yellowBird29.setX(yellowBird_29.getX());
+        yellowBird29.setY(yellowBird_29.getY());
+
+        yellowBird30.setX(yellowBird_30.getX());
+        yellowBird30.setY(yellowBird_30.getY());
+
 
         character.setX(SET_CHARACTER_POSITION_X);
         character.setY(SET_CHARACTER_POSITION_Y);
@@ -1410,6 +1804,7 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                         if (!gameStarted) {
                             startGame();
+                            start.setText("");
                             mediaPlayer.start();
 
                         }
@@ -1446,7 +1841,6 @@ public class MainActivity extends AppCompatActivity {
                         fullHeart1.setVisibility(View.INVISIBLE);
                         fullHeart2.setVisibility(View.INVISIBLE);
                         fullHeart3.setVisibility(View.INVISIBLE);
-
 
 
                         animationCoin.clearAnimation();
@@ -1659,8 +2053,11 @@ public class MainActivity extends AppCompatActivity {
                         arrowEnemy48.clearAnimation();
                         arrowEnemy49.clearAnimation();
                         arrowEnemy50.clearAnimation();
-
+                        greatGoal.setCollected(true);
+                        int nCoin = player.getCountCoins();
+                        intentGameOver.putExtra("coins",nCoin);
                         startActivity(intentGameOver);
+
                         finish();
                         // Marcar la lógica como ejecutada
                         isLogicExecuted = true;
@@ -1668,8 +2065,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-
-
 
 
             private final Runnable gameRunnable = new Runnable() {
@@ -1690,6 +2085,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     character.setY(birdY);
+
+                    greatGoal.moveEnemy();
+                    goal.setX(greatGoal.getX());
+                    goal.setY(greatGoal.getY());
 
                     bird1.moveEnemy();
                     birdEnemy1.setX(bird1.getX());
@@ -1730,6 +2129,46 @@ public class MainActivity extends AppCompatActivity {
                     bird10.moveEnemy();
                     birdEnemy10.setX(bird10.getX());
                     birdEnemy10.setY(bird10.getY());
+
+                    bird11.moveEnemy();
+                    birdEnemy11.setX(bird11.getX());
+                    birdEnemy11.setY(bird11.getY());
+
+                    bird12.moveEnemy();
+                    birdEnemy12.setX(bird12.getX());
+                    birdEnemy12.setY(bird12.getY());
+
+                    bird13.moveEnemy();
+                    birdEnemy13.setX(bird13.getX());
+                    birdEnemy13.setY(bird13.getY());
+
+                    bird14.moveEnemy();
+                    birdEnemy14.setX(bird14.getX());
+                    birdEnemy14.setY(bird14.getY());
+
+                    bird15.moveEnemy();
+                    birdEnemy15.setX(bird15.getX());
+                    birdEnemy15.setY(bird15.getY());
+
+                    bird16.moveEnemy();
+                    birdEnemy16.setX(bird16.getX());
+                    birdEnemy16.setY(bird16.getY());
+
+                    bird17.moveEnemy();
+                    birdEnemy17.setX(bird17.getX());
+                    birdEnemy17.setY(bird17.getY());
+
+                    bird18.moveEnemy();
+                    birdEnemy18.setX(bird18.getX());
+                    birdEnemy18.setY(bird18.getY());
+
+                    bird19.moveEnemy();
+                    birdEnemy19.setX(bird19.getX());
+                    birdEnemy19.setY(bird19.getY());
+
+                    bird20.moveEnemy();
+                    birdEnemy20.setX(bird20.getX());
+                    birdEnemy20.setY(bird20.getY());
 
 
                     coin_1.moveEnemy();
@@ -1932,7 +2371,6 @@ public class MainActivity extends AppCompatActivity {
                     coin50.setX(coin_50.getX());
                     coin50.setY(coin_50.getY());
 
-                    // Continue the pattern for moving and updating positions for coins 51 to 99
                     coin_51.moveEnemy();
                     coin51.setX(coin_51.getX());
                     coin51.setY(coin_51.getY());
@@ -2335,8 +2773,326 @@ public class MainActivity extends AppCompatActivity {
                     arrowEnemy50.setY(arrow50.getY());
 
 
+                    yellowBird_1.moveEnemy();
+                    yellowBird1.setX(yellowBird_1.getX());
+                    yellowBird1.setY(yellowBird_1.getY());
 
-                    if(bird1.checkCollision(character) && !bird1.isCollected()){
+                    yellowBird_2.moveEnemy();
+                    yellowBird2.setX(yellowBird_2.getX());
+                    yellowBird2.setY(yellowBird_2.getY());
+
+                    yellowBird_3.moveEnemy();
+                    yellowBird3.setX(yellowBird_3.getX());
+                    yellowBird3.setY(yellowBird_3.getY());
+
+                    yellowBird_4.moveEnemy();
+                    yellowBird4.setX(yellowBird_4.getX());
+                    yellowBird4.setY(yellowBird_4.getY());
+
+                    yellowBird_5.moveEnemy();
+                    yellowBird5.setX(yellowBird_5.getX());
+                    yellowBird5.setY(yellowBird_5.getY());
+
+                    yellowBird_6.moveEnemy();
+                    yellowBird6.setX(yellowBird_6.getX());
+                    yellowBird6.setY(yellowBird_6.getY());
+
+                    yellowBird_7.moveEnemy();
+                    yellowBird7.setX(yellowBird_7.getX());
+                    yellowBird7.setY(yellowBird_7.getY());
+
+                    yellowBird_8.moveEnemy();
+                    yellowBird8.setX(yellowBird_8.getX());
+                    yellowBird8.setY(yellowBird_8.getY());
+
+                    yellowBird_9.moveEnemy();
+                    yellowBird9.setX(yellowBird_9.getX());
+                    yellowBird9.setY(yellowBird_9.getY());
+
+                    yellowBird_10.moveEnemy();
+                    yellowBird10.setX(yellowBird_10.getX());
+                    yellowBird10.setY(yellowBird_10.getY());
+
+                    yellowBird_11.moveEnemy();
+                    yellowBird11.setX(yellowBird_11.getX());
+                    yellowBird11.setY(yellowBird_11.getY());
+
+                    yellowBird_12.moveEnemy();
+                    yellowBird12.setX(yellowBird_12.getX());
+                    yellowBird12.setY(yellowBird_12.getY());
+
+                    yellowBird_13.moveEnemy();
+                    yellowBird13.setX(yellowBird_13.getX());
+                    yellowBird13.setY(yellowBird_13.getY());
+
+                    yellowBird_14.moveEnemy();
+                    yellowBird14.setX(yellowBird_14.getX());
+                    yellowBird14.setY(yellowBird_14.getY());
+
+                    yellowBird_15.moveEnemy();
+                    yellowBird15.setX(yellowBird_15.getX());
+                    yellowBird15.setY(yellowBird_15.getY());
+
+                    yellowBird_16.moveEnemy();
+                    yellowBird16.setX(yellowBird_16.getX());
+                    yellowBird16.setY(yellowBird_16.getY());
+
+                    yellowBird_17.moveEnemy();
+                    yellowBird17.setX(yellowBird_17.getX());
+                    yellowBird17.setY(yellowBird_17.getY());
+
+                    yellowBird_18.moveEnemy();
+                    yellowBird18.setX(yellowBird_18.getX());
+                    yellowBird18.setY(yellowBird_18.getY());
+
+                    yellowBird_19.moveEnemy();
+                    yellowBird19.setX(yellowBird_19.getX());
+                    yellowBird19.setY(yellowBird_19.getY());
+
+                    yellowBird_20.moveEnemy();
+                    yellowBird20.setX(yellowBird_20.getX());
+                    yellowBird20.setY(yellowBird_20.getY());
+
+                    yellowBird_21.moveEnemy();
+                    yellowBird21.setX(yellowBird_21.getX());
+                    yellowBird21.setY(yellowBird_21.getY());
+
+                    yellowBird_22.moveEnemy();
+                    yellowBird22.setX(yellowBird_22.getX());
+                    yellowBird22.setY(yellowBird_22.getY());
+
+                    yellowBird_23.moveEnemy();
+                    yellowBird23.setX(yellowBird_23.getX());
+                    yellowBird23.setY(yellowBird_23.getY());
+
+                    yellowBird_24.moveEnemy();
+                    yellowBird24.setX(yellowBird_24.getX());
+                    yellowBird24.setY(yellowBird_24.getY());
+
+                    yellowBird_25.moveEnemy();
+                    yellowBird25.setX(yellowBird_25.getX());
+                    yellowBird25.setY(yellowBird_25.getY());
+
+                    yellowBird_26.moveEnemy();
+                    yellowBird26.setX(yellowBird_26.getX());
+                    yellowBird26.setY(yellowBird_26.getY());
+
+                    yellowBird_27.moveEnemy();
+                    yellowBird27.setX(yellowBird_27.getX());
+                    yellowBird27.setY(yellowBird_27.getY());
+
+                    yellowBird_28.moveEnemy();
+                    yellowBird28.setX(yellowBird_28.getX());
+                    yellowBird28.setY(yellowBird_28.getY());
+
+                    yellowBird_29.moveEnemy();
+                    yellowBird29.setX(yellowBird_29.getX());
+                    yellowBird29.setY(yellowBird_29.getY());
+
+                    yellowBird_30.moveEnemy();
+                    yellowBird30.setX(yellowBird_30.getX());
+                    yellowBird30.setY(yellowBird_30.getY());
+
+                    if(greatGoal.checkCollision(character)&& !greatGoal.isCollected()){
+                        int nCoin = player.getCountCoins();
+                        if(player.getCountCoins()>=80){
+                            greatGoal.setCollected(true);
+                            winner.putExtra("coins",nCoin);
+                            startActivity(winner);
+                        }
+                        else {
+                            greatGoal.setCollected(true);
+                            intentGameOver.putExtra("coins",nCoin);
+                            startActivity(intentGameOver);
+                        }
+
+                    }
+
+                    if(yellowBird_1.checkCollision(character)&& !yellowBird_1.isCollected() ){
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_1.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_2.checkCollision(character)&& !yellowBird_2.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_2.setCollected(true);
+                        player.GameOver();
+                    }else if (yellowBird_3.checkCollision(character) && !yellowBird_3.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_3.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_4.checkCollision(character) && !yellowBird_4.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_4.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_5.checkCollision(character) && !yellowBird_5.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_5.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_6.checkCollision(character) && !yellowBird_6.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_6.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_7.checkCollision(character) && !yellowBird_7.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_7.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_8.checkCollision(character) && !yellowBird_8.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_8.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_9.checkCollision(character) && !yellowBird_9.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_9.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_10.checkCollision(character) && !yellowBird_10.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_10.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_11.checkCollision(character) && !yellowBird_11.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_11.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_12.checkCollision(character) && !yellowBird_12.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_12.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_13.checkCollision(character) && !yellowBird_13.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_13.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_14.checkCollision(character) && !yellowBird_14.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_14.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_15.checkCollision(character) && !yellowBird_15.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_15.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_16.checkCollision(character) && !yellowBird_16.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_16.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_17.checkCollision(character) && !yellowBird_17.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_17.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_18.checkCollision(character) && !yellowBird_18.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_18.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_19.checkCollision(character) && !yellowBird_19.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_19.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_20.checkCollision(character) && !yellowBird_20.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_20.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_21.checkCollision(character) && !yellowBird_21.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_21.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_22.checkCollision(character) && !yellowBird_22.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_22.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_23.checkCollision(character) && !yellowBird_23.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_23.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_24.checkCollision(character) && !yellowBird_24.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_24.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_25.checkCollision(character) && !yellowBird_25.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_25.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_26.checkCollision(character) && !yellowBird_26.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_26.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_27.checkCollision(character) && !yellowBird_27.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_27.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_28.checkCollision(character) && !yellowBird_28.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_28.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_29.checkCollision(character) && !yellowBird_29.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_29.setCollected(true);
+                        player.GameOver();
+                    } else if (yellowBird_30.checkCollision(character) && !yellowBird_30.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        yellowBird_30.setCollected(true);
+                        player.GameOver();
+                    }
+
+
+
+                    if (bird1.checkCollision(character) && !bird1.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
@@ -2348,7 +3104,7 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         bird2.setCollected(true);
                         player.GameOver();
-                    }else if (bird3.checkCollision(character) && !bird3.isCollected()) {
+                    } else if (bird3.checkCollision(character) && !bird3.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
@@ -2396,7 +3152,68 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         bird10.setCollected(true);
                         player.GameOver();
+                    }else if (bird11.checkCollision(character) && !bird11.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird11.setCollected(true);
+                        player.GameOver();
+                    } else if (bird12.checkCollision(character) && !bird12.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird12.setCollected(true);
+                        player.GameOver();
+                    } else if (bird13.checkCollision(character) && !bird13.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird13.setCollected(true);
+                        player.GameOver();
+                    } else if (bird14.checkCollision(character) && !bird14.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird14.setCollected(true);
+                        player.GameOver();
+                    } else if (bird15.checkCollision(character) && !bird15.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird15.setCollected(true);
+                        player.GameOver();
+                    } else if (bird16.checkCollision(character) && !bird16.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird16.setCollected(true);
+                        player.GameOver();
+                    } else if (bird17.checkCollision(character) && !bird17.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird17.setCollected(true);
+                        player.GameOver();
+                    } else if (bird18.checkCollision(character) && !bird18.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird18.setCollected(true);
+                        player.GameOver();
+                    } else if (bird19.checkCollision(character) && !bird19.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird19.setCollected(true);
+                        player.GameOver();
+                    } else if (bird20.checkCollision(character) && !bird20.isCollected()) {
+                        hitSound.seekTo(0);
+                        hitSound.start();
+                        player.setLifeDamage();
+                        bird20.setCollected(true);
+                        player.GameOver();
                     }
+
 
 
                     if (arrow.checkCollision(character) && !arrow.isCollected()) {
@@ -2411,13 +3228,13 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         arrow1.setCollected(true);
                         player.GameOver();
-                    }else if (arrow2.checkCollision(character) && !arrow2.isCollected()) {
+                    } else if (arrow2.checkCollision(character) && !arrow2.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
                         arrow2.setCollected(true);
                         player.GameOver();
-                    }else if (arrow3.checkCollision(character) && !arrow3.isCollected()) {
+                    } else if (arrow3.checkCollision(character) && !arrow3.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
@@ -2465,7 +3282,7 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         arrow10.setCollected(true);
                         player.GameOver();
-                    }else if (arrow11.checkCollision(character) && !arrow11.isCollected()) {
+                    } else if (arrow11.checkCollision(character) && !arrow11.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
@@ -2646,7 +3463,7 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         arrow30.setCollected(true);
                         player.GameOver();
-                    }else if (arrow31.checkCollision(character) && !arrow31.isCollected()) {
+                    } else if (arrow31.checkCollision(character) && !arrow31.isCollected()) {
                         hitSound.seekTo(0);
                         hitSound.start();
                         player.setLifeDamage();
@@ -2766,10 +3583,7 @@ public class MainActivity extends AppCompatActivity {
                         player.setLifeDamage();
                         arrow50.setCollected(true);
                         player.GameOver();
-                    }else
-
-
-                    if (!coin_1.isCollected() && coin_1.checkCollision(character)) {
+                    } else if (!coin_1.isCollected() && coin_1.checkCollision(character)) {
                         coinSound.seekTo(0);
                         coinSound.start();
                         coin1.setVisibility(View.INVISIBLE);
@@ -3270,6 +4084,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (!coin_84.isCollected() && coin_84.checkCollision(character)) {
                         coinSound.seekTo(0);
                         coinSound.start();
+                        coin84.setVisibility(View.INVISIBLE);
                         player.setCountCoins(addCoinValue);
                         coin_84.setCollected(true);
                     } else if (!coin_85.isCollected() && coin_85.checkCollision(character)) {
@@ -3366,76 +4181,16 @@ public class MainActivity extends AppCompatActivity {
 
 
                     String getValue = String.valueOf(player.getCountCoins());
-                    prueba.setText(getValue + "/99");
+                    prueba.setText(getValue + "/80");
 //
 
 
-                    handler.postDelayed(this, 20);
+                    handler.postDelayed(this, 19);
                 }
             };
         });
 
     }
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        mediaPlayer.release();
-//        mediaPlayer.stop();
-//        coinSound.stop();
-//        hitSound.stop();
-//        backgroundImage2.clearAnimation();
-//        backgroundImage.clearAnimation();
-//        backgroundImage3.clearAnimation();
-//
-//        animationCoin.clearAnimation();
-//
-//
-//    }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        mediaPlayer.release();
-//        mediaPlayer.stop();
-//        coinSound.stop();
-//        hitSound.stop();
-//        backgroundImage2.clearAnimation();
-//        backgroundImage.clearAnimation();
-//        backgroundImage3.clearAnimation();
-//
-//        coin1.clearAnimation();
-//        coin2.clearAnimation();
-//        coin3.clearAnimation();
-//
-//    }
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        // Libera recursos cuando se destruye la actividad
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer.stop();
-//            coinSound.stop();
-//            hitSound.stop();
-//            mediaPlayer = null;
-//        }
-//    }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        // Libera recursos cuando se destruye la actividad
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer.stop();
-//            coinSound.stop();
-//            hitSound.stop();
-//            mediaPlayer = null;
-//        }
-//    }
-
-
 
 
     private void setCharacterImage(int seleccion) {
@@ -3481,6 +4236,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 16);
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -3653,10 +4409,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 }

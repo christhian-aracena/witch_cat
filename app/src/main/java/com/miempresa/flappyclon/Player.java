@@ -7,6 +7,7 @@ public class Player {
     public Player(){
 
         this.life = 3;
+        this.countCoins = 0;
     }
 
     public int getCountCoins() {
@@ -22,7 +23,7 @@ public class Player {
         if(this.life<1){
             return perdiste=true;
         }
-        else {return false;}
+        else {return perdiste = false;}
     }
 
     public int getLife() {

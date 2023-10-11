@@ -5,4 +5,5 @@
     <string name="msg_select_option">¿Que desea hacer?</string>
     <string name="msg_try_again">Jugar nuevamente</string>
     <string name="msg_go_to_home">Volver al Inicio</string>
+    <string name="msg_touch_to_start">Toca para iniciar</string>
 </resources>

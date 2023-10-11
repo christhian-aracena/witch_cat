@@ -24,7 +24,7 @@ public abstract class Enemys {
     }
 
 
-    protected void moveEnemy(){}
+    protected abstract void moveEnemy();
 
     protected boolean checkCollision(ImageView bird) {
         Rect birdRect = new Rect();
