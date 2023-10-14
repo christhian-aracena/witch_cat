@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class winner extends AppCompatActivity {
+public class Winner extends AppCompatActivity {
     private int nCountCoin;
     private TextView nCount;
     private MediaPlayer mediaPlayer;
@@ -24,8 +24,8 @@ public class winner extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         btnTryAgain = findViewById(R.id.btn_try_again);
         btnGoHome = findViewById(R.id.btn_home);
-        intentGoHome = new Intent(winner.this, MainMenu.class);
-        intentTryAgain = new Intent(winner.this, MainActivity.class);
+        intentGoHome = new Intent(Winner.this, MainMenu.class);
+        intentTryAgain = new Intent(Winner.this, MainActivity.class);
 
         mediaPlayer = new MediaPlayer();
 

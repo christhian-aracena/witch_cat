@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
-        winner = new Intent(MainActivity.this, winner.class);
+        winner = new Intent(MainActivity.this, Winner.class);
 
         fullHeart1 = findViewById(R.id.heartOneFull);
         fullHeart2 = findViewById(R.id.heartTwoFull);
@@ -1167,7 +1167,7 @@ public class MainActivity extends AppCompatActivity {
 
         greatGoal = new Goal(40000, goalPosition, 17, screenHeight);
 
-        prueba.setText("0/99");
+        prueba.setText("0/80");
 
         goal.setX(greatGoal.getX());
         goal.setY(greatGoal.getY());

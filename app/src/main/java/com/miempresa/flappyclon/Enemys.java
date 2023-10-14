@@ -9,7 +9,7 @@ public abstract class Enemys {
     protected float sizeEnemy;   // Tamaño del enemigo
     private boolean collected = false;
 
-    public Enemys(float x, float y, float speed, float sizeEnemy) {
+    protected Enemys(float x, float y, float speed, float sizeEnemy) {
         this.x = x;
         this.y = y;
         this.speed = speed;

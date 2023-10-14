@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FlappyClon"
         tools:targetApi="31">
         <activity
-            android:name=".winner"
+            android:name=".Winner"
             android:exported="false" />
         <activity
             android:name=".GameOver"

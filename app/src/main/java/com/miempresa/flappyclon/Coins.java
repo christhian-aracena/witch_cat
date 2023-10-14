@@ -33,20 +33,7 @@ public class Coins extends Enemys{
 
     }
 
-    @Override
-    public boolean checkCollision(ImageView bird) {
-        Rect birdRect = new Rect();
-        bird.getHitRect(birdRect);
 
-        Rect enemyRect = new Rect(
-                (int) getX(),
-                (int) getY(),
-                (int) (getX() + getSizeEnemy()),
-                (int) (getY() + getSizeEnemy())
-        );
-
-        return birdRect.intersect(enemyRect);
-    }
 
 
 }
